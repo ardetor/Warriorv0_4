@@ -12,9 +12,10 @@
     <string name="activity_main_loadgame_failure">Saved game not found.</string>
 
     <!--ActivityAbout Strings-->
-    <string name="activity_about_description">Warrior is an idle RPG for the Android platform, made in Android Studio. \n\nCreator: \naccypiter</string>
+    <string name="activity_about_description">Warrior is an idle RPG for the Android platform, made in Android Studio. \n\nCreator: \nardetor</string>
 
 
     <!--ActivitySummary Strings-->
     <string name="title_activity_summary">Summary</string>
+    <string name="title_activity_about">About</string>
 </resources>
