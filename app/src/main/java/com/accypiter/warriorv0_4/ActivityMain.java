@@ -1,6 +1,7 @@
 package com.accypiter.warriorv0_4;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -95,6 +96,8 @@ public class ActivityMain extends AppCompatActivity {
         //First clear FileNotFoundException text from infotext.
         TextView infoText = (TextView) findViewById(R.id.activity_main_infotext);
         infoText.setText("");
+        Intent openAbout = new Intent(this, ActivityAbout.class);
+        startActivity(openAbout);
     }
 }
 
