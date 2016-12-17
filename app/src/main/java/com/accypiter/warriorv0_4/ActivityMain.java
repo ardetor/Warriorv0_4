@@ -68,6 +68,7 @@ public class ActivityMain extends AppCompatActivity {
 
     public void buttonLoadGame(View view){
         //Load game from file and proceed to ActivitySummary.
+        boolean save_game_exists = true;
         try {
             FileInputStream fileIn = openFileInput(SaveGame.file_name);
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -77,11 +78,19 @@ public class ActivityMain extends AppCompatActivity {
         }catch(FileNotFoundException f){
             TextView infoText = (TextView) findViewById(R.id.activity_main_infotext);
             infoText.setText(R.string.activity_main_loadgame_failure);
+            save_game_exists = false;
         }catch(IOException i) {
             i.printStackTrace();
         }catch(ClassNotFoundException c) {
             c.printStackTrace();
         }
+
+        if (save_game_exists) startGame();
+    }
+
+    protected void startGame(){
+        //Start ActivitySummary
+        startActivity(new Intent(this, ActivitySummary.class));
     }
 
 
@@ -92,8 +101,8 @@ public class ActivityMain extends AppCompatActivity {
         infoText.setText("");
 
         //Temporary startActivity, to be replaced by forResult
-        startActivity(new Intent(this, ActivityNewGame.class));
-
+        Intent openNewGameActivityIntent = new Intent(this, ActivityNewGame.class);
+        startActivityForResult(openNewGameActivityIntent, 0);
     }
 
     public void buttonAbout(View view){
@@ -104,5 +113,17 @@ public class ActivityMain extends AppCompatActivity {
         Intent openAbout = new Intent(this, ActivityAbout.class);
         startActivity(openAbout);
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == 0){
+            if (resultCode == RESULT_CANCELED){
+                //Do nothing
+            }else if (resultCode == RESULT_OK){
+                //Launch ActivitySummary
+                startGame();
+            }
+        }
+    }
+
 }
 
