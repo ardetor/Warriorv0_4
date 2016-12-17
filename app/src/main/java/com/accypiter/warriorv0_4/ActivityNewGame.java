@@ -72,6 +72,7 @@ public class ActivityNewGame extends AppCompatActivity {
             //Confirm if user really wants to overwrite data.
             //Start new ActivityNewGameConfirm
             Intent confirmNewGameIntent = new Intent(this, ActivityNewGameConfirm.class);
+            startActivityForResult(confirmNewGameIntent, 1);
         }
     }
 

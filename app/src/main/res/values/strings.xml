@@ -16,6 +16,11 @@
     <string name="activity_new_game_button_cancel">Cancel</string>
     <string name="activity_new_game_button_start_new_game">Start New Game</string>
 
+    <!--ActivityNewGameConfirm Strings-->
+    <string name="activity_new_game_confirm_text">Existing save data will be permanently overwritten. Proceed to overwrite?</string>
+    <string name="activity_new_game_confirm_button_cancel">Cancel</string>
+    <string name="activity_new_game_confirm_button_overwrite">Overwrite</string>
+
     <!--ActivityAbout Strings-->
     <string name="activity_about_description">Warrior is an idle RPG for the Android platform, made in Android Studio. \n\nCreator: \nardetor</string>
 
