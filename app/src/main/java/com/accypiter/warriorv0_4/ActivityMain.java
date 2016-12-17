@@ -1,6 +1,10 @@
 package com.accypiter.warriorv0_4;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -26,6 +38,32 @@ public class ActivityMain extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+
+
+        //If user opted to in Preferences, skip title screen and go to ActivitySummary
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean skip_title_screen = sharedPreferences.getBoolean("preference_skip_title_screen", false);
+        if (skip_title_screen){
+
+            boolean save_game_exists = true;
+
+            try {
+                FileInputStream fileIn = openFileInput(SaveGame.file_name);
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                SaveGame.current = (SaveGame) in.readObject();
+                in.close();
+                fileIn.close();
+            }catch(FileNotFoundException f){
+                save_game_exists = false;
+            }catch(IOException i) {
+                i.printStackTrace();
+            }catch(ClassNotFoundException c) {
+                c.printStackTrace();
+            }
+
+            if (save_game_exists) startGame();
+
+        }
     }
 
     @Override
@@ -43,10 +81,79 @@ public class ActivityMain extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_settings) {
+            Intent openSettingsIntent = new Intent(this, ActivityPreferences.class);
+            startActivity(openSettingsIntent);
             return true;
+
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    protected void onPause(){
+        super.onPause();
+        //DO NOT SAVE GAME TO FILE. Only do that within the game.
+    }
+
+    public void buttonLoadGame(View view){
+        //Load game from file and proceed to ActivitySummary.
+        boolean save_game_exists = true;
+        try {
+            FileInputStream fileIn = openFileInput(SaveGame.file_name);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            SaveGame.current = (SaveGame) in.readObject();
+            in.close();
+            fileIn.close();
+        }catch(FileNotFoundException f){
+            TextView infoText = (TextView) findViewById(R.id.activity_main_infotext);
+            infoText.setText(R.string.activity_main_loadgame_failure);
+            save_game_exists = false;
+        }catch(IOException i) {
+            i.printStackTrace();
+        }catch(ClassNotFoundException c) {
+            c.printStackTrace();
+        }
+
+        if (save_game_exists) startGame();
+    }
+
+    protected void startGame(){
+        //Start ActivitySummary
+        startActivity(new Intent(this, ActivitySummary.class));
+    }
+
+
+    public void buttonNewGame(View view){
+        //Create new game: launch ActivityNewGame. This is to make it harder to accidentally overwrite an old game.
+        //First clear FileNotFoundException text from infotext.
+        TextView infoText = (TextView) findViewById(R.id.activity_main_infotext);
+        infoText.setText("");
+
+        //Temporary startActivity, to be replaced by forResult
+        Intent openNewGameActivityIntent = new Intent(this, ActivityNewGame.class);
+        startActivityForResult(openNewGameActivityIntent, 0);
+    }
+
+    public void buttonAbout(View view){
+        //Launch ActivityAbout.
+        //First clear FileNotFoundException text from infotext.
+        TextView infoText = (TextView) findViewById(R.id.activity_main_infotext);
+        infoText.setText("");
+        Intent openAbout = new Intent(this, ActivityAbout.class);
+        startActivity(openAbout);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == 0){
+            if (resultCode == RESULT_CANCELED){
+                //Do nothing
+            }else if (resultCode == RESULT_OK){
+                //Launch ActivitySummary
+                startGame();
+            }
+        }
+    }
+
 }
+

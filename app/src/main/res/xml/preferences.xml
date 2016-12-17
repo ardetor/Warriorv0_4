@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:key="preference_skip_title_screen"
+        android:title="@string/activity_preferences_skiptitlescreen"
+        android:summary="@string/activity_preferences_skiptitlescreen_description" />
+
+    <PreferenceScreen
+        android:title="@string/activity_preferences_about">
+
+        <intent android:action="com.accypiter.warrior.activity.ABOUT" />
+
+    </PreferenceScreen>
+
+</PreferenceScreen>

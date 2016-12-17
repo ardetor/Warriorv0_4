@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.accypiter.warriorv0_4.ActivitySummary"
-    android:id="@+id/activity_summary_coolay">
+    tools:context="com.accypiter.warriorv0_4.ActivityAbout"
+    android:id="@+id/activity_about_coolay">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/activity_summary_appbarlay">
+        android:id="@+id/activity_about_appbarlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -23,14 +23,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_activity_summary" />
-
-<!--    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />-->
+    <include layout="@layout/content_activity_about" />
 
 </android.support.design.widget.CoordinatorLayout>

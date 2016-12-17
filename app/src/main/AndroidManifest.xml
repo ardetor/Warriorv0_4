@@ -21,7 +21,28 @@
         <activity
             android:name=".ActivitySummary"
             android:label="@string/title_activity_summary"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityAbout"
+            android:label="@string/title_activity_about"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.accypiter.warrior.activity.ABOUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ActivityNewGame"
+            android:label="@string/title_activity_new_game"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityNewGameConfirm"
+            android:label="@string/title_activity_new_game_confirm"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityPreferences"
+            android:label="@string/title_activity_preferences"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
