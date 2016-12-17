@@ -33,6 +33,7 @@ public class ActivityNewGame extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_activity_about, menu);
         return true;
     }
+
     public void cancelNewGame(View view){
         //New game cancelled; return RESULT_CANCELLED and end activity.
         Intent emptyIntent = new Intent();
@@ -64,11 +65,11 @@ public class ActivityNewGame extends AppCompatActivity {
 
 
 
-        if (save_data_exists == false){
+        if (!save_data_exists){
             //Make new save game
             createNewSave();
 
-        } else if (save_data_exists == true){
+        } else if (save_data_exists){
             //Confirm if user really wants to overwrite data.
             //Start new ActivityNewGameConfirm
             Intent confirmNewGameIntent = new Intent(this, ActivityNewGameConfirm.class);

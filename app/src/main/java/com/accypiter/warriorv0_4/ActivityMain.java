@@ -2,7 +2,9 @@ package com.accypiter.warriorv0_4;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +38,32 @@ public class ActivityMain extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+
+
+        //If user opted to in Preferences, skip title screen and go to ActivitySummary
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean skip_title_screen = sharedPreferences.getBoolean("preference_skip_title_screen", false);
+        if (skip_title_screen){
+
+            boolean save_game_exists = true;
+
+            try {
+                FileInputStream fileIn = openFileInput(SaveGame.file_name);
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                SaveGame.current = (SaveGame) in.readObject();
+                in.close();
+                fileIn.close();
+            }catch(FileNotFoundException f){
+                save_game_exists = false;
+            }catch(IOException i) {
+                i.printStackTrace();
+            }catch(ClassNotFoundException c) {
+                c.printStackTrace();
+            }
+
+            if (save_game_exists) startGame();
+
+        }
     }
 
     @Override
@@ -53,7 +81,9 @@ public class ActivityMain extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_settings) {
+            Intent openSettingsIntent = new Intent(this, ActivityPreferences.class);
+            startActivity(openSettingsIntent);
             return true;
 
         }
