@@ -1,5 +1,13 @@
 <resources>
+    <!--General Strings-->
     <string name="app_name">Warrior</string>
     <string name="action_settings">Settings</string>
+
+    <!--ActivityMain Strings-->
+    <string name="activity_main_button_loadgame">Load Game</string>
+    <string name="activity_main_button_newgame">New Game</string>
+    <string name="activity_main_button_about">About</string>
+
+    <!--ActivitySummary Strings-->
     <string name="title_activity_summary">ActivitySummary</string>
 </resources>
