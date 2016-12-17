@@ -25,6 +25,10 @@
         <activity
             android:name=".ActivityAbout"
             android:label="@string/title_activity_about"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityNewGame"
+            android:label="@string/title_activity_new_game"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

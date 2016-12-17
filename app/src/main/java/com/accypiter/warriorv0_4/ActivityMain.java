@@ -66,13 +66,6 @@ public class ActivityMain extends AppCompatActivity {
         //DO NOT SAVE GAME TO FILE. Only do that within the game.
     }
 
-    public void buttonNewGame(View view){
-        //Create new game: launch ActivityNewGame. This is to make it harder to accidentally overwrite an old game.
-        //First clear FileNotFoundException text from infotext.
-        TextView infoText = (TextView) findViewById(R.id.activity_main_infotext);
-        infoText.setText("");
-    }
-
     public void buttonLoadGame(View view){
         //Load game from file and proceed to ActivitySummary.
         try {
@@ -89,6 +82,18 @@ public class ActivityMain extends AppCompatActivity {
         }catch(ClassNotFoundException c) {
             c.printStackTrace();
         }
+    }
+
+
+    public void buttonNewGame(View view){
+        //Create new game: launch ActivityNewGame. This is to make it harder to accidentally overwrite an old game.
+        //First clear FileNotFoundException text from infotext.
+        TextView infoText = (TextView) findViewById(R.id.activity_main_infotext);
+        infoText.setText("");
+
+        //Temporary startActivity, to be replaced by forResult
+        startActivity(new Intent(this, ActivityNewGame.class));
+
     }
 
     public void buttonAbout(View view){
