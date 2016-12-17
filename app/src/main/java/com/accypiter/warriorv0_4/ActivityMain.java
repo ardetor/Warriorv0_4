@@ -97,3 +97,4 @@ public class ActivityMain extends AppCompatActivity {
         infoText.setText("");
     }
 }
+
