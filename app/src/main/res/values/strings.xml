@@ -2,11 +2,14 @@
     <!--General Strings-->
     <string name="app_name">Warrior</string>
     <string name="action_settings">Settings</string>
+    <string name="save_game_name">savegame.sav</string>
 
     <!--ActivityMain Strings-->
+    <string name="activity_main_subtitle">An idle RPG for Android</string>
     <string name="activity_main_button_loadgame">Load Game</string>
     <string name="activity_main_button_newgame">New Game</string>
     <string name="activity_main_button_about">About</string>
+    <string name="activity_main_loadgame_failure">Saved game not found.</string>
 
     <!--ActivitySummary Strings-->
     <string name="title_activity_summary">ActivitySummary</string>
