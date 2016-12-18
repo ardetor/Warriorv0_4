@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 public class ActivitySummary extends AppCompatActivity {
     public static SaveGame save = SaveGame.current;
@@ -43,8 +44,20 @@ public class ActivitySummary extends AppCompatActivity {
 
     public void onResume(){
         super.onResume();
+        //Refresh views
+        refresh();
+    }
 
-        //Load views
+    public void onPause(){
+        SaveGame.save(getBaseContext());
+    }
+
+    protected void refresh(){
+        //Remove all views from main RelativeLayout
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.activity_summary_rellay);
+        relativeLayout.removeAllViews();
+
+        //Place buttons at bottom of screen
 
     }
 }
