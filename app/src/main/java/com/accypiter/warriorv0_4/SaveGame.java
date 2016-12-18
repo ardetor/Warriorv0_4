@@ -9,8 +9,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-class SaveGame {
+class SaveGame implements Serializable{
     static SaveGame current;
     static final String file_name = "savegame.sav";
 
@@ -38,7 +39,7 @@ class SaveGame {
             fileOut.close();
         }catch(IOException i) {
             i.printStackTrace();
-            return false;
+
         }
         return true;
     }
@@ -56,7 +57,6 @@ class SaveGame {
             return false;
         } catch (ClassNotFoundException|IOException e) {
             e.printStackTrace();
-            return false;
         }
 
         return true;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,11 +14,4 @@
     tools:context="com.accypiter.warriorv0_4.ActivitySummary"
     tools:showIn="@layout/activity_summary">
 
-    <LinearLayout
-        android:id="@+id/activity_summary_linlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>

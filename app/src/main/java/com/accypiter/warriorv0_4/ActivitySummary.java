@@ -41,5 +41,10 @@ public class ActivitySummary extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onResume(){
+        super.onResume();
 
+        //Load views
+
+    }
 }
