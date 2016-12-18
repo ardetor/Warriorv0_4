@@ -23,6 +23,8 @@ import java.io.ObjectOutputStream;
 
 public class ActivityMain extends AppCompatActivity {
 
+    public static boolean first_time = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,30 +41,18 @@ public class ActivityMain extends AppCompatActivity {
             }
         });*/
 
+        //Check if first time on this screen
+        if(first_time) {
+            first_time = false;
+            //If user opted to in Preferences, skip title screen and go to ActivitySummary
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            boolean skip_title_screen = sharedPreferences.getBoolean("preference_skip_title_screen", false);
 
-        //If user opted to in Preferences, skip title screen and go to ActivitySummary
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        boolean skip_title_screen = sharedPreferences.getBoolean("preference_skip_title_screen", false);
-        if (skip_title_screen){
-
-            boolean save_game_exists = true;
-
-            try {
-                FileInputStream fileIn = openFileInput(SaveGame.file_name);
-                ObjectInputStream in = new ObjectInputStream(fileIn);
-                SaveGame.current = (SaveGame) in.readObject();
-                in.close();
-                fileIn.close();
-            }catch(FileNotFoundException f){
-                save_game_exists = false;
-            }catch(IOException i) {
-                i.printStackTrace();
-            }catch(ClassNotFoundException c) {
-                c.printStackTrace();
+            if (skip_title_screen) {
+                if (SaveGame.load(getBaseContext())){ //if load is successful
+                    startGame();
+                }
             }
-
-            if (save_game_exists) startGame();
-
         }
     }
 
@@ -98,31 +88,13 @@ public class ActivityMain extends AppCompatActivity {
 
     public void buttonLoadGame(View view){
         //Load game from file and proceed to ActivitySummary.
-        boolean save_game_exists = true;
-        try {
-            FileInputStream fileIn = openFileInput(SaveGame.file_name);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            SaveGame.current = (SaveGame) in.readObject();
-            in.close();
-            fileIn.close();
-        }catch(FileNotFoundException f){
+        if (SaveGame.load(getBaseContext())){ //Load successful: start game
+            startGame();
+        } else { //Load unsuccessful: exception thrown
             TextView infoText = (TextView) findViewById(R.id.activity_main_infotext);
             infoText.setText(R.string.activity_main_loadgame_failure);
-            save_game_exists = false;
-        }catch(IOException i) {
-            i.printStackTrace();
-        }catch(ClassNotFoundException c) {
-            c.printStackTrace();
         }
-
-        if (save_game_exists) startGame();
     }
-
-    protected void startGame(){
-        //Start ActivitySummary
-        startActivity(new Intent(this, ActivitySummary.class));
-    }
-
 
     public void buttonNewGame(View view){
         //Create new game: launch ActivityNewGame. This is to make it harder to accidentally overwrite an old game.
@@ -145,14 +117,23 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (requestCode == 0){
+        if (requestCode == 0){  // requestCode 0: Start New Game
             if (resultCode == RESULT_CANCELED){
                 //Do nothing
             }else if (resultCode == RESULT_OK){
                 //Launch ActivitySummary
-                startGame();
+                startNewGame();
             }
         }
+    }
+
+    protected void startGame(){
+        //Start ActivitySummary
+        startActivity(new Intent(this, ActivitySummary.class));
+    }
+
+    protected void startNewGame(){
+        startGame();
     }
 
 }

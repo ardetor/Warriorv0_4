@@ -43,33 +43,13 @@ public class ActivityNewGame extends AppCompatActivity {
 
     public void confirmNewGame(View view){
         //Before allowing new game, check if savegame data currently exists
-        boolean save_data_exists = true;
-        try {
-            FileInputStream fileIn = openFileInput(SaveGame.file_name);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            SaveGame placeholder = (SaveGame) in.readObject();
-            in.close();
-            fileIn.close();
-            //If successful, save game exists! Confirm overwrite by opening new activity. Continued after catches.
-
-
-        }catch(FileNotFoundException f){
-            save_data_exists = false;
-            //This exception thrown if no game data exists -- safe to proceed with overwriting
-
-        }catch(IOException i) {
-            i.printStackTrace();
-        }catch(ClassNotFoundException c) {
-            c.printStackTrace();
-        }
-
-
+        boolean save_data_exists = SaveGame.load(getBaseContext());
 
         if (!save_data_exists){
             //Make new save game
             createNewSave();
 
-        } else if (save_data_exists){
+        } else {  //SAVE DATA EXISTS!
             //Confirm if user really wants to overwrite data.
             //Start new ActivityNewGameConfirm
             Intent confirmNewGameIntent = new Intent(this, ActivityNewGameConfirm.class);
@@ -82,16 +62,8 @@ public class ActivityNewGame extends AppCompatActivity {
         //Create new save file in SaveGame.current
         SaveGame.current = new SaveGame();
 
-        //Write savegame to file
-        try {
-            FileOutputStream fileOut = openFileOutput(SaveGame.file_name, Context.MODE_PRIVATE);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(SaveGame.current);
-            out.close();
-            fileOut.close();
-        }catch(IOException i) {
-            i.printStackTrace();
-        }
+        //Save new game to disk
+        SaveGame.save(getBaseContext());
 
         //Done, savegame written to SaveGame.current and to file. Finish activity and send Result_OK.
         Intent emptyIntent = new Intent();
@@ -100,7 +72,7 @@ public class ActivityNewGame extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (requestCode == 1){
+        if (requestCode == 1){  //requestCode 1: Confirm Start New Game
             if (resultCode == RESULT_CANCELED){
                 //Do nothing
             }else if (resultCode == RESULT_OK){

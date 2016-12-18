@@ -27,7 +27,7 @@
     <string name="activity_new_game_confirm_button_overwrite">Overwrite</string>
 
     <!--ActivityAbout Strings-->
-    <string name="activity_about_description">Warrior is an idle RPG for the Android platform, made in Android Studio. \n\nCreator: \nardetor</string>
+    <string name="activity_about_description">Warrior is an idle RPG for the Android platform, made in Android Studio. \n\nCoded by ardetor.</string>
 
 
     <!--ActivitySummary Strings-->

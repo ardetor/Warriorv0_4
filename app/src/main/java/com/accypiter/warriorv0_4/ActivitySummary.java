@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class ActivitySummary extends AppCompatActivity {
+    public static SaveGame save = SaveGame.current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
