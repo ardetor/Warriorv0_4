@@ -26,9 +26,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:id="@+id/activity_new_game_confirm_button_arm"
+            android:text="@string/activity_new_game_confirm_button_arm"
+            android:onClick="armOverwrite"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:id="@+id/activity_new_game_confirm_button_overwrite"
             android:text="@string/activity_new_game_confirm_button_overwrite"
-            android:onClick="confirmOverwrite"/>
+            android:onClick="confirmOverwrite"
+            android:enabled="false"/>
 
         <Button
             android:layout_width="0dp"
@@ -48,13 +57,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_new_game_confirm_text"
                 android:text="@string/activity_new_game_confirm_text"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_new_game_confirm_warning_text"
+                android:text="@string/activity_new_game_confirm_warning_text"
+                android:textColor="#ffff0000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

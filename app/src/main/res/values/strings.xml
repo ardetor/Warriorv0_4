@@ -22,12 +22,15 @@
     <string name="activity_new_game_button_start_new_game">Start New Game</string>
 
     <!--ActivityNewGameConfirm Strings-->
-    <string name="activity_new_game_confirm_text">Existing save data will be permanently overwritten. Proceed to overwrite?</string>
+    <string name="activity_new_game_confirm_text">Existing save data will be overwritten. Proceed to overwrite?</string>
+    <string name="activity_new_game_confirm_warning_text">WARNING: OVERWRITTEN DATA WILL BE PERMANENTLY LOST.</string>
     <string name="activity_new_game_confirm_button_cancel">Cancel</string>
     <string name="activity_new_game_confirm_button_overwrite">Overwrite</string>
+    <string name="activity_new_game_confirm_button_arm">Arm</string>
+    <string name="activity_new_game_confirm_button_disarm">Disarm</string>
 
     <!--ActivityAbout Strings-->
-    <string name="activity_about_description">Warrior is an idle RPG for the Android platform, made in Android Studio. \n\nCoded by ardetor.\n\n\n\n\nThis app uses the TwoDScrollView class, originally made by Matt Clark and modified by Jared Rummler, under the Apache License, Version 2.0. You may not use this file except in compliance with the License. You may obtain a copy of the License at:\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
+    <string name="activity_about_description">Warrior is an idle RPG for the Android platform, made in Android Studio. \n\nCoded by ardetor.\n\n\n\n\nThis app uses the TwoDScrollView class, originally made by Matt Clark and modified by Jared Rummler, under the Apache Licence 2.0. This class (and by extension, this app) may not be used except in compliance with the License. You may obtain a copy of the License at:\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
 
 
     <!--ActivitySummary Strings-->

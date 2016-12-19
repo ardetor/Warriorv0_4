@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 
 public class ActivityNewGameConfirm extends AppCompatActivity {
 
@@ -36,4 +37,17 @@ public class ActivityNewGameConfirm extends AppCompatActivity {
         setResult(RESULT_OK, emptyIntent);
         finish();
     }
+
+    public void armOverwrite(View view){
+        Button armButton = (Button) findViewById(R.id.activity_new_game_confirm_button_arm);
+        Button overwriteButton = (Button) findViewById(R.id.activity_new_game_confirm_button_overwrite);
+        if (!overwriteButton.isEnabled()) {
+            armButton.setText(R.string.activity_new_game_confirm_button_disarm);
+            overwriteButton.setEnabled(true);
+        } else {
+            armButton.setText(R.string.activity_new_game_confirm_button_arm);
+            overwriteButton.setEnabled(false);
+        }
+    }
+
 }
