@@ -45,7 +45,7 @@ public class ActivitySummary extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         //Refresh views
-        refresh();
+//        refresh();
     }
 
     public void onPause(){
@@ -60,4 +60,6 @@ public class ActivitySummary extends AppCompatActivity {
         //Place buttons at bottom of screen
 
     }
+
+
 }
