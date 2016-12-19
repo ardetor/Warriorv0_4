@@ -18,6 +18,7 @@ class SaveGame implements Serializable{
 
     //Health
     double health_max;
+    double health_body;
     double health_current;
 
 
@@ -25,6 +26,7 @@ class SaveGame implements Serializable{
     //Constructor
     SaveGame(){
         this.health_max = 100.;
+        this.health_body = 100.;
         this.health_current = 100.;
 
     }
@@ -61,4 +63,20 @@ class SaveGame implements Serializable{
 
         return true;
     }
+
+    static void startNewGame(Context context){
+        SaveGame newSaveGame = new SaveGame();
+        SaveGame.current = newSaveGame;
+        try {
+            FileOutputStream fileOut = context.openFileOutput(SaveGame.file_name, Context.MODE_PRIVATE);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(newSaveGame);
+            out.close();
+            fileOut.close();
+        }catch(IOException i) {
+            i.printStackTrace();
+
+        }
+    }
+
 }

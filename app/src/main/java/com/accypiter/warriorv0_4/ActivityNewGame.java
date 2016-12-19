@@ -60,10 +60,7 @@ public class ActivityNewGame extends AppCompatActivity {
 
     protected void createNewSave(){
         //Create new save file in SaveGame.current
-        SaveGame.current = new SaveGame();
-
-        //Save new game to disk
-        SaveGame.save(getBaseContext());
+        SaveGame.startNewGame(this);
 
         //Done, savegame written to SaveGame.current and to file. Finish activity and send Result_OK.
         Intent emptyIntent = new Intent();
