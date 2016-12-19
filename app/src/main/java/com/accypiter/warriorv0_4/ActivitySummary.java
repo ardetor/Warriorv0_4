@@ -49,13 +49,14 @@ public class ActivitySummary extends AppCompatActivity {
     }
 
     public void onPause(){
+        super.onPause();
         SaveGame.save(getBaseContext());
     }
 
     protected void refresh(){
         //Remove all views from main RelativeLayout
-        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.activity_summary_rellay);
-        relativeLayout.removeAllViews();
+//        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.activity_summary_rellay);
+//        relativeLayout.removeAllViews();
 
         //Place buttons at bottom of screen
 
