@@ -2,19 +2,20 @@ package com.accypiter.warriorv0_4;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ActivitySummary extends AppCompatActivity {
-    public static SaveGame save;
+    //DO NOT CHANGE THIS TO SAVEGAME.UPDATE. I HAVE NO IDEA WHY BUT IT WILL CRASH THE ACTIVITY.
+    //Probably due to simultaneous writing. Not sure, though.
+    public SaveGame save = SaveGame.current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class ActivitySummary extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        getMenuInflater().inflate(R.menu.menu_activity_summary, menu);
         return true;
     }
 
@@ -39,6 +40,8 @@ public class ActivitySummary extends AppCompatActivity {
             startActivity(openSettingsIntent);
             return true;
 
+        } else if (id == R.id.menu_refresh) {
+            this.recreate();
         }
 
         return super.onOptionsItemSelected(item);
@@ -47,7 +50,12 @@ public class ActivitySummary extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        save = SaveGame.current;
+        save = SaveGame.update(this);
+
+
+        if (save.magic_enabled){
+            enableMagicButton();
+        }
 
         updateHealthCurrent();
         updateHealthBody();
@@ -56,8 +64,8 @@ public class ActivitySummary extends AppCompatActivity {
 
     @Override
     public void onPause(){
+        SaveGame.update(this);
         super.onPause();
-        SaveGame.save(getBaseContext());
     }
 
     public void testHealthBody(View view){
@@ -100,7 +108,7 @@ public class ActivitySummary extends AppCompatActivity {
         
     }
 
-    public void startFight(View view){
+    protected void startFight(View view){
         //Remember to set enemy in SaveGame before calling this function
         save.in_fight = true;
         Intent startFightIntent = new Intent();
@@ -108,6 +116,13 @@ public class ActivitySummary extends AppCompatActivity {
         finish();
 
     }
+
+    protected void enableMagicButton(){
+        Button magicButton = (Button) findViewById(R.id.activity_summary_button_magic);
+        magicButton.setEnabled(true);
+        magicButton.setText(R.string.activity_summary_button_magic);
+    }
+
 }
 
 /*

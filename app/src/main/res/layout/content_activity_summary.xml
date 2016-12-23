@@ -13,14 +13,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/activity_summary_buttons_outer_layout"
+        android:id="@+id/activity_summary_linlay_buttons_outer"
         android:orientation="vertical"
         android:layout_alignParentBottom="true">
         
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/activity_summary_linlay_buttons_inner_top">
             
             <Button
                 android:layout_width="0dp"
@@ -39,44 +40,45 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/activity_summary_linlay_buttons_inner_middle">
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/activity_summary_button_health"/>
+                android:text="@string/activity_summary_button_health"
+                android:id="@+id/activity_summary_button_health"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/activity_summary_button_skills"/>
+                android:text="@string/activity_summary_button_skills"
+                android:id="@+id/activity_summary_button_skills"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/activity_summary_linlay_buttons_inner_bottom">
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/activity_summary_button_inventory"/>
+                android:text="@string/activity_summary_button_inventory"
+                android:id="@+id/activity_summary_button_inventory"/>
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:id="@+id/activity_summary_placeholder_button_magic"/>
-
-<!--            <Button
+            <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="asdf"/>-->
+                android:text="@string/activity_summary_button_undiscovered"
+                android:enabled="false"
+                android:id="@+id/activity_summary_button_magic" />
 
         </LinearLayout>
         
@@ -87,7 +89,7 @@
         android:layout_height="10dp"
         android:background="#ff000000"
         android:id="@+id/activity_summary_bar_health_max"
-        android:layout_above="@id/activity_summary_buttons_outer_layout"
+        android:layout_above="@id/activity_summary_linlay_buttons_outer"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"/>
 
@@ -97,7 +99,7 @@
         android:layout_height="10dp"
         android:background="#ffffff00"
         android:id="@+id/activity_summary_bar_health_body"
-        android:layout_above="@id/activity_summary_buttons_outer_layout"
+        android:layout_above="@id/activity_summary_linlay_buttons_outer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
@@ -106,7 +108,7 @@
         android:layout_height="10dp"
         android:background="#ff00ff00"
         android:id="@+id/activity_summary_bar_health_current"
-        android:layout_above="@id/activity_summary_buttons_outer_layout"
+        android:layout_above="@id/activity_summary_linlay_buttons_outer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 

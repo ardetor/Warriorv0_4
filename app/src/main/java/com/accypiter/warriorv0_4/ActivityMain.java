@@ -140,6 +140,7 @@ public class ActivityMain extends AppCompatActivity {
 
     protected void startGame(){
         //Start ActivitySummary OR ActivityFight
+        //TODO: ADD CHEAT DETECTION
         if (!SaveGame.current.in_fight) {
             startActivitySummary();
         } else {

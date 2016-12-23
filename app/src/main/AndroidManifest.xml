@@ -47,6 +47,10 @@
         <activity
             android:name=".ActivityFight"
             android:label="@string/title_activity_fight"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityJournal"
+            android:label="@string/title_activity_journal"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
