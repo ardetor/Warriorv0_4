@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ActivitySummary extends AppCompatActivity {
-    public static SaveGame save = SaveGame.current;
+    public static SaveGame save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class ActivitySummary extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     public void onResume(){
         super.onResume();
         save = SaveGame.current;
@@ -53,6 +54,7 @@ public class ActivitySummary extends AppCompatActivity {
         debugger();
     }
 
+    @Override
     public void onPause(){
         super.onPause();
         SaveGame.save(getBaseContext());
@@ -95,5 +97,15 @@ public class ActivitySummary extends AppCompatActivity {
     public void debugger(){
         TextView debugger = (TextView) findViewById(R.id.activity_summary_debugger);
         debugger.setText(ClassUtils.toString(save));
+        
+    }
+
+    public void startFight(View view){
+        //Remember to set enemy in SaveGame before calling this function
+        save.in_fight = true;
+        Intent startFightIntent = new Intent();
+        setResult(RESULT_OK, startFightIntent);
+        finish();
+
     }
 }

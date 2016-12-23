@@ -18,6 +18,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class ActivityNewGame extends AppCompatActivity {
+    protected final int CODE_CONFIRM_NEW_GAME = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class ActivityNewGame extends AppCompatActivity {
             //Confirm if user really wants to overwrite data.
             //Start new ActivityNewGameConfirm
             Intent confirmNewGameIntent = new Intent(this, ActivityNewGameConfirm.class);
-            startActivityForResult(confirmNewGameIntent, 1);
+            startActivityForResult(confirmNewGameIntent, CODE_CONFIRM_NEW_GAME);
         }
     }
 
@@ -69,7 +70,7 @@ public class ActivityNewGame extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (requestCode == 1){  //requestCode 1: Confirm Start New Game
+        if (requestCode == CODE_CONFIRM_NEW_GAME){  //requestCode 1: Confirm Start New Game
             if (resultCode == RESULT_CANCELED){
                 //Do nothing
             }else if (resultCode == RESULT_OK){

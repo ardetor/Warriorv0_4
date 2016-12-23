@@ -24,6 +24,8 @@ import java.io.ObjectOutputStream;
 public class ActivityMain extends AppCompatActivity {
 
     public static boolean first_time = true;
+    protected final int CODE_START_NEW_GAME = 0;
+    protected final int CODE_OK_TO_AUTOSTART = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,7 @@ public class ActivityMain extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     protected void onPause(){
         super.onPause();
         //DO NOT SAVE GAME TO FILE. Only do that within the game.
@@ -104,7 +107,7 @@ public class ActivityMain extends AppCompatActivity {
 
         //Temporary startActivity, to be replaced by forResult
         Intent openNewGameActivityIntent = new Intent(this, ActivityNewGame.class);
-        startActivityForResult(openNewGameActivityIntent, 0);
+        startActivityForResult(openNewGameActivityIntent, CODE_START_NEW_GAME);
     }
 
     public void buttonAbout(View view){
@@ -117,22 +120,43 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (requestCode == 0){  // requestCode 0: Start New Game
+        if (requestCode == CODE_START_NEW_GAME){  // requestCode 0: Start New Game
             if (resultCode == RESULT_CANCELED){
                 //Do nothing
-            }else if (resultCode == RESULT_OK){
+            } else if (resultCode == RESULT_OK){
                 //Launch ActivitySummary
                 startNewGame();
+            }
+
+        } else if (requestCode == CODE_OK_TO_AUTOSTART){
+            if (resultCode == RESULT_CANCELED){
+                //Do nothing
+            } else if (resultCode == RESULT_OK){
+                //Autostart
+                startGame();
             }
         }
     }
 
     protected void startGame(){
-        //Start ActivitySummary
-        startActivity(new Intent(this, ActivitySummary.class));
+        //Start ActivitySummary OR ActivityFight
+        if (!SaveGame.current.in_fight) {
+            startActivitySummary();
+        } else {
+            startActivityFight();
+        }
+    }
+
+    protected void startActivitySummary(){
+        startActivityForResult(new Intent(this, ActivitySummary.class), CODE_OK_TO_AUTOSTART);
+    }
+
+    protected void startActivityFight(){
+        startActivityForResult(new Intent(this, ActivityFight.class), CODE_OK_TO_AUTOSTART);
     }
 
     protected void startNewGame(){
+        //Later, replace with startActivityForResult to the tutorial, which when finished leads back here and starts game.
         startGame();
     }
 

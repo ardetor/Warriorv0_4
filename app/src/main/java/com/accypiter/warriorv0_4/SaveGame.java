@@ -15,6 +15,8 @@ class SaveGame implements Serializable{
     static SaveGame current;
     static final String file_name = "savegame.sav";
 
+    //General game mechanics
+    boolean in_fight;
 
     //Health
     double health_max;
@@ -25,6 +27,11 @@ class SaveGame implements Serializable{
 
     //Constructor
     SaveGame(){
+        //General game mechanics
+        this.in_fight = false;
+
+
+        //Health
         this.health_max = 100.;
         this.health_body = 100.;
         this.health_current = 100.;

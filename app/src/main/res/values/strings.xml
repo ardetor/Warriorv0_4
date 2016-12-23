@@ -42,4 +42,5 @@
     <string name="title_activity_new_game">New Game</string>
     <string name="title_activity_new_game_confirm">Confirm Overwrite Data</string>
     <string name="title_activity_preferences">ActivityPreferences</string>
+    <string name="title_activity_fight">Fight</string>
 </resources>
