@@ -109,3 +109,14 @@ public class ActivitySummary extends AppCompatActivity {
 
     }
 }
+
+/*
+//Sample code area
+
+
+
+
+
+
+
+*/

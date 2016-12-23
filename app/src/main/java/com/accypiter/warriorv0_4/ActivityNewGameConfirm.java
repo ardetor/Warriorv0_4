@@ -44,9 +44,11 @@ public class ActivityNewGameConfirm extends AppCompatActivity {
         if (!overwriteButton.isEnabled()) {
             armButton.setText(R.string.activity_new_game_confirm_button_disarm);
             overwriteButton.setEnabled(true);
+            overwriteButton.setTextColor(0xFFFF0000);
         } else {
             armButton.setText(R.string.activity_new_game_confirm_button_arm);
             overwriteButton.setEnabled(false);
+            overwriteButton.setTextColor(0x55FF0000);
         }
     }
 
