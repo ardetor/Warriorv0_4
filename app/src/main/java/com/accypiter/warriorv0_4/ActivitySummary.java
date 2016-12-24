@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Date;
+
 public class ActivitySummary extends AppCompatActivity {
     //DO NOT CHANGE THIS TO SAVEGAME.UPDATE. I HAVE NO IDEA WHY BUT IT WILL CRASH THE ACTIVITY.
     //Probably due to simultaneous writing. Not sure, though.
@@ -51,15 +53,11 @@ public class ActivitySummary extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         save = SaveGame.update(this);
-
-
         if (save.magic_enabled){
             enableMagicButton();
         }
 
-        updateHealthCurrent();
-        updateHealthBody();
-        debugger();
+        refreshScreen();
     }
 
     @Override
@@ -108,6 +106,12 @@ public class ActivitySummary extends AppCompatActivity {
         
     }
 
+    protected void refreshScreen(){
+        updateHealthCurrent();
+        updateHealthBody();
+        debugger();
+    }
+
     protected void startFight(View view){
         //Remember to set enemy in SaveGame before calling this function
         save.in_fight = true;
@@ -121,6 +125,21 @@ public class ActivitySummary extends AppCompatActivity {
         Button magicButton = (Button) findViewById(R.id.activity_summary_button_magic);
         magicButton.setEnabled(true);
         magicButton.setText(R.string.activity_summary_button_magic);
+    }
+
+    public void startActivityJournal(View view){
+        Intent openJournalIntent = new Intent(this, ActivityJournal.class);
+        startActivity(openJournalIntent);
+    }
+
+    public void testJournal(View view){
+        JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_SKILL_LEVEL_UP, "asdf", "asdfasdf");
+        SaveGame.addJournalEntry(this, journalEntry);
+    }
+
+    public void testJournal2(View view){
+        JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_SKILL_LEVEL_UP, "asdf2", "asdfasdf2");
+        SaveGame.addJournalEntry(this, journalEntry);
     }
 
 }

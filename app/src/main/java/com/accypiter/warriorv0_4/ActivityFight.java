@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class ActivityFight extends AppCompatActivity {
-    public SaveGame save = SaveGame.update(this);
+    public SaveGame save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

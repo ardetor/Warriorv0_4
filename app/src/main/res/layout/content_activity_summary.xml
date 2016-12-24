@@ -27,13 +27,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/activity_summary_button_journal"/>
+                android:text="@string/activity_summary_button_journal"
+                android:id="@+id/activity_summary_button_journal"
+                android:onClick="startActivityJournal"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/activity_summary_button_map"/>
+                android:text="@string/activity_summary_button_map"
+                android:id="@+id/activity_summary_button_map"/>
             
         </LinearLayout>
 
@@ -146,10 +149,24 @@
                 android:text="Toggle IF"
                 android:onClick="startFight"/>
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TJ"
+                android:onClick="testJournal"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TJ2"
+                android:onClick="testJournal2"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/activity_summary_debugger"/>
+
+
 
         </LinearLayout>
 

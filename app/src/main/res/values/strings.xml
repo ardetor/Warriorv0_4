@@ -8,8 +8,10 @@
 
     <!--ActivityPreferences Strings-->
     <string name="activity_preferences_skiptitlescreen">Skip Title Screen</string>
-    <string name="activity_preferences_skiptitlescreen_description">If save data exists, title screen will be skipped.</string>
+    <string name="activity_preferences_skiptitlescreen_description">If selected, title screen will be skipped when a save game exists.</string>
     <string name="activity_preferences_about">About</string>
+    <string name="activity_preferences_journal_capacity">Journal Capacity</string>
+    <string name="activity_preferences_journal_capacity_description">This number of journal entries will be saved. Enter 0 for unlimited saved entries. (Default: 100)</string>
 
     <!--ActivityMain Strings-->
     <string name="activity_main_subtitle">An idle RPG for Android</string>

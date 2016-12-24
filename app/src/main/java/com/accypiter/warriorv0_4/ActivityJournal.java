@@ -10,9 +10,12 @@ import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class ActivityJournal extends AppCompatActivity {
-    public SaveGame save = SaveGame.update(this);
+    public SaveGame save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,17 @@ public class ActivityJournal extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         save = SaveGame.update(this);
+
+        //Update displayed journal entries
+        //First, clear views from rellay
+        LinearLayout innerLinear = (LinearLayout) findViewById(R.id.activity_journal_linlay);
+        innerLinear.removeAllViews();
+        //Next, populate the relativeLayout with members of save.journal
+        for (JournalEntry journalEntry : save.journal){
+            TextView textView = new TextView(this);
+            textView.setText(journalEntry.message_short);
+            innerLinear.addView(textView);
+        }
     }
 
     @Override

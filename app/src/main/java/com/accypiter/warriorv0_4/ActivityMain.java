@@ -47,7 +47,7 @@ public class ActivityMain extends AppCompatActivity {
         if(first_time) {
             first_time = false;
             //If user opted to in Preferences, skip title screen and go to ActivitySummary
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             boolean skip_title_screen = sharedPreferences.getBoolean("preference_skip_title_screen", false);
 
             if (skip_title_screen) {
