@@ -51,6 +51,10 @@
         <activity
             android:name=".ActivityJournal"
             android:label="@string/title_activity_journal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityJournalDetail"
+            android:label="@string/title_activity_journal_detail"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -29,7 +29,7 @@ public class ActivitySummary extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_activity_summary, menu);
+        getMenuInflater().inflate(R.menu.menu_activity_standard, menu);
         return true;
     }
 
@@ -133,15 +133,21 @@ public class ActivitySummary extends AppCompatActivity {
     }
 
     public void testJournal(View view){
-        JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_SKILL_LEVEL_UP, "asdf", "asdfasdf");
+        JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_SKILL_LEVEL_UP, "asdf", "asdfasdf", "asdfasdfasdf");
         SaveGame.addJournalEntry(this, journalEntry);
     }
+
+/*    public void testJournal2(View view){
+        JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_NORMAL, "asdf2", "asdfasdf2", "asdfasdfasdf2");
+        SaveGame.addJournalEntry(this, journalEntry);
+    }*/
 
     public void testJournal2(View view){
-        JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_SKILL_LEVEL_UP, "asdf2", "asdfasdf2");
-        SaveGame.addJournalEntry(this, journalEntry);
+        for(int i = 0; i < 100; ++i) {
+            JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_NORMAL, "asdf2", "asdfasdf2", "asdfasdfasdf2");
+            SaveGame.addJournalEntry(this, journalEntry);
+        }
     }
-
 }
 
 /*

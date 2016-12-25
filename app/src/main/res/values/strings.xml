@@ -47,6 +47,12 @@
     <string name="activity_summary_button_undiscovered">\?\?\?</string>
 
 
+
+    <!--ActivityJournalDetail Strings-->
+    <string name="activity_journal_detail_error_notfound">Error - index of journal entry to display not found in Intent</string>
+    <string name="activity_journal_detail_error_exceed">Error - index of requested journal entry exceeds current journal length</string>
+
+
     <!--Title Strings-->
     <string name="title_activity_summary">Summary</string>
     <string name="title_activity_about">About</string>
@@ -55,6 +61,5 @@
     <string name="title_activity_preferences">Preferences</string>
     <string name="title_activity_fight">Fight</string>
     <string name="title_activity_journal">Journal</string>
-
-
+    <string name="title_activity_journal_detail">Journal Entry</string>
 </resources>

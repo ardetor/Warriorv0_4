@@ -1,21 +1,11 @@
 package com.accypiter.warriorv0_4;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 public class ActivityNewGame extends AppCompatActivity {
     protected final int CODE_CONFIRM_NEW_GAME = 1;
@@ -31,7 +21,7 @@ public class ActivityNewGame extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_activity_about, menu);
+        getMenuInflater().inflate(R.menu.menu_activity_blank, menu);
         return true;
     }
 

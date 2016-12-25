@@ -46,10 +46,10 @@ public class JournalEntry implements Serializable {
 
 
     //JOURNAL ENTRY TYPES DEFINED HERE
-    public final int TYPE_NORMAL = 123874;
-    public final int TYPE_SKILL_LEVEL_UP = 435802;
-    public final int TYPE_FIGHT_WIN = 458923;
-    public final int TYPE_FIGHT_LOSE = 197209;
+    public static final int TYPE_NORMAL = 123874;
+    public static final int TYPE_SKILL_LEVEL_UP = 435802;
+    public static final int TYPE_FIGHT_WIN = 458923;
+    public static final int TYPE_FIGHT_LOSE = 197209;
 
 
 
@@ -57,7 +57,7 @@ public class JournalEntry implements Serializable {
         int entryType = this.type;
         switch(entryType){
             case TYPE_NORMAL:
-                return 0xFFF5F5F5;
+                return 0xFFFFFFFF;
             case TYPE_SKILL_LEVEL_UP:
                 return 0xFFFFF9C4;
             case TYPE_FIGHT_WIN:
