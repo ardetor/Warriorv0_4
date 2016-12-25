@@ -57,7 +57,7 @@ public class JournalEntry implements Serializable {
         int entryType = this.type;
         switch(entryType){
             case TYPE_NORMAL:
-                return 0xFFFFFFFF;
+                return 0xFFDDDDDD;
             case TYPE_SKILL_LEVEL_UP:
                 return 0xFFFFF9C4;
             case TYPE_FIGHT_WIN:

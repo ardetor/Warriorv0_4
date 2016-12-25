@@ -133,21 +133,21 @@ public class ActivitySummary extends AppCompatActivity {
     }
 
     public void testJournal(View view){
-        JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_SKILL_LEVEL_UP, "asdf", "asdfasdf", "asdfasdfasdf");
+        JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_SKILL_LEVEL_UP, "Skill increase", "Blunt weapon skill has increased.", "You have reached Level 23 in Blunt weaponry. 93.235 experience points to next level.");
+        SaveGame.addJournalEntry(this, journalEntry);
+    }
+
+    public void testJournal2(View view){
+        JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_NORMAL, "Item purchase", "Potion purchased for 625 copper pieces.");
         SaveGame.addJournalEntry(this, journalEntry);
     }
 
 /*    public void testJournal2(View view){
-        JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_NORMAL, "asdf2", "asdfasdf2", "asdfasdfasdf2");
-        SaveGame.addJournalEntry(this, journalEntry);
-    }*/
-
-    public void testJournal2(View view){
         for(int i = 0; i < 100; ++i) {
             JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_NORMAL, "asdf2", "asdfasdf2", "asdfasdfasdf2");
             SaveGame.addJournalEntry(this, journalEntry);
         }
-    }
+    }*/
 }
 
 /*
