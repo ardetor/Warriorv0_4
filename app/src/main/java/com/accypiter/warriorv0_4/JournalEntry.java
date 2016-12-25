@@ -11,7 +11,6 @@ import java.util.StringTokenizer;
  */
 
 public class JournalEntry implements Serializable {
-    public static int TYPE_SKILL_LEVEL_UP = 0;
 
 
     Date date;
@@ -44,4 +43,29 @@ public class JournalEntry implements Serializable {
         this.message_long = message_long;
     }
 
+
+
+    //JOURNAL ENTRY TYPES DEFINED HERE
+    public final int TYPE_NORMAL = 123874;
+    public final int TYPE_SKILL_LEVEL_UP = 435802;
+    public final int TYPE_FIGHT_WIN = 458923;
+    public final int TYPE_FIGHT_LOSE = 197209;
+
+
+
+    int getColor(){
+        int entryType = this.type;
+        switch(entryType){
+            case TYPE_NORMAL:
+                return 0xFFF5F5F5;
+            case TYPE_SKILL_LEVEL_UP:
+                return 0xFFFFF9C4;
+            case TYPE_FIGHT_WIN:
+                return 0xFFB9F6CA;
+            case TYPE_FIGHT_LOSE:
+                return 0xFFF8BBD0;
+            default:
+                return 0xFF990000;
+        }
+    }
 }
