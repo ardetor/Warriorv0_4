@@ -39,6 +39,8 @@ public class ActivityJournalDetail extends AppCompatActivity {
 
         } else if (id == R.id.menu_refresh) {
             this.recreate();
+        } else if (id == android.R.id.home){
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
