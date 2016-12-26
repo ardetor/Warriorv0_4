@@ -1,12 +1,9 @@
 package com.accypiter.warriorv0_4;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,14 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 public class ActivityMain extends AppCompatActivity {
+
+    public static boolean first_time = true;
+    protected final int CODE_START_NEW_GAME = 0;
+    protected final int CODE_OK_TO_AUTOSTART = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,37 +33,25 @@ public class ActivityMain extends AppCompatActivity {
             }
         });*/
 
+        //Check if first time on this screen
+        if(first_time) {
+            first_time = false;
+            //If user opted to in Preferences, skip title screen and go to ActivitySummary
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            boolean skip_title_screen = sharedPreferences.getBoolean("preference_skip_title_screen", false);
 
-        //If user opted to in Preferences, skip title screen and go to ActivitySummary
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        boolean skip_title_screen = sharedPreferences.getBoolean("preference_skip_title_screen", false);
-        if (skip_title_screen){
-
-            boolean save_game_exists = true;
-
-            try {
-                FileInputStream fileIn = openFileInput(SaveGame.file_name);
-                ObjectInputStream in = new ObjectInputStream(fileIn);
-                SaveGame.current = (SaveGame) in.readObject();
-                in.close();
-                fileIn.close();
-            }catch(FileNotFoundException f){
-                save_game_exists = false;
-            }catch(IOException i) {
-                i.printStackTrace();
-            }catch(ClassNotFoundException c) {
-                c.printStackTrace();
+            if (skip_title_screen) {
+                if (SaveGame.load(getBaseContext())){ //if load is successful
+                    startGame();
+                }
             }
-
-            if (save_game_exists) startGame();
-
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        getMenuInflater().inflate(R.menu.menu_activity_norefresh, menu);
         return true;
     }
 
@@ -91,6 +73,7 @@ public class ActivityMain extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     protected void onPause(){
         super.onPause();
         //DO NOT SAVE GAME TO FILE. Only do that within the game.
@@ -98,31 +81,13 @@ public class ActivityMain extends AppCompatActivity {
 
     public void buttonLoadGame(View view){
         //Load game from file and proceed to ActivitySummary.
-        boolean save_game_exists = true;
-        try {
-            FileInputStream fileIn = openFileInput(SaveGame.file_name);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            SaveGame.current = (SaveGame) in.readObject();
-            in.close();
-            fileIn.close();
-        }catch(FileNotFoundException f){
+        if (SaveGame.load(getBaseContext())){ //Load successful: start game
+            startGame();
+        } else { //Load unsuccessful: exception thrown
             TextView infoText = (TextView) findViewById(R.id.activity_main_infotext);
             infoText.setText(R.string.activity_main_loadgame_failure);
-            save_game_exists = false;
-        }catch(IOException i) {
-            i.printStackTrace();
-        }catch(ClassNotFoundException c) {
-            c.printStackTrace();
         }
-
-        if (save_game_exists) startGame();
     }
-
-    protected void startGame(){
-        //Start ActivitySummary
-        startActivity(new Intent(this, ActivitySummary.class));
-    }
-
 
     public void buttonNewGame(View view){
         //Create new game: launch ActivityNewGame. This is to make it harder to accidentally overwrite an old game.
@@ -132,7 +97,7 @@ public class ActivityMain extends AppCompatActivity {
 
         //Temporary startActivity, to be replaced by forResult
         Intent openNewGameActivityIntent = new Intent(this, ActivityNewGame.class);
-        startActivityForResult(openNewGameActivityIntent, 0);
+        startActivityForResult(openNewGameActivityIntent, CODE_START_NEW_GAME);
     }
 
     public void buttonAbout(View view){
@@ -145,14 +110,45 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (requestCode == 0){
+        if (requestCode == CODE_START_NEW_GAME){  // requestCode 0: Start New Game
             if (resultCode == RESULT_CANCELED){
                 //Do nothing
-            }else if (resultCode == RESULT_OK){
+            } else if (resultCode == RESULT_OK){
                 //Launch ActivitySummary
+                startNewGame();
+            }
+
+        } else if (requestCode == CODE_OK_TO_AUTOSTART){
+            if (resultCode == RESULT_CANCELED){
+                //Do nothing
+            } else if (resultCode == RESULT_OK){
+                //Autostart
                 startGame();
             }
         }
+    }
+
+    protected void startGame(){
+        //Start ActivitySummary OR ActivityFight
+        //TODO: ADD CHEAT DETECTION
+        if (!SaveGame.current.in_fight) {
+            startActivitySummary();
+        } else {
+            startActivityFight();
+        }
+    }
+
+    protected void startActivitySummary(){
+        startActivityForResult(new Intent(this, ActivitySummary.class), CODE_OK_TO_AUTOSTART);
+    }
+
+    protected void startActivityFight(){
+        startActivityForResult(new Intent(this, ActivityFight.class), CODE_OK_TO_AUTOSTART);
+    }
+
+    protected void startNewGame(){
+        //Later, replace with startActivityForResult to the tutorial, which when finished leads back here and starts game.
+        startGame();
     }
 
 }

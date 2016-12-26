@@ -5,6 +5,11 @@
         android:title="@string/activity_preferences_skiptitlescreen"
         android:summary="@string/activity_preferences_skiptitlescreen_description" />
 
+    <EditTextPreference
+        android:key="preference_journal_capacity"
+        android:title="@string/activity_preferences_journal_capacity"
+        android:summary="@string/activity_preferences_journal_capacity_description" />
+
     <PreferenceScreen
         android:title="@string/activity_preferences_about">
 

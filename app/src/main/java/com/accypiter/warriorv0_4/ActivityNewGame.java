@@ -1,23 +1,14 @@
 package com.accypiter.warriorv0_4;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 public class ActivityNewGame extends AppCompatActivity {
+    protected final int CODE_CONFIRM_NEW_GAME = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +21,7 @@ public class ActivityNewGame extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_activity_about, menu);
+        getMenuInflater().inflate(R.menu.menu_activity_blank, menu);
         return true;
     }
 
@@ -43,55 +34,24 @@ public class ActivityNewGame extends AppCompatActivity {
 
     public void confirmNewGame(View view){
         //Before allowing new game, check if savegame data currently exists
-        boolean save_data_exists = true;
-        try {
-            FileInputStream fileIn = openFileInput(SaveGame.file_name);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            SaveGame placeholder = (SaveGame) in.readObject();
-            in.close();
-            fileIn.close();
-            //If successful, save game exists! Confirm overwrite by opening new activity. Continued after catches.
-
-
-        }catch(FileNotFoundException f){
-            save_data_exists = false;
-            //This exception thrown if no game data exists -- safe to proceed with overwriting
-
-        }catch(IOException i) {
-            i.printStackTrace();
-        }catch(ClassNotFoundException c) {
-            c.printStackTrace();
-        }
-
-
+        boolean save_data_exists = SaveGame.load(getBaseContext());
 
         if (!save_data_exists){
             //Make new save game
             createNewSave();
 
-        } else if (save_data_exists){
+        } else {  //SAVE DATA EXISTS!
             //Confirm if user really wants to overwrite data.
             //Start new ActivityNewGameConfirm
             Intent confirmNewGameIntent = new Intent(this, ActivityNewGameConfirm.class);
-            startActivityForResult(confirmNewGameIntent, 1);
+            startActivityForResult(confirmNewGameIntent, CODE_CONFIRM_NEW_GAME);
         }
     }
 
 
     protected void createNewSave(){
         //Create new save file in SaveGame.current
-        SaveGame.current = new SaveGame();
-
-        //Write savegame to file
-        try {
-            FileOutputStream fileOut = openFileOutput(SaveGame.file_name, Context.MODE_PRIVATE);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(SaveGame.current);
-            out.close();
-            fileOut.close();
-        }catch(IOException i) {
-            i.printStackTrace();
-        }
+        SaveGame.startNewGame(this);
 
         //Done, savegame written to SaveGame.current and to file. Finish activity and send Result_OK.
         Intent emptyIntent = new Intent();
@@ -100,7 +60,7 @@ public class ActivityNewGame extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (requestCode == 1){
+        if (requestCode == CODE_CONFIRM_NEW_GAME){  //requestCode 1: Confirm Start New Game
             if (resultCode == RESULT_CANCELED){
                 //Do nothing
             }else if (resultCode == RESULT_OK){

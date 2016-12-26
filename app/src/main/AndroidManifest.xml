@@ -28,6 +28,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.accypiter.warrior.activity.ABOUT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -43,6 +44,18 @@
             android:name=".ActivityPreferences"
             android:label="@string/title_activity_preferences"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityFight"
+            android:label="@string/title_activity_fight"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityJournal"
+            android:label="@string/title_activity_journal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityJournalDetail"
+            android:label="@string/title_activity_journal_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
