@@ -14,77 +14,65 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/activity_summary_linlay_buttons_outer"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true">
-        
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/activity_summary_linlay_buttons_inner_top">
             
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_journal"
-                android:id="@+id/activity_summary_button_journal"
-                android:onClick="startActivityJournal"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_map"
-                android:id="@+id/activity_summary_button_map"/>
-            
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageButton
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/activity_summary_linlay_buttons_inner_middle">
+            android:layout_weight="1"
+            android:id="@+id/activity_summary_button_journal"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_journal"
+            android:contentDescription="@string/activity_summary_button_journal"
+            android:onClick="startActivityJournal"/>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_health"
-                android:id="@+id/activity_summary_button_health"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_skills"
-                android:id="@+id/activity_summary_button_skills"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageButton
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/activity_summary_linlay_buttons_inner_bottom">
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_map"
+            android:contentDescription="@string/activity_summary_button_map"
+            android:id="@+id/activity_summary_button_map"/>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_inventory"
-                android:id="@+id/activity_summary_button_inventory"/>
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_health"
+            android:contentDescription="@string/activity_summary_button_health"
+            android:id="@+id/activity_summary_button_health"/>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_undiscovered"
-                android:enabled="false"
-                android:id="@+id/activity_summary_button_magic" />
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_skills_2"
+            android:contentDescription="@string/activity_summary_button_skills"
+            android:id="@+id/activity_summary_button_skills"/>
 
-        </LinearLayout>
-        
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_inventory"
+            android:contentDescription="@string/activity_summary_button_inventory"
+            android:id="@+id/activity_summary_button_inventory"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_unknown"
+            android:enabled="false"
+            android:contentDescription="@string/activity_summary_button_undiscovered"
+            android:id="@+id/activity_summary_button_magic" />
+
     </LinearLayout>
 
     <View

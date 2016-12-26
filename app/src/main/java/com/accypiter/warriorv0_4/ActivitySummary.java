@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -122,9 +123,10 @@ public class ActivitySummary extends AppCompatActivity {
     }
 
     protected void enableMagicButton(){
-        Button magicButton = (Button) findViewById(R.id.activity_summary_button_magic);
+        ImageButton magicButton = (ImageButton) findViewById(R.id.activity_summary_button_magic);
         magicButton.setEnabled(true);
-        magicButton.setText(R.string.activity_summary_button_magic);
+        magicButton.setImageResource(R.drawable.icon_magic);
+        magicButton.setContentDescription(getString(R.string.activity_summary_button_magic));
     }
 
     public void startActivityJournal(View view){
