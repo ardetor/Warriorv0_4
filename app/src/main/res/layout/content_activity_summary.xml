@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:id="@+id/activity_summary_linlay_buttons_outer"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true">
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/icon_skills_2"
+            android:src="@drawable/icon_skills"
             android:contentDescription="@string/activity_summary_button_skills"
             android:id="@+id/activity_summary_button_skills"/>
 
@@ -66,11 +66,12 @@
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:scaleType="centerInside"
-            android:src="@drawable/icon_unknown"
+            android:src="@drawable/icon_magic_fire"
             android:enabled="false"
             android:contentDescription="@string/activity_summary_button_undiscovered"
+
             android:id="@+id/activity_summary_button_magic" />
 
     </LinearLayout>
@@ -148,6 +149,13 @@
                 android:layout_height="wrap_content"
                 android:text="TJ2"
                 android:onClick="testJournal2"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEM"
+                android:onClick="toggleMagic"/>
+
 
             <TextView
                 android:layout_width="wrap_content"

@@ -8,8 +8,10 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -51,23 +53,62 @@ public class ActivitySummary extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         save = SaveGame.update(this);
-        if (save.magic_enabled){
+        if (save.magic_enabled) {
             enableMagicButton();
         }
 
+
+        //Debugging things
         refreshScreen();
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         SaveGame.update(this);
         super.onPause();
     }
 
-    public void testHealthBody(View view){
+    protected void enableMagicButton() {
+        ImageButton magicButton = (ImageButton) findViewById(R.id.activity_summary_button_magic);
+        magicButton.setEnabled(true);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        magicButton.setLayoutParams(layoutParams);
+        magicButton.setContentDescription(getString(R.string.activity_summary_button_magic));
+    }
+
+    protected void startFight(View view) {
+        //Remember to set enemy in SaveGame before calling this function
+        save.in_fight = true;
+        Intent startFightIntent = new Intent();
+        setResult(RESULT_OK, startFightIntent);
+        finish();
+
+    }
+
+
+    public void startActivityJournal(View view) {
+        Intent openJournalIntent = new Intent(this, ActivityJournal.class);
+        startActivity(openJournalIntent);
+    }
+
+    public void startActivityHealth(View view){
+        Intent openHealthIntent = new Intent(this, ActivityHealth.class);
+        startActivity(openHealthIntent);
+    }
+
+
+
+
+
+
+
+
+    //DEBUGGING RELATED THINGS
+
+    public void testHealthBody(View view) {
         save.health_body -= 1.;
         save.health_current -= 1.;
         updateHealthCurrent();
@@ -75,13 +116,13 @@ public class ActivitySummary extends AppCompatActivity {
         debugger();
     }
 
-    public void testHealthCurrent(View view){
+    public void testHealthCurrent(View view) {
         save.health_current -= 1.;
         updateHealthCurrent();
         debugger();
     }
 
-    public void updateHealthCurrent(){
+    public void updateHealthCurrent() {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         double screenWidth = displayMetrics.widthPixels;// / displayMetrics.density;
         int currentHealthLength = (int) (screenWidth * save.health_current / save.health_max);
@@ -91,7 +132,7 @@ public class ActivitySummary extends AppCompatActivity {
         view.setLayoutParams(layoutParams);
     }
 
-    public void updateHealthBody(){
+    public void updateHealthBody() {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         double screenWidth = displayMetrics.widthPixels;// / displayMetrics.density;
         int currentHealthLength = (int) (screenWidth * save.health_body / save.health_max);
@@ -101,55 +142,31 @@ public class ActivitySummary extends AppCompatActivity {
         view.setLayoutParams(layoutParams);
     }
 
-    public void debugger(){
+    public void debugger() {
         TextView debugger = (TextView) findViewById(R.id.activity_summary_debugger);
         debugger.setText(ClassUtils.toString(save));
-        
     }
 
-    protected void refreshScreen(){
+    protected void refreshScreen() {
         updateHealthCurrent();
         updateHealthBody();
         debugger();
     }
 
-    protected void startFight(View view){
-        //Remember to set enemy in SaveGame before calling this function
-        save.in_fight = true;
-        Intent startFightIntent = new Intent();
-        setResult(RESULT_OK, startFightIntent);
-        finish();
-
-    }
-
-    protected void enableMagicButton(){
-        ImageButton magicButton = (ImageButton) findViewById(R.id.activity_summary_button_magic);
-        magicButton.setEnabled(true);
-        magicButton.setImageResource(R.drawable.icon_magic);
-        magicButton.setContentDescription(getString(R.string.activity_summary_button_magic));
-    }
-
-    public void startActivityJournal(View view){
-        Intent openJournalIntent = new Intent(this, ActivityJournal.class);
-        startActivity(openJournalIntent);
-    }
-
-    public void testJournal(View view){
+    public void testJournal(View view) {
         JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_SKILL_LEVEL_UP, "Skill increase", "Blunt weapon skill has increased.", "You have reached Level 23 in Blunt weaponry. 93.235 experience points to next level.");
         SaveGame.addJournalEntry(this, journalEntry);
     }
 
-    public void testJournal2(View view){
+    public void testJournal2(View view) {
         JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_NORMAL, "Item purchase", "Potion purchased for 625 copper pieces.");
         SaveGame.addJournalEntry(this, journalEntry);
     }
 
-/*    public void testJournal2(View view){
-        for(int i = 0; i < 100; ++i) {
-            JournalEntry journalEntry = new JournalEntry(new Date(), JournalEntry.TYPE_NORMAL, "asdf2", "asdfasdf2", "asdfasdfasdf2");
-            SaveGame.addJournalEntry(this, journalEntry);
-        }
-    }*/
+    public void toggleMagic(View view){
+        save.magic_enabled = !save.magic_enabled;
+    }
+
 }
 
 /*
