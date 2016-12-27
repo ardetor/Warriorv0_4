@@ -29,7 +29,11 @@ public class SaveGame implements Serializable{
     //Journal
     ArrayList <JournalEntry> journal;
 
-    //Health
+    //Body object, representing all info about physical health
+    Body body;
+
+
+    //Health debugging, to be deleted later
     double health_max;
     double health_body;
     double health_current;
@@ -48,7 +52,14 @@ public class SaveGame implements Serializable{
         //Journal
         this.journal = new ArrayList<JournalEntry>();
 
-        //Health
+        //Body creation
+        this.body = new Body(Body.SPECIES_HUMAN);
+
+
+
+
+
+        //Health debugging -- to be deleted
         this.health_max = 100.;
         this.health_body = 100.;
         this.health_current = 100.;
