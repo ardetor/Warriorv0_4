@@ -60,10 +60,13 @@ public class Body implements Serializable {
             this.blood_max = HUMAN_BLOOD_BASE;
             this.blood_current = HUMAN_BLOOD_BASE;
 
+
             //Next, generate BodyBase to begin building body.
             this.base = new BodyBase("torso", this, HUMAN_TORSO_SIZE, HUMAN_FACTOR_SHARP,
                     HUMAN_FACTOR_BLEED, HUMAN_FACTOR_BLUNT, HUMAN_TORSO_THRESHOLD_SHARP,
                     HUMAN_TORSO_THRESHOLD_BLUNT);
+
+
 
 
 

@@ -33,10 +33,6 @@ public class SaveGame implements Serializable{
     Body body;
 
 
-    //Health debugging, to be deleted later
-    double health_max;
-    double health_body;
-    double health_current;
 
 
 
@@ -54,17 +50,13 @@ public class SaveGame implements Serializable{
 
         //Body creation
         this.body = new Body(Body.SPECIES_HUMAN);
-
-
-
-
-
-        //Health debugging -- to be deleted
-        this.health_max = 100.;
-        this.health_body = 100.;
-        this.health_current = 100.;
-
     }
+
+
+
+
+
+
 
     public static boolean save(Context context){
         //Returns true if successful, false if it fails.

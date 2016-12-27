@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -106,18 +105,10 @@ public class ActivitySummary extends AppCompatActivity {
 
 
 
-    //DEBUGGING RELATED THINGS
-
-    public void testHealthBody(View view) {
-        save.health_body -= 1.;
-        save.health_current -= 1.;
-        updateHealthCurrent();
-        updateHealthBody();
-        debugger();
-    }
+    //DEBUGGING-RELATED THINGS
 
     public void testHealthCurrent(View view) {
-        save.health_current -= 1.;
+        save.body.blood_current -= 0.02;
         updateHealthCurrent();
         debugger();
     }
@@ -125,18 +116,8 @@ public class ActivitySummary extends AppCompatActivity {
     public void updateHealthCurrent() {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         double screenWidth = displayMetrics.widthPixels;// / displayMetrics.density;
-        int currentHealthLength = (int) (screenWidth * save.health_current / save.health_max);
-        View view = findViewById(R.id.activity_summary_bar_health_current);
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-        layoutParams.width = currentHealthLength;
-        view.setLayoutParams(layoutParams);
-    }
-
-    public void updateHealthBody() {
-        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        double screenWidth = displayMetrics.widthPixels;// / displayMetrics.density;
-        int currentHealthLength = (int) (screenWidth * save.health_body / save.health_max);
-        View view = findViewById(R.id.activity_summary_bar_health_body);
+        int currentHealthLength = (int) (screenWidth * save.body.blood_current / save.body.blood_max);
+        View view = findViewById(R.id.activity_summary_bar_blood_current);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
         layoutParams.width = currentHealthLength;
         view.setLayoutParams(layoutParams);
@@ -144,12 +125,11 @@ public class ActivitySummary extends AppCompatActivity {
 
     public void debugger() {
         TextView debugger = (TextView) findViewById(R.id.activity_summary_debugger);
-        debugger.setText(ClassUtils.toString(save));
+        debugger.setText(Util.toString(save));
     }
 
     protected void refreshScreen() {
         updateHealthCurrent();
-        updateHealthBody();
         debugger();
     }
 

@@ -68,7 +68,7 @@ public class BodyBase {
 
     public BodyBase(String name, Body parent, double size, double factorSharp, double factorBleed,
                     double factorBlunt, double thresholdSharp, double thresholdBlunt){
-        this(name, name.substring(0,1).toUpperCase() + name.substring(1), parent, size, factorSharp, factorBleed, factorBlunt, thresholdSharp, thresholdBlunt);
+        this(name, Util.capitalize(name), parent, size, factorSharp, factorBleed, factorBlunt, thresholdSharp, thresholdBlunt);
     }
 
 
@@ -80,9 +80,18 @@ public class BodyBase {
 
 
 
+    //Add limbs
+    public BodyBase addLimb(String name, String Name, int type){
+        BodyLimb limb = new BodyLimb(name, Name, type, this);
+        this.limbs.add(limb);
 
+        return this;
+    }
 
-
+    //Add limbs
+    public BodyBase addLimb(String name, int type){
+        return addLimb(name, Util.capitalize(name), type);
+    }
 
 
 

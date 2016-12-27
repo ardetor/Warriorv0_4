@@ -53,7 +53,7 @@ public class BodyOrgan {
 
     public BodyOrgan(String name, int type, double size, double factorSharp,
                      double factorBleed, double factorBlunt){
-        this(name, name.substring(0,1).toUpperCase() + name.substring(1), type, size, factorSharp, factorBleed, factorBlunt);
+        this(name, Util.capitalize(name), type, size, factorSharp, factorBleed, factorBlunt);
     }
 
 }

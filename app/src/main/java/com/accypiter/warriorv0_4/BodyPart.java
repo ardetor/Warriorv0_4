@@ -73,7 +73,7 @@ public class BodyPart {
 
     public BodyPart(String name, int type, BodyLimb parent, double size, double factorSharp,
                         double factorBleed, double factorBlunt, double thresholdSharp, double thresholdBlunt){
-        this(name, name.substring(0,1).toUpperCase() + name.substring(1), type, parent, size, factorSharp, factorBleed, factorBlunt, thresholdSharp, thresholdBlunt);
+        this(name, Util.capitalize(name), type, parent, size, factorSharp, factorBleed, factorBlunt, thresholdSharp, thresholdBlunt);
 
     }
 

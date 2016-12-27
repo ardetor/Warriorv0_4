@@ -3,9 +3,14 @@ package com.accypiter.warriorv0_4;
 import java.util.ArrayList;
 
 public class BodyLimb {
+    public static final int HEAD = 0;
+    public static final int ARM = 1;
+    public static final int LEG = 2;
+
     //Admin
     String name;
     String Name;
+    int type;
 
     //Parent reference
     BodyBase parent;
@@ -33,7 +38,7 @@ public class BodyLimb {
 
 
     //Constructor
-    public BodyLimb(String name, String Name, BodyBase parent){
+    public BodyLimb(String name, String Name, int type, BodyBase parent){
         this.name = name;
         this.Name = Name;
         this.parent = parent;
@@ -52,8 +57,8 @@ public class BodyLimb {
 
     }
 
-    public BodyLimb(String name, BodyBase parent){
-        this(name, name.substring(0,1).toUpperCase() + name.substring(1), parent);
+    public BodyLimb(String name, int type, BodyBase parent){
+        this(name, Util.capitalize(name), type, parent);
     }
 
 
