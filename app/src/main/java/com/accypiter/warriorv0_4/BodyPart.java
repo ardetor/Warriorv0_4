@@ -85,14 +85,14 @@ public class BodyPart{
             case TORSO:
                 this.isOrgan = false;
                 this.name = "torso";
-                this.size = 1;
+                this.size = 1.3;
 
                 this.multiplierSharp = species.factorSharp() * 1;
                 this.multiplierHaem = species.factorHaem() * 1;
                 this.multiplierBlunt = species.factorBlunt() * 1.2;
 
-                this.thresholdSevereSharp = 1 / species.factorSharp() * 9;
-                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4;
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 10;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 7;
 
                 this.severeSharpName = "bisected";
                 this.severeBluntName = "crushed";
@@ -105,9 +105,9 @@ public class BodyPart{
                 this.name = "heart";
                 this.size = -2;
 
-                this.multiplierSharp = species.factorSharp() * 5;
+                this.multiplierSharp = species.factorSharp() * 2;
                 this.multiplierHaem = species.factorHaem() * 10;
-                this.multiplierBlunt = species.factorBlunt() * 5;
+                this.multiplierBlunt = species.factorBlunt() * 2;
 
                 this.thresholdSevereSharp = 1 / species.factorSharp() * 2;
                 this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3;
@@ -115,17 +115,17 @@ public class BodyPart{
                 this.severeSharpName = "shredded";
                 this.severeBluntName = "crushed";
 
-                this.organDefermentSharp = 1 / species.factorSharp() * 3;
-                this.organDefermentBlunt = 1 / species.factorBlunt() * 3;
+                this.organDefermentSharp = 1 / species.factorSharp() * 4;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 4;
 
             case LUNGS:
                 this.isOrgan = true;
                 this.name = "lungs";
                 this.size = -1.5;
 
-                this.multiplierSharp = species.factorSharp() * 4;
-                this.multiplierHaem = species.factorHaem() * 8;
-                this.multiplierBlunt = species.factorBlunt() * 5;
+                this.multiplierSharp = species.factorSharp() * 1.5;
+                this.multiplierHaem = species.factorHaem() * 2;
+                this.multiplierBlunt = species.factorBlunt() * 1.3;
 
                 this.thresholdSevereSharp = 1 / species.factorSharp() * 3;
                 this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3;
@@ -133,20 +133,20 @@ public class BodyPart{
                 this.severeSharpName = "shredded";
                 this.severeBluntName = "crushed";
 
-                this.organDefermentSharp = 1 / species.factorSharp() * 3;
-                this.organDefermentBlunt = 1 / species.factorBlunt() * 3;
+                this.organDefermentSharp = 1 / species.factorSharp() * 4;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 4;
 
             case LIVER:
                 this.isOrgan = true;
                 this.name = "liver";
                 this.size = -1.4;
 
-                this.multiplierSharp = species.factorSharp() * 2;
-                this.multiplierHaem = species.factorHaem() * 2.3;
-                this.multiplierBlunt = species.factorBlunt() * 2;
+                this.multiplierSharp = species.factorSharp() * 1;
+                this.multiplierHaem = species.factorHaem() * 1.2;
+                this.multiplierBlunt = species.factorBlunt() * 1.1;
 
-                this.thresholdSevereSharp = 1 / species.factorSharp() * 3;
-                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3;
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 4;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4;
 
                 this.severeSharpName = "shredded";
                 this.severeBluntName = "crushed";
@@ -159,9 +159,9 @@ public class BodyPart{
                 this.name = "viscera";
                 this.size = -1.2;
 
-                this.multiplierSharp = species.factorSharp() * 1.8;
-                this.multiplierHaem = species.factorHaem() * 2;
-                this.multiplierBlunt = species.factorBlunt() * 1.6;
+                this.multiplierSharp = species.factorSharp() * 1.3;
+                this.multiplierHaem = species.factorHaem() * 1.5;
+                this.multiplierBlunt = species.factorBlunt() * 1.4;
 
                 this.thresholdSevereSharp = 1 / species.factorSharp() * 3;
                 this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3.5;
@@ -195,54 +195,54 @@ public class BodyPart{
                 this.name = "artery (neck)";
                 this.size = -3.7;
 
-                this.multiplierSharp = species.factorSharp() * 2;
-                this.multiplierHaem = species.factorHaem() * 5;
-                this.multiplierBlunt = species.factorBlunt() * 1.5;
+                this.multiplierSharp = species.factorSharp() * 0.3;
+                this.multiplierHaem = species.factorHaem() * 4;
+                this.multiplierBlunt = species.factorBlunt() * 0.2;
 
-                this.thresholdSevereSharp = species.factorSharp() * 3;
-                this.thresholdSevereBlunt = species.factorBlunt() * 4;
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 5;
 
                 this.severeSharpName = "opened";
-                this.severeBluntName = "crushed";
+                this.severeBluntName = "smashed";
 
-                this.organDefermentSharp = 0.5;
-                this.organDefermentBlunt = 0.5;
+                this.organDefermentSharp = 1 / species.factorSharp() * 0.5;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0.5;
 
             case NECK_VEIN:
                 this.isOrgan = true;
                 this.name = "vein (neck)";
                 this.size = -3.6;
 
-                this.multiplierSharp = species.factorSharp() * 2;
-                this.multiplierHaem = species.factorHaem() * 3;
-                this.multiplierBlunt = species.factorBlunt() * 1.5;
+                this.multiplierSharp = species.factorSharp() * 0.3;
+                this.multiplierHaem = species.factorHaem() * 2;
+                this.multiplierBlunt = species.factorBlunt() * 0.2;
 
-                this.thresholdSevereSharp = species.factorSharp() * 2;
-                this.thresholdSevereBlunt = species.factorBlunt() * 3;
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 5;
 
                 this.severeSharpName = "opened";
-                this.severeBluntName = "crushed";
+                this.severeBluntName = "smashed";
 
-                this.organDefermentSharp = 0.5;
-                this.organDefermentBlunt = 0.5;
+                this.organDefermentSharp = 1 / species.factorSharp() * 0.5;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0.5;
 
             case NECK_LIGAMENT:
                 this.isOrgan = true;
                 this.name = "ligament (neck)";
                 this.size = -3.7;
 
-                this.multiplierSharp = species.factorSharp() * 1.2;
-                this.multiplierHaem = species.factorHaem() * 0.5;
-                this.multiplierBlunt = species.factorBlunt() * 0.8;
+                this.multiplierSharp = species.factorSharp() * 0.3;
+                this.multiplierHaem = species.factorHaem() * 0.2;
+                this.multiplierBlunt = species.factorBlunt() * 0.2;
 
-                this.thresholdSevereSharp = species.factorSharp() * 3;
-                this.thresholdSevereBlunt = species.factorBlunt() * 5;
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 5;
 
                 this.severeSharpName = "severed";
-                this.severeBluntName = "crushed";
+                this.severeBluntName = "smashed";
 
-                this.organDefermentSharp = 0.5;
-                this.organDefermentBlunt = 0.5;
+                this.organDefermentSharp = 1 / species.factorSharp() * 0.5;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0.5;
 
             case HEAD:
                 this.isOrgan = false;
@@ -253,75 +253,680 @@ public class BodyPart{
                 this.multiplierHaem = species.factorHaem() * 0.8;
                 this.multiplierBlunt = species.factorBlunt() * 1.3;
 
-                this.thresholdSevereSharp = species.factorSharp() * 5;
-                this.thresholdSevereBlunt = species.factorBlunt() * 3;
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 7;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 5;
 
                 this.severeSharpName = "decapitated";
                 this.severeBluntName = "crushed";
 
-                this.organDefermentSharp = 0;
-                this.organDefermentBlunt = 0;
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
 
             case EYE:
                 this.isOrgan = true;
                 this.name = "eye";
-                this.size = -3;
+                this.size = -3.2;
 
-                this.multiplierSharp = species.factorSharp() * 1.5;
-                this.multiplierHaem = species.factorHaem() * 0.9;
-                this.multiplierBlunt = species.factorBlunt() * 1.3;
+                this.multiplierSharp = species.factorSharp() * 0.8;
+                this.multiplierHaem = species.factorHaem() * 0.7;
+                this.multiplierBlunt = species.factorBlunt() * 0.8;
 
-                this.thresholdSevereSharp = species.factorSharp() * 1;
-                this.thresholdSevereBlunt = species.factorBlunt() * 3;
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4;
 
                 this.severeSharpName = "blinded";
                 this.severeBluntName = "crushed";
 
-                this.organDefermentSharp = 0;
-                this.organDefermentBlunt = 0;
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
 
+            case NOSE:
+                this.isOrgan = true;
+                this.name = "nose";
+                this.size = -2;
 
+                this.multiplierSharp = species.factorSharp() * 0.4;
+                this.multiplierHaem = species.factorHaem() * 0.7;
+                this.multiplierBlunt = species.factorBlunt() * 1.2;
 
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3;
 
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
 
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
 
+            case JAW:
+                this.isOrgan = true;
+                this.name = "jaw";
+                this.size = -1.5;
 
+                this.multiplierSharp = species.factorSharp() * 0.5;
+                this.multiplierHaem = species.factorHaem() * 0.5;
+                this.multiplierBlunt = species.factorBlunt() * 1.2;
 
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 5;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4;
 
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
 
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
 
+            case EAR:
+                this.isOrgan = true;
+                this.name = "ear";
+                this.size = -2.2;
 
+                this.multiplierSharp = species.factorSharp() * 0.7;
+                this.multiplierHaem = species.factorHaem() * 0.5;
+                this.multiplierBlunt = species.factorBlunt() * 0.9;
 
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3;
 
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
 
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
 
+            case SHOULDER:
+                this.isOrgan = false;
+                this.name = "shoulder";
+                this.size = -1.2;
 
+                this.multiplierSharp = species.factorSharp() * 1;
+                this.multiplierHaem = species.factorHaem() * 1.1;
+                this.multiplierBlunt = species.factorBlunt() * 1.3;
 
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 6;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.5;
 
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
 
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
 
+            case SHOULDER_LIGAMENT:
+                this.isOrgan = true;
+                this.name = "ligament (shoulder)";
+                this.size = -3.9;
 
+                this.multiplierSharp = species.factorSharp() * 0.2;
+                this.multiplierHaem = species.factorHaem() * 0.1;
+                this.multiplierBlunt = species.factorBlunt() * 0.2;
 
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.7;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.7;
 
+                this.severeSharpName = "severed";
+                this.severeBluntName = "crushed";
 
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
 
+            case UPPER_ARM:
+                this.isOrgan = false;
+                this.name = "upper arm";
+                this.size = 0;
 
+                this.multiplierSharp = species.factorSharp() * 1.1;
+                this.multiplierHaem = species.factorHaem() * 1;
+                this.multiplierBlunt = species.factorBlunt() * 1.1;
 
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 6.7;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 5.6;
 
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
 
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
 
+            case UPPER_ARM_ARTERY:
+                this.isOrgan = true;
+                this.name = "artery (upper arm)";
+                this.size = -3.5;
 
+                this.multiplierSharp = species.factorSharp() * 0.7;
+                this.multiplierHaem = species.factorHaem() * 3;
+                this.multiplierBlunt = species.factorBlunt() * 0.4;
 
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.5;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.5;
 
+                this.severeSharpName = "severed";
+                this.severeBluntName = "crushed";
 
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
 
+            case UPPER_ARM_VEIN:
+                this.isOrgan = true;
+                this.name = "vein (upper arm)";
+                this.size = -3.4;
 
+                this.multiplierSharp = species.factorSharp() * 0.7;
+                this.multiplierHaem = species.factorHaem() * 1;
+                this.multiplierBlunt = species.factorBlunt() * 0.4;
 
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.5;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.5;
 
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
 
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
 
+            case ELBOW:
+                this.isOrgan = false;
+                this.name = "elbow";
+                this.size = -1.8;
 
+                this.multiplierSharp = species.factorSharp() * 1;
+                this.multiplierHaem = species.factorHaem() * 1.2;
+                this.multiplierBlunt = species.factorBlunt() * 1.5;
 
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 5.5;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.4;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case ELBOW_LIGAMENT:
+                this.isOrgan = true;
+                this.name = "ligament (elbow)";
+                this.size = -4.1;
+
+                this.multiplierSharp = species.factorSharp() * 0.2;
+                this.multiplierHaem = species.factorHaem() * 0.1;
+                this.multiplierBlunt = species.factorBlunt() * 0.2;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.3;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.6;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case LOWER_ARM:
+                this.isOrgan = false;
+                this.name = "lower arm";
+                this.size = -0.2;
+
+                this.multiplierSharp = species.factorSharp() * 1.2;
+                this.multiplierHaem = species.factorHaem() * 1.1;
+                this.multiplierBlunt = species.factorBlunt() * 1.2;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 6.2;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 5.0;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case LOWER_ARM_ARTERY:
+                this.isOrgan = true;
+                this.name = "artery (lower arm)";
+                this.size = -4.1;
+
+                this.multiplierSharp = species.factorSharp() * 0.5;
+                this.multiplierHaem = species.factorHaem() * 2;
+                this.multiplierBlunt = species.factorBlunt() * 0.2;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.2;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.2;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case LOWER_ARM_VEIN:
+                this.isOrgan = true;
+                this.name = "vein (lower arm)";
+                this.size = -4.0;
+
+                this.multiplierSharp = species.factorSharp() * 0.4;
+                this.multiplierHaem = species.factorHaem() * 1;
+                this.multiplierBlunt = species.factorBlunt() * 0.2;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.2;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.2;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case WRIST:
+                this.isOrgan = false;
+                this.name = "wrist";
+                this.size = -1.9;
+
+                this.multiplierSharp = species.factorSharp() * 1;
+                this.multiplierHaem = species.factorHaem() * 1.2;
+                this.multiplierBlunt = species.factorBlunt() * 1.5;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 5.1;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3.8;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case WRIST_LIGAMENT:
+                this.isOrgan = true;
+                this.name = "ligament (wrist)";
+                this.size = -4.4;
+
+                this.multiplierSharp = species.factorSharp() * 0.2;
+                this.multiplierHaem = species.factorHaem() * 0.1;
+                this.multiplierBlunt = species.factorBlunt() * 0.2;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.1;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case HAND:
+                this.isOrgan = false;
+                this.name = "hand";
+                this.size = -0.8;
+
+                this.multiplierSharp = species.factorSharp() * 1.3;
+                this.multiplierHaem = species.factorHaem() * 1.2;
+                this.multiplierBlunt = species.factorBlunt() * 1.3;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 5.7;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.9;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case FINGER_FIRST:
+                this.isOrgan = true;
+                this.name = "first finger";
+                this.size = -2.5;
+
+                this.multiplierSharp = species.factorSharp() * 1.1;
+                this.multiplierHaem = species.factorHaem() * 0.9;
+                this.multiplierBlunt = species.factorBlunt() * 1.1;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3.5;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3.3;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case FINGER_SECOND:
+                this.isOrgan = true;
+                this.name = "second finger";
+                this.size = -2.4;
+
+                this.multiplierSharp = species.factorSharp() * 1.1;
+                this.multiplierHaem = species.factorHaem() * 0.9;
+                this.multiplierBlunt = species.factorBlunt() * 1.1;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3.6;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3.4;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case FINGER_THIRD:
+                this.isOrgan = true;
+                this.name = "third finger";
+                this.size = -2.5;
+
+                this.multiplierSharp = species.factorSharp() * 1.1;
+                this.multiplierHaem = species.factorHaem() * 0.9;
+                this.multiplierBlunt = species.factorBlunt() * 1.1;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3.5;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3.3;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case FINGER_FOURTH:
+                this.isOrgan = true;
+                this.name = "fourth finger";
+                this.size = -2.7;
+
+                this.multiplierSharp = species.factorSharp() * 1.1;
+                this.multiplierHaem = species.factorHaem() * 0.9;
+                this.multiplierBlunt = species.factorBlunt() * 1.1;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3.0;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 2.8;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case THUMB:
+                this.isOrgan = true;
+                this.name = "thumb";
+                this.size = -3;
+
+                this.multiplierSharp = species.factorSharp() * 1.1;
+                this.multiplierHaem = species.factorHaem() * 0.9;
+                this.multiplierBlunt = species.factorBlunt() * 1.1;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3.5;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 3.3;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case HIP:
+                this.isOrgan = false;
+                this.name = "hip";
+                this.size = -1.1;
+
+                this.multiplierSharp = species.factorSharp() * 1;
+                this.multiplierHaem = species.factorHaem() * 1.3;
+                this.multiplierBlunt = species.factorBlunt() * 1.6;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 6;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 5;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case HIP_LIGAMENT:
+                this.isOrgan = true;
+                this.name = "ligament (hip)";
+                this.size = -3.6;
+
+                this.multiplierSharp = species.factorSharp() * 0.3;
+                this.multiplierHaem = species.factorHaem() * 0.2;
+                this.multiplierBlunt = species.factorBlunt() * 0.3;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 3;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 5;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case UPPER_LEG:
+                this.isOrgan = false;
+                this.name = "upper leg";
+                this.size = 0.7;
+
+                this.multiplierSharp = species.factorSharp() * 1.1;
+                this.multiplierHaem = species.factorHaem() * 1;
+                this.multiplierBlunt = species.factorBlunt() * 1.1;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 7;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 6;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case UPPER_LEG_ARTERY:
+                this.isOrgan = true;
+                this.name = "artery (upper leg)";
+                this.size = -3.4;
+
+                this.multiplierSharp = species.factorSharp() * 0.7;
+                this.multiplierHaem = species.factorHaem() * 3;
+                this.multiplierBlunt = species.factorBlunt() * 0.4;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.9;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.8;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case UPPER_LEG_VEIN:
+                this.isOrgan = true;
+                this.name = "vein (upper leg)";
+                this.size = -3.2;
+
+                this.multiplierSharp = species.factorSharp() * 0.7;
+                this.multiplierHaem = species.factorHaem() * 1.5;
+                this.multiplierBlunt = species.factorBlunt() * 0.4;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.9;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.8;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case KNEE:
+                this.isOrgan = false;
+                this.name = "knee";
+                this.size = -1.5;
+
+                this.multiplierSharp = species.factorSharp() * 1;
+                this.multiplierHaem = species.factorHaem() * 1.2;
+                this.multiplierBlunt = species.factorBlunt() * 1.5;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 5.7;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.5;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case KNEE_LIGAMENT:
+                this.isOrgan = true;
+                this.name = "ligament (knee)";
+                this.size = -3.9;
+
+                this.multiplierSharp = species.factorSharp() * 0.3;
+                this.multiplierHaem = species.factorHaem() * 0.2;
+                this.multiplierBlunt = species.factorBlunt() * 0.3;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.6;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.5;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case LOWER_LEG:
+                this.isOrgan = false;
+                this.name = "lower leg";
+                this.size = 0.2;
+
+                this.multiplierSharp = species.factorSharp() * 1.2;
+                this.multiplierHaem = species.factorHaem() * 1.1;
+                this.multiplierBlunt = species.factorBlunt() * 1.2;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 6.3;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 5.5;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case LOWER_LEG_ARTERY:
+                this.isOrgan = true;
+                this.name = "artery (lower leg)";
+                this.size = -3.8;
+
+                this.multiplierSharp = species.factorSharp() * 0.6;
+                this.multiplierHaem = species.factorHaem() * 2;
+                this.multiplierBlunt = species.factorBlunt() * 0.4;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.4;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.3;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case LOWER_LEG_VEIN:
+                this.isOrgan = true;
+                this.name = "vein (lower leg)";
+                this.size = -3.6;
+
+                this.multiplierSharp = species.factorSharp() * 0.6;
+                this.multiplierHaem = species.factorHaem() * 1;
+                this.multiplierBlunt = species.factorBlunt() * 0.4;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.4;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.3;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case ANKLE:
+                this.isOrgan = false;
+                this.name = "ankle";
+                this.size = -1.7;
+
+                this.multiplierSharp = species.factorSharp() * 1;
+                this.multiplierHaem = species.factorHaem() * 1.2;
+                this.multiplierBlunt = species.factorBlunt() * 1.7;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 5.3;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.3;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case ANKLE_LIGAMENT:
+                this.isOrgan = true;
+                this.name = "ligament (ankle)";
+                this.size = -4;
+
+                this.multiplierSharp = species.factorSharp() * 0.3;
+                this.multiplierHaem = species.factorHaem() * 0.2;
+                this.multiplierBlunt = species.factorBlunt() * 0.3;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.4;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.3;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case FOOT:
+                this.isOrgan = false;
+                this.name = "foot";
+                this.size = -0.55;
+
+                this.multiplierSharp = species.factorSharp() * 1.2;
+                this.multiplierHaem = species.factorHaem() * 1;
+                this.multiplierBlunt = species.factorBlunt() * 1.1;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 6;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 5;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "fractured";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 0;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 0;
+
+            case FOOT_ARTERY:
+                this.isOrgan = true;
+                this.name = "artery (foot)";
+                this.size = -4.1;
+
+                this.multiplierSharp = species.factorSharp() * 0.5;
+                this.multiplierHaem = species.factorHaem() * 1.5;
+                this.multiplierBlunt = species.factorBlunt() * 0.2;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.2;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.2;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
+
+            case FOOT_VEIN:
+                this.isOrgan = true;
+                this.name = "vein (foot)";
+                this.size = -4.0;
+
+                this.multiplierSharp = species.factorSharp() * 0.5;
+                this.multiplierHaem = species.factorHaem() * 0.7;
+                this.multiplierBlunt = species.factorBlunt() * 0.2;
+
+                this.thresholdSevereSharp = 1 / species.factorSharp() * 2.2;
+                this.thresholdSevereBlunt = 1 / species.factorBlunt() * 4.2;
+
+                this.severeSharpName = "severed";
+                this.severeBluntName = "smashed";
+
+                this.organDefermentSharp = 1 / species.factorSharp() * 1;
+                this.organDefermentBlunt = 1 / species.factorBlunt() * 1;
 
 
         }
@@ -350,7 +955,7 @@ public class BodyPart{
     public static final int EYE = 10;
     public static final int NOSE = 11;
     public static final int JAW = 12;
-    public static final int EARS = 13;
+    public static final int EAR = 13;
     public static final int SHOULDER = 14;
     public static final int SHOULDER_LIGAMENT = 15;
     public static final int UPPER_ARM = 16;
