@@ -262,7 +262,23 @@ public class BodyPart{
                 this.organDefermentSharp = 0;
                 this.organDefermentBlunt = 0;
 
+            case EYE:
+                this.isOrgan = true;
+                this.name = "eye";
+                this.size = -3;
 
+                this.multiplierSharp = species.factorSharp() * 1.5;
+                this.multiplierHaem = species.factorHaem() * 0.9;
+                this.multiplierBlunt = species.factorBlunt() * 1.3;
+
+                this.thresholdSevereSharp = species.factorSharp() * 1;
+                this.thresholdSevereBlunt = species.factorBlunt() * 3;
+
+                this.severeSharpName = "blinded";
+                this.severeBluntName = "crushed";
+
+                this.organDefermentSharp = 0;
+                this.organDefermentBlunt = 0;
 
 
 
@@ -331,7 +347,7 @@ public class BodyPart{
     public static final int NECK_VEIN = 7;
     public static final int NECK_LIGAMENT = 8;
     public static final int HEAD = 9;
-    public static final int EYES = 10;
+    public static final int EYE = 10;
     public static final int NOSE = 11;
     public static final int JAW = 12;
     public static final int EARS = 13;
