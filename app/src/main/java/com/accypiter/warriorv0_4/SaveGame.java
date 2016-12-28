@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class SaveGame implements Serializable{
     public static SaveGame current;
@@ -25,6 +26,7 @@ public class SaveGame implements Serializable{
     Date date_current;
     boolean in_fight;
     boolean magic_enabled;
+    Random random;
 
     //Journal
     ArrayList <JournalEntry> journal;
@@ -33,10 +35,6 @@ public class SaveGame implements Serializable{
     Body body;
 
 
-    //Health debugging, to be deleted later
-    double health_max;
-    double health_body;
-    double health_current;
 
 
 
@@ -48,23 +46,20 @@ public class SaveGame implements Serializable{
         this.date_latest = new Date();
         this.in_fight = false;
         this.magic_enabled = true;
+        this.random = new Random();
 
         //Journal
         this.journal = new ArrayList<JournalEntry>();
 
         //Body creation
-        this.body = new Body(Body.SPECIES_HUMAN);
-
-
-
-
-
-        //Health debugging -- to be deleted
-        this.health_max = 100.;
-        this.health_body = 100.;
-        this.health_current = 100.;
-
+        this.body = new Body(new Body.Human());
     }
+
+
+
+
+
+
 
     public static boolean save(Context context){
         //Returns true if successful, false if it fails.

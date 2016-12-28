@@ -80,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="#ff000000"
-        android:id="@+id/activity_summary_bar_health_max"
+        android:id="@+id/activity_summary_bar_blood_max"
         android:layout_above="@id/activity_summary_linlay_buttons_outer"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"/>
@@ -89,17 +89,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="#ffffff00"
-        android:id="@+id/activity_summary_bar_health_body"
-        android:layout_above="@id/activity_summary_linlay_buttons_outer"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="#ff00ff00"
-        android:id="@+id/activity_summary_bar_health_current"
+        android:background="#ffff0000"
+        android:id="@+id/activity_summary_bar_blood_current"
         android:layout_above="@id/activity_summary_linlay_buttons_outer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
@@ -108,7 +99,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_above="@id/activity_summary_bar_health_max"
+        android:layout_above="@id/activity_summary_bar_blood_max"
         android:layout_alignParentTop="true">
 
         <LinearLayout
