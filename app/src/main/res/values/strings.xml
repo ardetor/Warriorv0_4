@@ -57,7 +57,7 @@
     <string name="title_activity_about">About</string>
     <string name="title_activity_new_game">New Game</string>
     <string name="title_activity_new_game_confirm">Confirm Overwrite Data</string>
-    <string name="title_activity_preferences">Preferences</string>
+    <string name="title_activity_preferences">Settings</string>
     <string name="title_activity_fight">Fight</string>
     <string name="title_activity_journal">Journal</string>
     <string name="title_activity_journal_detail">Journal Entry</string>
