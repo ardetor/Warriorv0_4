@@ -77,11 +77,9 @@ public class Body implements Serializable {
         double baseWeight();
         double baseBlood();
 
-        double torsoSize();
+        double speciesSize();
 
-        double factorSharp();
-        double factorHaem();
-        double factorBlunt();
+        double susceptibility(int attack_type);
 
 
     }
@@ -96,10 +94,8 @@ public class Body implements Serializable {
         public double baseWeight() { return 50; }
         public double baseBlood() { return 1.5; }
 
-        public double torsoSize() { return 1; }
+        public double speciesSize() { return 1; }
 
-        public double factorSharp() { return 1; }
-        public double factorHaem() { return 1; }
-        public double factorBlunt() { return 1; }
+        public double susceptibility(int attack_type) { return 1; }
     }
 }

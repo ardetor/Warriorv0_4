@@ -7,22 +7,26 @@ import java.util.ArrayList;
 
 public class BodyPart{
 
-    //Related Parts
-    BodyPart parent;
-    BodyPart child;
-
     Body.Species species;
 
-    //Organ-related
-    boolean isOrgan;
-    ArrayList<BodyPart> organs; //is empty IFF Bodypart is an organ. All normal parts have organs.
 
     //Displayables
     String designation;
     String name;
 
-    //Limb type
-    int type;
+    //Related Parts
+    BodyPart parent;
+    BodyPart child;
+
+    //Type
+    int limb_type;
+    int part_type;
+    int index;
+
+    //Organ-related
+    boolean isOrgan;
+    BodyPart organ;
+
 
     //Related items
     Wieldable wieldable; //only allowed if child == null and type = arm for HUMAN.
@@ -31,34 +35,238 @@ public class BodyPart{
     //Hit chance
     double size;
 
-    double damageSharp;               //Tracks current damage to this Part
-    double damageHaem;
-    double damageBlunt;
+    //Damage stats
+    double[] damage;               //Tracks current damage to this Part. [0] is sharp, [1] is blunt, [2] is bleed.
 
-    double multiplierSharp;           //Susceptibility of this Part to this type of damage.
-    double multiplierHaem;            //Applied before damage is added to damageXYZ.
-    double multiplierBlunt;
 
-    double thresholdSevereSharp;      //The damage in one hit beyond which a severe hit is triggered.
-    double thresholdSevereBlunt;      //Damage will be doubled on a severe hit which toggles the relevant bool.
+    boolean[] severeDamage;         //Tracks if severe damage has been done. If true, this limb is ineffective.
+                                    //0 is sharp, 1 is blunt.
+
+    //Characteristic stats
+    double[] multiplier;           //Susceptibility of this Part to this type of damage.
+                                      //Applied before damage is added to damageXYZ.
+
+
+    double[] thresholdSevere;      //The damage in one hit beyond which a severe hit is triggered.
+                                   //Damage will be doubled on a severe hit which toggles the relevant bool.
                                       //COUNTED BEFOREEEE MULTIPLIER
 
-    boolean isSevereSharp;            //Tracks if severe damage has been done. If true, this limb is ineffective.
-    boolean isSevereBlunt;
-
-    String severeSharpName;
-    String severeBluntName;
-
-    double organDefermentSharp;       //If this Part is an organ, this amount of damage will be pushed up to parent.
-    double organDefermentBlunt;
+    double[] organDeferment;       //If this Part is an organ, this amount of damage will be pushed up to parent.
 
 
-    /**
-     *
-     * species effects
-     */
+
+    String[] severeName;
 
 
+    public BodyPart(Body.Species species, @Nullable BodyPart parent, String designation, int limb_type, int index){
+        //Constructor for normal body parts, not for organs
+        this.species = species;
+        this.designation = designation;
+        this.parent = parent;
+        this.limb_type = limb_type;
+        this.index = index;
+        this.isOrgan = false;
+        this.organDeferment = null;
+        this.wieldable = null;
+        this.armor = null;
+        this.damage = new double[] {0,0,0};
+        this.severeDamage = new boolean[] {false, false};
+
+        if (limb_type == LIMB_ARM){
+            this.severeName = new String[]{"severed","fractured"};
+            switch(index){
+                case 0:
+                    this.name = "shoulder";
+                case 1:
+                    this.name = "upper arm";
+                case 2:
+                    this.name = "elbow";
+                case 3:
+                    this.name = "lower arm";
+                case 4:
+                    this.name = "wrist";
+                case 5:
+                    this.name = "hand";
+                default:
+                    this.name = "error_arm";
+            }
+            if (index%2 == 0){
+                this.part_type = PART_JOINT;
+                this.size = (-1) - (0.4 * index);
+                this.multiplier = new double[]{1.25   + (0.05  * index),
+                                               1.4 + (0.1 * index),
+                                               1.4 + (0.075  * index)};
+                this.thresholdSevere = new double[]{5 - (0.2 * index),
+                                                    4 - (0.2 * index)};
+
+            } else {
+                if (index == 5){
+                    this.part_type = PART_NO_ORGAN;
+                } else {
+                    this.part_type = PART_SEGMENT;
+                }
+
+                this.size = (0.75) - (0.25 * index);
+                this.multiplier = new double[]{0.90   + (0.05 * index),
+                                               1      + (0.05 * index),
+                                               0.85   + (0.05 * index)};
+                this.thresholdSevere = new double[]{7.25 - (0.25 * index),
+                                                    6    - (0.25 * index)};
+            }
+
+        } else if (limb_type == LIMB_LEG){
+            this.severeName = new String[]{"severed","fractured"};
+            switch(index){
+                case 0:
+                    this.name = "hip";
+                case 1:
+                    this.name = "upper leg";
+                case 2:
+                    this.name = "knee";
+                case 3:
+                    this.name = "lower leg";
+                case 4:
+                    this.name = "ankle";
+                case 5:
+                    this.name = "foot";
+                default:
+                    this.name = "error_leg";
+            }
+            if (index%2 == 0){
+                this.part_type = PART_JOINT;
+                this.size = (-0.6) - (0.4 * index);
+                this.multiplier = new double[]{1.15   + (0.05  * index),
+                        1.25 + (0.1 * index),
+                        1.25 + (0.075  * index)};
+                this.thresholdSevere = new double[]{5.2 - (0.2 * index),
+                        4.2 - (0.2 * index)};
+
+            } else {
+                if (index == 5){
+                    this.part_type = PART_NO_ORGAN;
+                } else {
+                    this.part_type = PART_SEGMENT;
+                }
+                this.size = (1) - (0.25 * index);
+                this.multiplier = new double[]{0.85   + (0.05 * index),
+                                               0.9    + (0.05 * index),
+                                               0.8    + (0.05 * index)};
+                this.thresholdSevere = new double[]{7.5 - (0.25 * index),
+                                                    6.25   - (0.25 * index)};
+            }
+
+        }
+
+        else if (limb_type == LIMB_CORE){
+            switch(index){
+                case 0:
+                    this.name = "torso";
+                    this.part_type = PART_SEGMENT;
+                    this.size = 1.5;
+                    this.multiplier = new double[]{1,
+                                                   1,
+                                                   1};
+                    this.thresholdSevere = new double[]{9,
+                                                        7};
+                    this.severeName = new String[]{"bisected","crushed"};
+
+                case 1:
+                    this.name = "neck";
+                    this.part_type = PART_SEGMENT;
+                    this.size = -1.5;
+                    this.multiplier = new double[]{1.3,
+                                                   1.6,
+                                                   1.2};
+                    this.thresholdSevere = new double[]{5,
+                                                        5};
+                    this.severeName = new String[]{"decapitated","broken"};
+
+                case 2:
+                    this.name = "head";
+                    this.part_type = PART_HEAD;
+                    this.size = 0.1;
+                    this.multiplier = new double[]{1,
+                                                   0.9,
+                                                   1.3};
+                    this.thresholdSevere = new double[]{8,
+                                                        6};
+                    this.severeName = new String[]{"bisected","fractured"};
+            }
+
+        }
+
+        //Accounting for species
+        this.size *= species.speciesSize();
+
+        for (int i = 0; i < 2; i++) {
+            this.multiplier[i] *= species.susceptibility(i);
+            this.thresholdSevere[i] /= species.susceptibility(i);
+        }
+        this.multiplier[2] *= species.susceptibility(2);
+
+
+
+        //Adding organ
+        this.organ = new BodyPart(species, this, this.limb_type, this.part_type, this.index);
+
+    }
+
+    public BodyPart(Body.Species species, BodyPart parent, int limb_type, int part_type, int index){
+        //Used only for organs, called by the normal constructor.
+        this.species = species;
+        this.designation = null;
+        this.parent = parent;
+        this.child = null;
+        this.limb_type = limb_type;
+        this.index = index;
+        this.isOrgan = true;
+        this.organ = null;
+        this.wieldable = null;
+        this.armor = null;
+        this.damage = new double[]{0,0,0};
+        this.severeDamage = new boolean[]{false,false};
+
+
+
+  /*
+        name
+        parttype
+       size
+    double[] multiplier;
+ double[] thresholdSevere;      //The damage in one hit beyond which a severe hit is triggered.
+  double[] organDeferment;       //If this Part is an organ, this amount of damage will be pushed up to parent.
+ String[] severeName;*/
+
+    }
+
+
+
+    public static final int LIMB_CORE = 0;
+    public static final int LIMB_ARM = 1;
+    public static final int LIMB_LEG = 2;
+
+    public static final int PART_SEGMENT = 10;
+    public static final int PART_JOINT = 11;
+    public static final int PART_HEAD = 12; //For now, this means "do not add organ". Later, means "add organ Eye"
+    public static final int PART_NO_ORGAN = 13;
+    public static final int ORGAN_ARTERY = 14;
+    public static final int ORGAN_LIGAMENT = 15;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     public BodyPart(@Nullable BodyPart parent, Body.Species species, int type, @Nullable String designation){
         this.parent = parent;
         this.child = null;
@@ -936,11 +1144,11 @@ public class BodyPart{
         //toadd isorgan, name, size, multiplier, threshold, severe_name, organdefer
     }
 
+*/
 
 
 
-
-
+/*
     //BODYPART TYPES
     public static final int TORSO = 0;
     public static final int HEART = 1;
@@ -989,7 +1197,7 @@ public class BodyPart{
     public static final int FOOT = 44;
     public static final int FOOT_ARTERY = 45;
     public static final int FOOT_VEIN = 46;
-
+*/
 
 }
 
