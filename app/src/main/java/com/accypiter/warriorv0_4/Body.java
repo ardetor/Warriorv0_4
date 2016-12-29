@@ -28,10 +28,6 @@ public class Body implements Serializable {
 
     ArrayList<BodyPart> roots;
 
-    //Vision related
-    boolean has_vision;             //If no vision, accuracy -2. Is true if functioning eyes > 0.
-    ArrayList<BodyPart> eyes;       //Carries references to eyes.
-
     double weight;                  //Equals species base weight, plus a fraction of strength
 
     //Blood
@@ -45,27 +41,51 @@ public class Body implements Serializable {
         this.species = species;
 
         this.weight = species.baseWeight();
-        this.has_vision = true;
 
         //Blood
         this.blood_true_max = species.baseBlood();
         this.blood_max = species.baseBlood();
         this.blood_current = species.baseBlood();
 
-        //Construct torso
-        //BodyPart torso = new BodyPart();
+        this.roots = new ArrayList<BodyPart>();
 
+        //generate torso root
+        BodyPart torso = new BodyPart(this.species, null, null, BodyPart.LIMB_CORE, 0);
+        this.roots.add(torso);
+        extendPart(torso, 2); //populate torso
 
-        //Construct heads
+        BodyPart leftArm = new BodyPart(this.species, null, "left", BodyPart.LIMB_ARM, 0);
+        this.roots.add(leftArm);
+        extendPart(leftArm, 5);
 
+        BodyPart rightArm = new BodyPart(this.species, null, "right", BodyPart.LIMB_ARM, 0);
+        this.roots.add(rightArm);
+        extendPart(rightArm, 5);
 
-        //Construct arms
+        BodyPart leftLeg = new BodyPart(this.species, null, "left", BodyPart.LIMB_LEG, 0);
+        this.roots.add(leftLeg);
+        extendPart(leftLeg, 5);
 
-
-        //Construct legs
+        BodyPart rightLeg = new BodyPart(this.species, null, "right", BodyPart.LIMB_LEG, 0);
+        this.roots.add(rightLeg);
+        extendPart(rightLeg, 5);
 
     }
 
+    public BodyPart extendPart(BodyPart parent){
+        BodyPart child = new BodyPart(parent.species, parent, parent.designation, parent.limb_type, parent.index + 1);
+        parent.child = child;
+
+        return child;
+    }
+
+    public BodyPart extendPart(BodyPart parent, int extent){
+        BodyPart now_working_on = parent;
+        for (int i = 0; i < extent; i++){
+            now_working_on = extendPart(now_working_on);
+        }
+        return parent;
+    }
 
     interface Species {
         String getSpecies();
@@ -84,7 +104,7 @@ public class Body implements Serializable {
 
     }
 
-    public static class Human implements Species {
+    public static class Human implements Species, Serializable{
         public String getSpecies() { return "human"; }
 
         public int numberHeads() { return 1; }

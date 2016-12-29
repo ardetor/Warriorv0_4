@@ -125,7 +125,7 @@ public class ActivitySummary extends AppCompatActivity {
 
     public void debugger() {
         TextView debugger = (TextView) findViewById(R.id.activity_summary_debugger);
-        debugger.setText(Util.toString(save));
+        debugger.setText(Util.toString(save.body.roots.get(0).child.organ.multiplier[1]));
     }
 
     protected void refreshScreen() {
