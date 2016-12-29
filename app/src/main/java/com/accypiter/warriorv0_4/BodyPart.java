@@ -37,7 +37,9 @@ public class BodyPart implements Serializable{
     double size;
 
     //Damage stats
-    double[] damage;               //Tracks current damage to this Part. [0] is sharp, [1] is blunt, [2] is bleed.
+    double[] damage;               //Tracks current damage to this Part. [0] is sharp, [1] is blunt,
+                                   // [2] is bleed, [3] is burned, [4] is rotting. [4] cannot be
+                                   // cured by self-healing. Must be magically dealt with.
 
 
     boolean[] severeDamage;         //Tracks if severe damage has been done. If true, this limb is ineffective.
@@ -70,7 +72,7 @@ public class BodyPart implements Serializable{
         this.organDeferment = null;
         this.wieldable = null;
         this.armor = null;
-        this.damage = new double[] {0,0,0};
+        this.damage = new double[] {0,0,0,0,0};
         this.severeDamage = new boolean[] {false, false};
 
         if (this.limb_type == LIMB_ARM){
@@ -243,7 +245,7 @@ public class BodyPart implements Serializable{
         this.organ = null;
         this.wieldable = null;
         this.armor = null;
-        this.damage = new double[]{0,0,0};
+        this.damage = new double[]{0,0,0,0,0};
         this.severeDamage = new boolean[]{false,false};
 
         switch(parent_part_type){

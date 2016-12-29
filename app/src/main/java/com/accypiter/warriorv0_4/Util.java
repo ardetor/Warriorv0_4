@@ -51,5 +51,27 @@ public class Util {
         }
     }
 
+    public static int colorScale(double number, double reference, int hex_alpha){
+        int red, green;
+
+        if (number / reference < 0){
+            red = 0x0;
+            green = 0xFF;
+
+        } else if (number / reference > 1){
+            green = 0x0;
+            red = 0xFF;
+
+        } else if (number / reference <= 0.5){
+            green = 0xFF;
+            red = (int) ((number / reference) * 2 * 0xFF);
+
+        } else {
+            red = 0xFF;
+            green = (int) ((1 - (number / reference)) * 2 * 0xFF);
+        }
+
+        return (hex_alpha * 0x1000000) + (red * 0x10000) + (green * 0x100);
+    }
 
 }
