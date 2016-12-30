@@ -108,8 +108,9 @@ public class Body implements Serializable {
                     number_severe += 1;
                 }
             }
+            now_working_on = now_working_on.child;
         }
-        reference_health *= Math.pow(0.5, number_severe);
+        total_damage += 20 - (reference_health * Math.pow(0.5, number_severe)); //This adds 10 damage for the first severe, five for the next, two and a half for the third, and so on.
         if (total_damage > reference_health){
             total_damage = reference_health;
         }

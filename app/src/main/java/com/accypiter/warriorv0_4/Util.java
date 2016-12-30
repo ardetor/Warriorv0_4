@@ -1,5 +1,9 @@
 package com.accypiter.warriorv0_4;
 
+import android.content.Context;
+import android.util.TypedValue;
+import android.widget.TextView;
+
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 
@@ -33,6 +37,8 @@ public class Util {
     public static String capitalize(String string){
         return string.substring(0,1).toUpperCase() + string.substring(1);
     }
+
+
 
     public static String ordinal(int integer){
         switch (integer){
@@ -74,6 +80,10 @@ public class Util {
         return (hex_alpha * 0x1000000) + (red * 0x10000) + (green * 0x100);
     }
 
+    public static int invertedColorScale(double number, int hex_alpha){
+        return invertedColorScale(number, 1, hex_alpha);
+    }
+
     public static int colorScale(double number, double reference, int hex_alpha){
         int red, green;
 
@@ -95,6 +105,18 @@ public class Util {
         }
 
         return (hex_alpha * 0x1000000) + (red * 0x10000) + (green * 0x100);
+    }
+
+    public static int colorScale(double number, int hex_alpha){
+        return colorScale(number, 1, hex_alpha);
+    }
+
+    public static void setTextSizeSP(Context context, TextView textView, double size_in_sp){
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, (float) (size_in_sp));
+    }
+
+    public static double getDensity(Context context){
+        return context.getResources().getDisplayMetrics().density;
     }
 
 }

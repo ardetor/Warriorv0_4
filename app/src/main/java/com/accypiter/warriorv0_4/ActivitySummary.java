@@ -109,6 +109,7 @@ public class ActivitySummary extends AppCompatActivity {
 
     public void testHealthCurrent(View view) {
         save.body.blood_current -= 0.02;
+        save.body.roots.get(2).damage[1] += 2;
         updateHealthCurrent();
         debugger();
     }
@@ -125,7 +126,7 @@ public class ActivitySummary extends AppCompatActivity {
 
     public void debugger() {
         TextView debugger = (TextView) findViewById(R.id.activity_summary_debugger);
-        debugger.setText(Util.toString(save.body.roots.get(0).child.organ.multiplier[1]));
+        debugger.setText(Util.toString(save.body.roots.get(1).getPartHealth() == 1));
     }
 
     protected void refreshScreen() {

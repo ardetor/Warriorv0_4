@@ -59,6 +59,10 @@
         <activity
             android:name=".ActivityHealth"
             android:label="@string/title_activity_health"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityHealthSecond"
+            android:label="@string/title_activity_health_second"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

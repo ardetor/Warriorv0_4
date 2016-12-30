@@ -334,7 +334,7 @@ public class BodyPart implements Serializable{
             return 0; // If broken/severed straight away go to red
         }
 
-        double reference_health = 20;
+        double reference_health = 10;
         double damage = this.getTotalDamage();
         if (damage > reference_health){
             damage = reference_health;
@@ -356,6 +356,26 @@ public class BodyPart implements Serializable{
 
     public boolean isSeverelyDamaged(){
         return this.severeDamage[0] || this.severeDamage[1];
+    }
+
+    public BodyPart getChild(int depth){
+        if (depth == 0){
+            return this;
+        } else {
+            return this.child.getChild(depth - 1);
+        }
+    }
+
+    public String getPartName(){
+        if (this.designation == null || this.designation.equals("")){
+            return this.name;
+        } else {
+            return this.designation + " " + this.name;
+        }
+    }
+
+    public String GetPartName(){
+        return Util.capitalize(this.getPartName());
     }
 
 }
