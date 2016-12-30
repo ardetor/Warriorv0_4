@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -84,6 +85,7 @@ public class ActivityHealth extends AppCompatActivity {
 
 
     public LinearLayout viewBodyPart(BodyPart bodyPart){
+        //Calculate colour of this view
         int alpha_title = 0x77;
         int alpha_detail = 0x44;
 
@@ -92,13 +94,18 @@ public class ActivityHealth extends AppCompatActivity {
             damageSum += individual_damage;
         }
 
+
         LinearLayout containerLinear = new LinearLayout(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        containerLinear.setLayoutParams(layoutParams);
+        double density = this.getResources().getDisplayMetrics().density;
+        containerLinear.setPadding(0,0,0,(int)(10*density));
+        containerLinear.setOrientation(LinearLayout.VERTICAL);
 
         TextView titleText = new TextView(this);
         titleText.setBackgroundColor(Util.colorScale(damageSum, 100, alpha_title));
 
-
+        //Incomplete
 
         return containerLinear;
     }

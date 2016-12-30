@@ -256,10 +256,10 @@ public class BodyPart implements Serializable{
                 this.severeName = new String[]{"error_artery_should_not_be_severable","error_artery_should_not_be_severable"};
 
                 //Sets prefix of this organ to the full name of its parent, accounting for exception of heart
-                if (parent.name == "torso"){
+                if (parent.name.equals("torso")){
                     this.name = "heart";
                     this.designation = null;
-                } else if (parent.designation == null || parent.designation == ""){
+                } else if (parent.designation == null || parent.designation.equals("")){
                     this.designation = parent.name;
                 } else {
                     this.designation = parent.designation + " " + parent.name;
@@ -270,7 +270,7 @@ public class BodyPart implements Serializable{
                     case LIMB_CORE:
                         this.size = -2.5 - (1 * index);
                         this.multiplier = new double[]{0,
-                                                       10 - (6 * index),
+                                                       20 - (15 * index),
                                                        0};
                         this.organDeferment = new double[]{4 - (2.5 * index),
                                                            4 - (2.5 * index)};
@@ -325,6 +325,38 @@ public class BodyPart implements Serializable{
     public static final int ORGAN_ARTERY = 14;
     public static final int ORGAN_LIGAMENT = 15;
 
+
+    public double getPartHealth(){
+        //Returns a fraction from 0 to 1 representing the health of a particular body part.
+        // 0 means disabled, 1 means perfect condition.
+
+        if (this.isSeverelyDamaged()) {
+            return 0; // If broken/severed straight away go to red
+        }
+
+        double reference_health = 20;
+        double damage = this.getTotalDamage();
+        if (damage > reference_health){
+            damage = reference_health;
+        }
+
+        return 1 - (damage / reference_health);
+    }
+
+    public double getTotalDamage(){
+        //Iterates over a BodyPart's damage statistic and returns the sum.
+        //Bleeding damage only counts as one-fifth the damage.
+        double damage = 0;
+        for (double individual_damage : this.damage) {
+            damage += individual_damage;
+        }
+        damage -= this.damage[2] * 0.8;
+        return damage;
+    }
+
+    public boolean isSeverelyDamaged(){
+        return this.severeDamage[0] || this.severeDamage[1];
+    }
 
 }
 

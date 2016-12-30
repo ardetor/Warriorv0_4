@@ -87,6 +87,45 @@ public class Body implements Serializable {
         return parent;
     }
 
+
+    public static double getLimbHealth(BodyPart root){
+        //Given a root, traverse and sum the damage, and give fractional effectiveness of that limb.
+        //Accounts for severe damage.
+        //Perfect health is a 1. If 0, the limb cannot attack.
+        double reference_health = 20;
+        double total_damage = 0;
+        int number_severe = 0;
+
+        BodyPart now_working_on = root;
+        while (now_working_on != null){
+            total_damage += now_working_on.getTotalDamage();
+            if (now_working_on.isSeverelyDamaged()){
+                number_severe += 1;
+            }
+            if (now_working_on.organ != null){
+                total_damage += now_working_on.organ.getTotalDamage();
+                if (now_working_on.organ.isSeverelyDamaged()){
+                    number_severe += 1;
+                }
+            }
+        }
+        reference_health *= Math.pow(0.5, number_severe);
+        if (total_damage > reference_health){
+            total_damage = reference_health;
+        }
+
+        return 1 - (total_damage / reference_health);
+    }
+
+    public double getLimbHealth(int limb_index){
+        return getLimbHealth(this.roots.get(limb_index));
+    }
+
+
+
+
+
+
     interface Species {
         String getSpecies();
 
