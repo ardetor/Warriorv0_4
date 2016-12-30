@@ -88,7 +88,7 @@ public class Body implements Serializable {
     }
 
 
-    public static double getLimbHealth(BodyPart root){
+    public static double getLimbHealthScale(BodyPart root){
         //Given a root, traverse and sum the damage, and give fractional effectiveness of that limb.
         //Accounts for severe damage.
         //Perfect health is a 1. If 0, the limb cannot attack.
@@ -119,7 +119,7 @@ public class Body implements Serializable {
     }
 
     public double getLimbHealth(int limb_index){
-        return getLimbHealth(this.roots.get(limb_index));
+        return getLimbHealthScale(this.roots.get(limb_index));
     }
 
 

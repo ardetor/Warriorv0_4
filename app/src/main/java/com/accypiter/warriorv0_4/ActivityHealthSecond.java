@@ -3,8 +3,6 @@ package com.accypiter.warriorv0_4;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ActivityHealthSecond extends AppCompatActivity {
+public class ActivityHealthSecond extends AppCompatActivity implements View.OnClickListener{
     public SaveGame save;
 
     @Override
@@ -75,18 +73,39 @@ public class ActivityHealthSecond extends AppCompatActivity {
 
         //For each root in Body.roots, traverse it until there are no more children. Display organs if available.
         for (BodyPart bodyPart = root; bodyPart != null ; bodyPart = bodyPart.child){
-            mainLinear.addView(viewLimbSecond(bodyPart));
+            mainLinear.addView(viewPart(bodyPart));
             if (bodyPart.organ != null){
-                mainLinear.addView(viewLimbSecond(bodyPart.organ));
+                mainLinear.addView(viewPart(bodyPart.organ));
             }
         }
     }
 
 
-    public LinearLayout viewLimbSecond(BodyPart bodyPart){
+    public LinearLayout viewPart(BodyPart bodyPart){
+        /*
+        * The structure of this view is:
+        * TITLE TITLE TITLE
+        * [sharp icon] [sharp damage indicator]      [Blunt D][Blunt DI]          [Bleed D]etc. etc.
+        *
+        * containerLinear is the thing containing the whole thing.
+        * titleTextView is the TITLE TITLE TITLE thing.
+        * statusLinear is the Linear containing the status row.
+        * statusImage is the ImageView containing the damage icon.
+        * statusView is the View containing the damage indicator.
+        *
+        * statusImages and statusViews have gravity toward their corresponding members. So that
+        * they cluster together. I don't know how to explain this better. They clump in their groups
+        * of two. If you don't get it you have bigger problems than this.
+        *
+        * If severe, the statusImage will show a red icon.
+        * */
+
+
+
         //Calculate colour of this view
         int alpha_title = 0xA0;
         int alpha_detail = 0x30;
+        int icon_dimension_dp = 25;
 
         //Make containing LL
         LinearLayout containerLinear = new LinearLayout(this);
@@ -98,75 +117,105 @@ public class ActivityHealthSecond extends AppCompatActivity {
 
         //Make title TextView
         TextView titleText = new TextView(this);
-        titleText.setBackgroundColor(Util.colorScale(bodyPart.getPartHealth(), alpha_title));
+        titleText.setBackgroundColor(Util.colorScale(bodyPart.getPartHealthScale(), alpha_title));
         titleText.setText(bodyPart.GetPartName());
         titleText.setTypeface(null, Typeface.BOLD);
-        int titlePadding = (int) (Util.getDensity(this) * 4);
+        int titlePadding = (int) (Util.getDensity(this) * 6);
         titleText.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
-        LinearLayout.LayoutParams width_fill_height_wrap = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-        titleText.setLayoutParams(width_fill_height_wrap);
-
-
-        //Add severe icons
-        //LinearLayout.LayoutParams width_wrap_height_match
-        if (bodyPart.severeDamage[0]){
-            ImageView icon = new ImageView(this);
-            icon.setMaxHeight((int) (15 * density));
-            //to be replaced by a function
-        }
-
+        titleText.setLayoutParams(width_match_height_wrap);
 
         //Add title to LL
         containerLinear.addView(titleText);
 
+        //Construct statusLinear
+        LinearLayout statusLinear = new LinearLayout(this);
+        statusLinear.setLayoutParams(width_match_height_wrap);
+        statusLinear.setBackgroundColor(Util.colorScale(bodyPart.getPartHealthScale(), alpha_detail));
+        statusLinear.setOrientation(LinearLayout.HORIZONTAL);
+        statusLinear.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
 
 
-        /*
+        //Add icons and status text for the 4 main damage types
+        for (int i = 0; i < 4; i++){
 
-        //Add one TextView per child, with colour and stating OK or not.
-        BodyPart now_working_on = body.roots.get(index);
-        LinearLayout.LayoutParams partParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-        LinearLayout.LayoutParams statusParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ImageView statusImage = new ImageView(this);
+            View statusView = new View(this);
+            LinearLayout.LayoutParams width_fixed_height_fixed = new LinearLayout.LayoutParams((int) (icon_dimension_dp * density), (int) (icon_dimension_dp * density));
+            statusImage.setLayoutParams(width_fixed_height_fixed);
 
-        while (now_working_on != null){
-            double partHealth = now_working_on.getPartHealth();
-            LinearLayout partLinear = new LinearLayout(this);
-            partLinear.setOrientation(LinearLayout.HORIZONTAL);
-            partLinear.setBackgroundColor(Util.colorScale(partHealth,alpha_detail));
-
-            TextView partText = new TextView(this);
-            partText.setText(Util.GetPartName(now_working_on));
-            partText.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
-
-            TextView statusText = new TextView(this);
-            String status;
-            if (partHealth == 1){
-                status = "Perfect";
-            } else if (partHealth > 0.9){
-                status = "Good";
-            } else if (partHealth > 0.5){
-                status = "Poor";
-            } else if (partHealth > 0){
-                status = "Very poor";
-            } else { //partHealth == 1
-                status = "Critical";
+            //FOR DEBUGGING
+            BodyPart temp = bodyPart;
+            int counter = -1 - (bodyPart.isOrgan?1:0);
+            while(temp != null) {
+                temp = temp.parent;
+                counter++;
             }
-            statusText.setText(status);
-            statusText.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
+            int[] tag = {getIntent().getIntExtra("health_second_tag", 0), counter, i, bodyPart.isOrgan?1:0};
+            statusImage.setTag(tag);
+            statusImage.setOnClickListener(this);
+            //END DEBUGGING*/
 
-            partLinear.addView(partText, partParams);
-            partLinear.addView(statusText,statusParams);
+            LinearLayout.LayoutParams statusParams = new LinearLayout.LayoutParams((int) ((icon_dimension_dp - 2) * density), (int) ((icon_dimension_dp - 2) * density));
+            statusView.setLayoutParams(width_fixed_height_fixed);
+
+            View spacerView = new View(this);
+            LinearLayout.LayoutParams spacerParams = new LinearLayout.LayoutParams((int) (10 * density), (int)(icon_dimension_dp * density));
+            spacerView.setLayoutParams(spacerParams);
+
+            switch (i) {
+                case 0:
+                    if (!bodyPart.severeDamage[0]) {
+                        statusImage.setImageResource(R.drawable.icon_sharp);
+                    } else {
+                        statusImage.setImageResource(R.drawable.icon_sharp_severe);
+                    }
+                    break;
+
+                case 1:
+                    if (!bodyPart.severeDamage[1]) {
+                        statusImage.setImageResource(R.drawable.icon_blunt);
+                    } else {
+                        statusImage.setImageResource(R.drawable.icon_blunt_severe);
+                    }
+                    break;
+
+                case 2:
+                    statusImage.setImageResource(R.drawable.icon_blood);
+                    break;
+
+                default: //case 3
+                    statusImage.setImageResource(R.drawable.icon_burn);
+                    break;
+            }
+
+            statusView.setBackgroundColor(Util.invertedColorScale(bodyPart.damage[i],5,alpha_title));
+
+            statusLinear.addView(statusImage);
+            statusLinear.addView(statusView);
+            if (i != 3){
+                statusLinear.addView(spacerView);
+            }
 
 
-            //Add the completed partLinear to containerLinear
-            containerLinear.addView(partLinear);
-
-            //Go to next BodyPart
-            now_working_on = now_working_on.child;
         }
-*/
+        containerLinear.addView(statusLinear);
+
         return containerLinear;
 
+
+    }
+
+    public void onClick(View view) { //FOR DEBUGGING ONLY - REMOVE LATER
+        int a = ((int[]) view.getTag())[0];
+        int b = ((int[]) view.getTag())[1];
+        int c = ((int[]) view.getTag())[2];
+        int d = ((int[]) view.getTag())[3];
+        if (d == 0) {
+            save.body.roots.get(a).getChild(b).damage[c] += 1;
+        } else {
+            save.body.roots.get(a).getChild(b).organ.damage[c] += 1;
+        }
+        updateHealthSecond();
 
     }
 

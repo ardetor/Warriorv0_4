@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -115,7 +114,7 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
         titleText.setBackgroundColor(Util.colorScale(body.getLimbHealth(index), alpha_title));
         titleText.setText(Util.capitalize(limb_name));
         titleText.setTypeface(null, Typeface.BOLD);
-        int titlePadding = (int) (Util.getDensity(this) * 4);
+        int titlePadding = (int) (Util.getDensity(this) * 6);
         titleText.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
         titleText.setLayoutParams(width_match_height_wrap);
 
@@ -128,13 +127,13 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
         LinearLayout.LayoutParams statusParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         while (now_working_on != null){
-            double partHealth = now_working_on.getPartHealth();
+            double partHealth = now_working_on.getPartHealthScale();
             LinearLayout partLinear = new LinearLayout(this);
             partLinear.setOrientation(LinearLayout.HORIZONTAL);
             partLinear.setBackgroundColor(Util.colorScale(partHealth,alpha_detail));
 
             TextView partText = new TextView(this);
-            partText.setText(Util.GetPartName(now_working_on));
+            partText.setText(now_working_on.GetPartName());
             partText.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
 
             TextView statusText = new TextView(this);

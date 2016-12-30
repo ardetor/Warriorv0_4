@@ -326,7 +326,7 @@ public class BodyPart implements Serializable{
     public static final int ORGAN_LIGAMENT = 15;
 
 
-    public double getPartHealth(){
+    public double getPartHealthScale(){
         //Returns a fraction from 0 to 1 representing the health of a particular body part.
         // 0 means disabled, 1 means perfect condition.
 
