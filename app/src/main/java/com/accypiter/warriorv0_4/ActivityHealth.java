@@ -59,8 +59,12 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onPause(){
-        save = SaveGame.update(this);
         super.onPause();
+    }
+
+    public void onStop(){
+        save = SaveGame.update(this);
+        super.onStop();
     }
 
     public void updateHealthScreen(){

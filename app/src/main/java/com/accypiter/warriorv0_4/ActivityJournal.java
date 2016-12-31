@@ -121,8 +121,12 @@ public class ActivityJournal extends AppCompatActivity implements View.OnClickLi
 
     @Override
     protected void onPause(){
-        save = SaveGame.update(this);
         super.onPause();
+    }
+
+    public void onStop(){
+        save = SaveGame.update(this);
+        super.onStop();
     }
 
 

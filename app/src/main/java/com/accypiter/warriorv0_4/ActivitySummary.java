@@ -66,8 +66,18 @@ public class ActivitySummary extends AppCompatActivity {
 
     @Override
     public void onPause() {
-        SaveGame.update(this);
+        //DO NOT UPDATE SAVEGAME IN ONPAUSE(). CAUSES SOME WEIRD PROBLEM WHERE AFTER FORCE STOP, SAVE FILE BECOMES NULL.
+        //No idea why it happens, but the solution is to update in onStop instead. My guess would be that
+        //force stop tries to run onPause, but only gets halfway i.e. the writing to save is interrupted and
+        //the save file becomes corrupted, causing problems when next read. I don't know if movement to onStop
+        //may cause future problems but I don't see any right now and I don't see any way to tell if it will
+        //ever happen.
         super.onPause();
+    }
+
+    public void onStop(){
+        save = SaveGame.update(this);
+        super.onStop();
     }
 
     protected void enableMagicButton() {

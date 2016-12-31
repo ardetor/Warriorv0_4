@@ -59,8 +59,12 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onPause(){
-        save = SaveGame.update(this);
         super.onPause();
+    }
+
+    public void onStop(){
+        save = SaveGame.update(this);
+        super.onStop();
     }
 
     public void updateHealthSecond(){
