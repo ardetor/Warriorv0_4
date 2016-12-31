@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ActivityHealth extends AppCompatActivity implements View.OnClickListener {
-    public SaveGame save;
+    public SaveGame save = SaveGame.current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +115,14 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
         LinearLayout.LayoutParams statusParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         while (now_working_on != null){
-            double partHealth = now_working_on.getPartHealthScale();
+            //Get scaled health of a part, INCLUDING ITS ASSOCIATED ORGAN
+            double partHealth;
+            if (now_working_on.organ == null){
+                partHealth = now_working_on.getPartHealthScale();
+            } else {
+                partHealth = 0.5 * (now_working_on.getPartHealthScale() + now_working_on.organ.getPartHealthScale());
+            }
+
             LinearLayout partLinear = new LinearLayout(this);
             partLinear.setOrientation(LinearLayout.HORIZONTAL);
             partLinear.setBackgroundColor(Util.colorScale(partHealth,alpha_detail));
@@ -134,7 +141,7 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
                 status = "Poor";
             } else if (partHealth > 0){
                 status = "Very poor";
-            } else { //partHealth == 1
+            } else { //partHealth == 0
                 status = "Critical";
             }
             statusText.setText(status);
@@ -157,7 +164,7 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view){
         int index = (int) view.getTag();
         Intent openHealthSecondIntent = new Intent(this, ActivityHealthSecond.class);
-        openHealthSecondIntent.putExtra("health_second_tag", index);
+        openHealthSecondIntent.putExtra("activity_health_second_identifier", index);
         startActivity(openHealthSecondIntent);
     }
 

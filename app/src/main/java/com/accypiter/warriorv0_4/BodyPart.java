@@ -410,6 +410,60 @@ public class BodyPart implements Serializable{
 
     }
 
+    public void sever(){
+        BodyPart now_working_on = this;
+
+        //sever all child parts and set damage to 999
+        while (now_working_on != null){
+            //set bodypart to severed
+            now_working_on.severeDamage[0] = true;
+
+            for (int damage_type = 0; damage_type < 4; damage_type++) {
+                now_working_on.damage[damage_type] = 999;
+            }
+
+            if (now_working_on.organ != null){
+                now_working_on.organ.severeDamage[0] = true;
+                for (int damage_type = 0; damage_type < 4; damage_type++) {
+                    now_working_on.organ.damage[damage_type] = 99;
+                }
+            }
+
+            //Go to next part
+            now_working_on = now_working_on.child;
+        }
+
+    }
+
+    public int getPartIndexInLimb(){
+        //This method traverses through parent of this BodyPart, until the parent is null.
+        //Remember to account for if this is an organ or not.
+
+        //If this BP is a root, one loop of the while will run. We must set the initial to be -1 to
+        //account for this.
+        int index = -1;
+
+        //If this is an organ, we will need to traverse one initial parent where index does not change.
+        index -= (this.isOrgan?1:0);
+
+        //The main loop.
+        BodyPart now_working_on = this;
+        while (now_working_on != null){
+            index++;
+            now_working_on = now_working_on.parent;
+        }
+
+        return index;
+    }
+
+    public BodyPart getOrganIfTrue(boolean condition){
+        if (!condition){
+            return this;
+        } else {
+            return this.organ;
+        }
+    }
+
 }
 
 

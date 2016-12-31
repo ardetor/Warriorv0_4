@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ActivityHealthSecond extends AppCompatActivity implements View.OnClickListener{
-    public SaveGame save;
+    public SaveGame save = SaveGame.current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
         mainLinear.removeAllViews();
 
         //Find out which limb we will be looking at
-        BodyPart root = save.body.roots.get(getIntent().getIntExtra("health_second_tag", 0));
+        BodyPart root = save.body.roots.get(getIntent().getIntExtra("activity_health_second_identifier", 0));
 
         //For each root in Body.roots, traverse it until there are no more children. Display organs if available.
         for (BodyPart bodyPart = root; bodyPart != null ; bodyPart = bodyPart.child){
@@ -148,16 +148,23 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
             statusImage.setLayoutParams(width_fixed_height_fixed);
 
             //FOR DEBUGGING - Increments damage to a particular body part if its icon is clicked
-            BodyPart temp = bodyPart;
-            int counter = -1 - (bodyPart.isOrgan?1:0);
-            while(temp != null) {
-                temp = temp.parent;
-                counter++;
-            }
-            int[] tag = {getIntent().getIntExtra("health_second_tag", 0), counter, damage_type, bodyPart.isOrgan?1:0};
+            int[] tag = {getIntent().getIntExtra("activity_health_second_identifier", 0), bodyPart.getPartIndexInLimb(), damage_type, bodyPart.isOrgan?1:0};
             statusImage.setTag(tag);
-            statusImage.setOnClickListener(this);
-            //END DEBUGGING*/
+            statusImage.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View view) { //FOR DEBUGGING ONLY - REMOVE LATER
+                    int a = ((int[]) view.getTag())[0];
+                    int b = ((int[]) view.getTag())[1];
+                    int c = ((int[]) view.getTag())[2];
+                    int d = ((int[]) view.getTag())[3];
+                    if (d == 0) {
+                        save.body.roots.get(a).getChild(b).damage[c] += 1;
+                    } else {
+                        save.body.roots.get(a).getChild(b).organ.damage[c] += 1;
+                    }
+                    updateHealthSecond();
+                }
+            });
+            //END DEBUGGING
 
             LinearLayout.LayoutParams statusParams = new LinearLayout.LayoutParams((int) ((icon_dimension_dp - 2) * density), (int) ((icon_dimension_dp - 2) * density));
             statusView.setLayoutParams(width_fixed_height_fixed);
@@ -202,22 +209,25 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
         }
         containerLinear.addView(statusLinear);
 
+        //Make containerLinear open HealthThird on click
+        //Stores identifying information in tag[].
+        //tag[0]: root index
+        //tag[1]: self-explanatory; part index in limb.
+        //tag[2]: whether or not have to get organ.
+        int[] tag = {getIntent().getIntExtra("health_second_tag", 0), bodyPart.getPartIndexInLimb(), bodyPart.isOrgan?1:0};
+        containerLinear.setTag(tag);
+        containerLinear.setOnClickListener(this);
+
         return containerLinear;
-
-
     }
 
-    public void onClick(View view) { //FOR DEBUGGING ONLY - REMOVE LATER
-        int a = ((int[]) view.getTag())[0];
-        int b = ((int[]) view.getTag())[1];
-        int c = ((int[]) view.getTag())[2];
-        int d = ((int[]) view.getTag())[3];
-        if (d == 0) {
-            save.body.roots.get(a).getChild(b).damage[c] += 1;
-        } else {
-            save.body.roots.get(a).getChild(b).organ.damage[c] += 1;
-        }
-        updateHealthSecond();
+    @Override
+    public void onClick(View view) {
+        int[] tag = (int[]) view.getTag();
+
+        Intent openHealthThirdIntent = new Intent(this, ActivityHealthThird.class);
+        openHealthThirdIntent.putExtra("activity_health_third_identifier", tag);
+        startActivity(openHealthThirdIntent);
 
     }
 

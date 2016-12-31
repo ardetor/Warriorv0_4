@@ -119,7 +119,7 @@ public class ActivitySummary extends AppCompatActivity {
 
     public void testHealthCurrent(View view) {
         save.body.blood_current -= 0.02;
-        save.body.roots.get(2).damage[1] += 2;
+        save.body.roots.get(2).getChild(3).sever();
         updateHealthCurrent();
         debugger();
     }
