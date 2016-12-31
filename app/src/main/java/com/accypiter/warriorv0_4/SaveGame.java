@@ -24,8 +24,9 @@ public class SaveGame implements Serializable{
     Date date_created;
     Date date_latest;
     Date date_current;
-    boolean in_fight;
-    boolean magic_enabled;
+
+
+
     Random random;
 
     //Journal
@@ -34,7 +35,8 @@ public class SaveGame implements Serializable{
     //Body object, representing all info about physical health
     Body body;
 
-
+    boolean magic_enabled;
+    boolean in_fight;
 
 
 
@@ -69,7 +71,8 @@ public class SaveGame implements Serializable{
             out.writeObject(SaveGame.current);
             out.close();
             fileOut.close();
-        }catch(IOException i) {
+        }
+        catch(IOException i) {
             i.printStackTrace();
         }
         return true;

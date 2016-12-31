@@ -1,4 +1,6 @@
 package com.accypiter.warriorv0_4;
 
-public class Armor {
+import java.io.Serializable;
+
+public class Armor implements Serializable{
 }

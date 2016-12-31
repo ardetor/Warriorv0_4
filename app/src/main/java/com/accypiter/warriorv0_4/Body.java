@@ -89,44 +89,61 @@ public class Body implements Serializable {
 
 
     public static double getLimbHealthScale(BodyPart root){
-        //Given a root, traverse and sum the damage, and give fractional effectiveness of that limb.
+        //Given a root, traverse and aggregate the damage, and give fractional effectiveness of that limb.
         //Accounts for severe damage.
         //Perfect health is a 1. If 0, the limb cannot attack.
-        double reference_health = 20;
-        double total_damage = 0;
+        double reference_health = 30;
+        double limb_aggregate_damage = 0;
         int number_severe = 0;
 
         BodyPart now_working_on = root;
         while (now_working_on != null){
-            total_damage += now_working_on.getTotalDamage();
+            //Add aggregate damage^2
+            limb_aggregate_damage += Math.pow(now_working_on.partAggregateDamage(), 2);
+
+            //Track severe damage
             if (now_working_on.isSeverelyDamaged()){
                 number_severe += 1;
             }
+
+            //Repeat for organ
             if (now_working_on.organ != null){
-                total_damage += now_working_on.organ.getTotalDamage();
+                limb_aggregate_damage += Math.pow(now_working_on.organ.partAggregateDamage(), 2);
+
                 if (now_working_on.organ.isSeverelyDamaged()){
                     number_severe += 1;
                 }
             }
             now_working_on = now_working_on.child;
         }
-        total_damage += 20 - (reference_health * Math.pow(0.5, number_severe)); //This adds 10 damage for the first severe, five for the next, two and a half for the third, and so on.
-        if (total_damage > reference_health){
-            total_damage = reference_health;
+        //Square root to recover aggregate damage
+        limb_aggregate_damage = Math.sqrt(limb_aggregate_damage);
+
+        //This adds 50%-max-health damage for the first severe, 25% for the next, 12.5% for the third, and so on.
+        limb_aggregate_damage += reference_health - (reference_health * Math.pow(0.5, number_severe));
+
+        //Handles damage over limit
+        if (limb_aggregate_damage > reference_health){
+            return 0;
         }
 
-        return 1 - (total_damage / reference_health);
+        return 1 - (limb_aggregate_damage / reference_health);
     }
 
     public double getLimbHealth(int limb_index){
         return getLimbHealthScale(this.roots.get(limb_index));
     }
 
+    public String getLimbName(int root_index){
+        return this.species.getLimbName(root_index);
+    }
 
 
 
 
 
+
+    //Species related
     interface Species {
         String getSpecies();
 
@@ -141,7 +158,7 @@ public class Body implements Serializable {
 
         double susceptibility(int attack_type);
 
-
+        String getLimbName(int root_index);
     }
 
     public static class Human implements Species, Serializable{
@@ -157,5 +174,20 @@ public class Body implements Serializable {
         public double speciesSize() { return 1; }
 
         public double susceptibility(int attack_type) { return 1; }
+
+        public String getLimbName(int root_index) {
+            switch (root_index) {
+                case 0:
+                    return "head";
+                case 1:
+                    return "left arm";
+                case 2:
+                    return "right arm";
+                case 3:
+                    return "left leg";
+                default:
+                    return "right leg";
+            }
+        }
     }
 }

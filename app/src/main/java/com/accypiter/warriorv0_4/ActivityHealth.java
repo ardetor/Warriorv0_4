@@ -79,25 +79,9 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
         //Calculate colour of this view
         int alpha_title = 0xA0;
         int alpha_detail = 0x30;
+        int padding = (int) (Util.getDensity(this) * 6);
 
-        String limb_name;
-        switch (index) {
-            case 0:
-                limb_name = "head";
-                break;
-            case 1:
-                limb_name = "left arm";
-                break;
-            case 2:
-                limb_name = "right arm";
-                break;
-            case 3:
-                limb_name = "left leg";
-                break;
-            default:
-                limb_name = "right leg";
-                break;
-        }
+        String limb_name = body.getLimbName(index);
 
         //Make containing LL
         LinearLayout containerLinear = new LinearLayout(this);
@@ -114,8 +98,8 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
         titleText.setBackgroundColor(Util.colorScale(body.getLimbHealth(index), alpha_title));
         titleText.setText(Util.capitalize(limb_name));
         titleText.setTypeface(null, Typeface.BOLD);
-        int titlePadding = (int) (Util.getDensity(this) * 6);
-        titleText.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
+
+        titleText.setPadding(padding, padding, padding, padding);
         titleText.setLayoutParams(width_match_height_wrap);
 
         //Add title to LL
@@ -134,7 +118,7 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
 
             TextView partText = new TextView(this);
             partText.setText(now_working_on.GetPartName());
-            partText.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
+            partText.setPadding(padding, padding, padding, padding);
 
             TextView statusText = new TextView(this);
             String status;
@@ -150,7 +134,7 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
                 status = "Critical";
             }
             statusText.setText(status);
-            statusText.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
+            statusText.setPadding(padding, padding, padding, padding);
 
             partLinear.addView(partText, partParams);
             partLinear.addView(statusText,statusParams);

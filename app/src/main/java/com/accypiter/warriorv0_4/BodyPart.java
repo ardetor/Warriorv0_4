@@ -329,18 +329,33 @@ public class BodyPart implements Serializable{
     public double getPartHealthScale(){
         //Returns a fraction from 0 to 1 representing the health of a particular body part.
         // 0 means disabled, 1 means perfect condition.
+        // Used for calculating part color scales only.
+
+        double reference_health = 10;
 
         if (this.isSeverelyDamaged()) {
             return 0; // If broken/severed straight away go to red
         }
 
-        double reference_health = 10;
-        double damage = this.getTotalDamage();
-        if (damage > reference_health){
-            damage = reference_health;
+        double aggregate_damage = this.partAggregateDamage();
+        if (aggregate_damage > reference_health){
+            return 0;
         }
 
-        return 1 - (damage / reference_health);
+        return 1 - (aggregate_damage / reference_health);
+    }
+
+    public double getDamageHealthScale(int damage_type){
+        //returns a fraction from 0 to 1 representing the health of a particular body part IN ONE TYPE OF DAMAGE.
+        double reference_health = 10;
+        double damage = this.damage[damage_type];
+        if (damage >= 0 && damage <= 1){
+            return 1 - (damage / reference_health);
+        } else if (damage > reference_health){
+            return 0;
+        } else {
+            return Double.NaN;
+        }
     }
 
     public double getTotalDamage(){
@@ -376,6 +391,23 @@ public class BodyPart implements Serializable{
 
     public String GetPartName(){
         return Util.capitalize(this.getPartName());
+    }
+
+    public double partAggregateDamage(){
+        //Aggregate damage is calculated as the Pythagorean sum of the damages. sqrt(x^2 + y^2),
+        // that kind of thing.
+        double aggregate_damage = 0;
+
+        //Sum squares
+        for(double individual_damage : this.damage){
+            aggregate_damage += Math.pow(individual_damage, 2);
+        }
+
+        //square root to get aggregate damage
+        aggregate_damage = Math.sqrt(aggregate_damage);
+
+        return aggregate_damage;
+
     }
 
 }

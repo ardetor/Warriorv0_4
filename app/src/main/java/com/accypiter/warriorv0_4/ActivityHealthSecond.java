@@ -136,21 +136,21 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
 
 
         //Add icons and status text for the 4 main damage types
-        for (int i = 0; i < 4; i++){
+        for (int damage_type = 0; damage_type < 4; damage_type++){
 
             ImageView statusImage = new ImageView(this);
             View statusView = new View(this);
             LinearLayout.LayoutParams width_fixed_height_fixed = new LinearLayout.LayoutParams((int) (icon_dimension_dp * density), (int) (icon_dimension_dp * density));
             statusImage.setLayoutParams(width_fixed_height_fixed);
 
-            //FOR DEBUGGING
+            //FOR DEBUGGING - Increments damage to a particular body part if its icon is clicked
             BodyPart temp = bodyPart;
             int counter = -1 - (bodyPart.isOrgan?1:0);
             while(temp != null) {
                 temp = temp.parent;
                 counter++;
             }
-            int[] tag = {getIntent().getIntExtra("health_second_tag", 0), counter, i, bodyPart.isOrgan?1:0};
+            int[] tag = {getIntent().getIntExtra("health_second_tag", 0), counter, damage_type, bodyPart.isOrgan?1:0};
             statusImage.setTag(tag);
             statusImage.setOnClickListener(this);
             //END DEBUGGING*/
@@ -162,7 +162,7 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
             LinearLayout.LayoutParams spacerParams = new LinearLayout.LayoutParams((int) (10 * density), (int)(icon_dimension_dp * density));
             spacerView.setLayoutParams(spacerParams);
 
-            switch (i) {
+            switch (damage_type) { 
                 case 0:
                     if (!bodyPart.severeDamage[0]) {
                         statusImage.setImageResource(R.drawable.icon_sharp);
@@ -188,15 +188,13 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
                     break;
             }
 
-            statusView.setBackgroundColor(Util.invertedColorScale(bodyPart.damage[i],5,alpha_title));
+            statusView.setBackgroundColor(Util.invertedColorScale(bodyPart.damage[damage_type],5,alpha_title));
 
             statusLinear.addView(statusImage);
             statusLinear.addView(statusView);
-            if (i != 3){
+            if (damage_type != 3){
                 statusLinear.addView(spacerView);
             }
-
-
         }
         containerLinear.addView(statusLinear);
 
