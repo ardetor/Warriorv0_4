@@ -12,86 +12,76 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:id="@+id/activity_summary_linlay_buttons_outer"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true">
-        
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/activity_summary_linlay_buttons_inner_top">
             
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_journal"
-                android:id="@+id/activity_summary_button_journal"
-                android:onClick="startActivityJournal"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_map"
-                android:id="@+id/activity_summary_button_map"/>
-            
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageButton
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/activity_summary_linlay_buttons_inner_middle">
+            android:layout_weight="1"
+            android:id="@+id/activity_summary_button_journal"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_journal"
+            android:contentDescription="@string/activity_summary_button_journal"
+            android:onClick="startActivityJournal"/>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_health"
-                android:id="@+id/activity_summary_button_health"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_skills"
-                android:id="@+id/activity_summary_button_skills"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageButton
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/activity_summary_linlay_buttons_inner_bottom">
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_map"
+            android:contentDescription="@string/activity_summary_button_map"
+            android:id="@+id/activity_summary_button_map"/>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_inventory"
-                android:id="@+id/activity_summary_button_inventory"/>
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_health"
+            android:contentDescription="@string/activity_summary_button_health"
+            android:id="@+id/activity_summary_button_health"
+            android:onClick="startActivityHealth"/>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/activity_summary_button_undiscovered"
-                android:enabled="false"
-                android:id="@+id/activity_summary_button_magic" />
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_skills"
+            android:contentDescription="@string/activity_summary_button_skills"
+            android:id="@+id/activity_summary_button_skills"/>
 
-        </LinearLayout>
-        
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_inventory"
+            android:contentDescription="@string/activity_summary_button_inventory"
+            android:id="@+id/activity_summary_button_inventory"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_magic_fire"
+            android:enabled="false"
+            android:contentDescription="@string/activity_summary_button_undiscovered"
+
+            android:id="@+id/activity_summary_button_magic" />
+
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="#ff000000"
-        android:id="@+id/activity_summary_bar_health_max"
+        android:id="@+id/activity_summary_bar_blood_max"
         android:layout_above="@id/activity_summary_linlay_buttons_outer"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"/>
@@ -100,17 +90,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="#ffffff00"
-        android:id="@+id/activity_summary_bar_health_body"
-        android:layout_above="@id/activity_summary_linlay_buttons_outer"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="#ff00ff00"
-        android:id="@+id/activity_summary_bar_health_current"
+        android:background="#ffff0000"
+        android:id="@+id/activity_summary_bar_blood_current"
         android:layout_above="@id/activity_summary_linlay_buttons_outer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
@@ -119,7 +100,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_above="@id/activity_summary_bar_health_max"
+        android:layout_above="@id/activity_summary_bar_blood_max"
         android:layout_alignParentTop="true">
 
         <LinearLayout
@@ -130,12 +111,6 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="HB"
-                android:onClick="testHealthBody"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -160,6 +135,13 @@
                 android:layout_height="wrap_content"
                 android:text="TJ2"
                 android:onClick="testJournal2"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEM"
+                android:onClick="toggleMagic"/>
+
 
             <TextView
                 android:layout_width="wrap_content"

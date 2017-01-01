@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class SaveGame implements Serializable{
     public static SaveGame current;
@@ -23,16 +24,19 @@ public class SaveGame implements Serializable{
     Date date_created;
     Date date_latest;
     Date date_current;
-    boolean in_fight;
-    boolean magic_enabled;
+
+
+
+    Random random;
 
     //Journal
     ArrayList <JournalEntry> journal;
 
-    //Health
-    double health_max;
-    double health_body;
-    double health_current;
+    //Body object, representing all info about physical health
+    Body body;
+
+    boolean magic_enabled;
+    boolean in_fight;
 
 
 
@@ -44,16 +48,20 @@ public class SaveGame implements Serializable{
         this.date_latest = new Date();
         this.in_fight = false;
         this.magic_enabled = true;
+        this.random = new Random();
 
         //Journal
         this.journal = new ArrayList<JournalEntry>();
 
-        //Health
-        this.health_max = 100.;
-        this.health_body = 100.;
-        this.health_current = 100.;
-
+        //Body creation
+        this.body = new Body(new Body.Human());
     }
+
+
+
+
+
+
 
     public static boolean save(Context context){
         //Returns true if successful, false if it fails.
@@ -63,7 +71,8 @@ public class SaveGame implements Serializable{
             out.writeObject(SaveGame.current);
             out.close();
             fileOut.close();
-        }catch(IOException i) {
+        }
+        catch(IOException i) {
             i.printStackTrace();
         }
         return true;

@@ -80,4 +80,9 @@ public class ActivityJournalDetail extends AppCompatActivity {
 
     }
 
+    public void onStop(){
+        save = SaveGame.update(this);
+        super.onStop();
+    }
+
 }

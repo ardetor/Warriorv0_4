@@ -34,7 +34,7 @@
     <string name="activity_new_game_confirm_button_disarm">Disarm</string>
 
     <!--ActivityAbout Strings-->
-    <string name="activity_about_description">Warrior is an idle RPG for the Android platform, made in Android Studio. \n\nCoded by ardetor.\n\n\n\n\nThis app uses the TwoDScrollView class, originally made by Matt Clark and modified by Jared Rummler, under the Apache Licence 2.0. This class (and by extension, this app) may not be used except in compliance with the License. You may obtain a copy of the License at:\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
+    <string name="activity_about_description">Warrior is an idle RPG for the Android platform, made in Android Studio. \n\nCoded by ardetor.\n\n\n\n\nThis app uses the TwoDScrollView class, originally made by Matt Clark and modified by Jared Rummler, under the Apache Licence 2.0. This class (and by extension, this app) may not be used except in compliance with the License. You may obtain a copy of the License at:\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.\n\n\n\n\nThis app uses icons from Icons8.</string>
 
 
     <!--ActivitySummary Strings-->
@@ -47,10 +47,13 @@
     <string name="activity_summary_button_undiscovered">\?\?\?</string>
 
 
-
     <!--ActivityJournalDetail Strings-->
     <string name="activity_journal_detail_error_notfound">Error - index of journal entry to display not found in Intent</string>
     <string name="activity_journal_detail_error_exceed">Error - index of requested journal entry exceeds current journal length</string>
+
+
+    <!--ActivityHealthThird Strings-->
+    <string name="activity_health_third_message_dark">You have been afflicted with Dark damage. This type of damage does not heal by itself, and will get worse over time. You are advised to magically heal this wound as soon as possible to prevent contagion, or seek help if you are unable to deal with it yourself.</string>
 
 
     <!--Title Strings-->
@@ -58,8 +61,11 @@
     <string name="title_activity_about">About</string>
     <string name="title_activity_new_game">New Game</string>
     <string name="title_activity_new_game_confirm">Confirm Overwrite Data</string>
-    <string name="title_activity_preferences">Preferences</string>
+    <string name="title_activity_preferences">Settings</string>
     <string name="title_activity_fight">Fight</string>
     <string name="title_activity_journal">Journal</string>
     <string name="title_activity_journal_detail">Journal Entry</string>
+    <string name="title_activity_health">Health</string>
+    <string name="title_activity_health_second">Limb</string>
+    <string name="title_activity_health_third">Details</string>
 </resources>

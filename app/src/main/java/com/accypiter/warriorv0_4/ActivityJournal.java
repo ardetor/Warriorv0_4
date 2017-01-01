@@ -46,10 +46,15 @@ public class ActivityJournal extends AppCompatActivity implements View.OnClickLi
 
         } else if (id == R.id.menu_refresh) {
             this.recreate();
+
+        } else if (id == android.R.id.home){
+            finish();
+
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 
     protected void populateJournal(){
         //Update displayed journal entries
@@ -116,8 +121,12 @@ public class ActivityJournal extends AppCompatActivity implements View.OnClickLi
 
     @Override
     protected void onPause(){
-        save = SaveGame.update(this);
         super.onPause();
+    }
+
+    public void onStop(){
+        save = SaveGame.update(this);
+        super.onStop();
     }
 
 

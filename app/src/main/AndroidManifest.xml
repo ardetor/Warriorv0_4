@@ -55,6 +55,18 @@
         <activity
             android:name=".ActivityJournalDetail"
             android:label="@string/title_activity_journal_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityHealth"
+            android:label="@string/title_activity_health"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityHealthSecond"
+            android:label="@string/title_activity_health_second"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityHealthThird"
+            android:label="@string/title_activity_health_third"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

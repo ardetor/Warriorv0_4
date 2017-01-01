@@ -27,9 +27,10 @@ public class ActivityAbout extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() == android.R.id.home) {
-            finish();
+            this.finish();
         }
         return super.onOptionsItemSelected(menuItem);
     }
+
 
 }

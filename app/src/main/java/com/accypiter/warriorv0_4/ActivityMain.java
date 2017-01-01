@@ -81,7 +81,7 @@ public class ActivityMain extends AppCompatActivity {
 
     public void buttonLoadGame(View view){
         //Load game from file and proceed to ActivitySummary.
-        if (SaveGame.load(getBaseContext())){ //Load successful: start game
+        if (SaveGame.load(this)){ //Load successful: start game
             startGame();
         } else { //Load unsuccessful: exception thrown
             TextView infoText = (TextView) findViewById(R.id.activity_main_infotext);
