@@ -336,11 +336,14 @@ public class BodyPart implements Serializable{
         return getPartHealthScale(this.partAggregateDamage());
     }
 
-    public double getPartAndOrganHealthScale(){
+    public double getPartHealthScaleIncludingOrgan(){
         //Returns a fraction from 0 to 1 representing the health of a particular body part.
         // 0 means disabled, 1 means perfect condition.
         // Used for calculating part color scales only.
 
+        if(!this.hasOrgan()){
+            return getPartHealthScale();
+        }
 
         if (this.isSeverelyDamaged() || this.organ.isSeverelyDamaged() ) {
             return 0; // If broken/severed straight away go to red
@@ -364,10 +367,18 @@ public class BodyPart implements Serializable{
     }
 
 
+
+
+
+
     public double getDamageHealthScale(int damage_type){
         //returns a fraction from 0 to 1 representing the health of a particular body part IN ONE TYPE OF DAMAGE.
+        return getDamageHealthScale(damage_type, this.damage[damage_type]);
+    }
+
+    public double getDamageHealthScale(int damage_type, double damage){
+        //returns a fraction from 0 to 1 representing the health of a particular body part IN ONE TYPE OF DAMAGE.
         double reference_health = 7.5;
-        double damage = this.damage[damage_type];
         if (damage/reference_health >= 0 && damage/reference_health <= 1){
             return 1 - (damage / reference_health);
         } else if (damage > reference_health){
@@ -376,6 +387,20 @@ public class BodyPart implements Serializable{
             return Double.NaN;
         }
     }
+
+    public double getDamageHealthScaleIncludingOrgan(int damage_type){
+        if (!this.hasOrgan()){
+            return getDamageHealthScale(damage_type);
+        }
+
+        return getDamageHealthScale(damage_type, Math.sqrt(Math.pow(this.damage[damage_type],2)
+                                                         + Math.pow(this.organ.damage[damage_type],2)));
+    }
+
+
+
+
+
 
     public boolean isSeverelyDamaged(){
         return this.severeDamage[0] || this.severeDamage[1];
@@ -472,6 +497,10 @@ public class BodyPart implements Serializable{
         }
     }
 
+    public boolean hasOrgan(){
+        return this.organ != null;
+    }
+
     public String GetDamageStatusText(int damage_type){
         double damage_scale = this.getDamageHealthScale(damage_type);
 
@@ -565,7 +594,7 @@ public class BodyPart implements Serializable{
             return "ERROR(BodyPart.getDamageStatusText)";
         }
     }
-
+    
     public String getDamageStatusText(int damage_type){
         return GetDamageStatusText(damage_type).toLowerCase();
     }
@@ -578,10 +607,30 @@ public class BodyPart implements Serializable{
         }
     }
 
-    public String GetDamageSevereStatusText (int severe_type){
-        return Util.capitalize(getDamageSevereStatusText (severe_type));
+    public String GETDamageSevereStatusText (int severe_type){
+        return getDamageSevereStatusText(severe_type).toUpperCase();
     }
 
+    public String GetPartStatusText(){
+        double partHealth = this.getPartHealthScaleIncludingOrgan();
+        if (partHealth == 1){
+            return "Perfect health";
+        } else if (partHealth > 0.9){
+            return "Healthy";
+        } else if (partHealth > 0.5){
+            return "Injured";
+        } else if (partHealth > 0){
+            return "Badly injured";
+        } else if (partHealth == 0){
+            return "Critical";
+        } else {
+            return "ERROR(BodyPart.getPartStatusText()";
+        }
+    }
+
+    public String getPartStatusText(){
+        return GetPartStatusText().toLowerCase();
+    }
 }
 
 

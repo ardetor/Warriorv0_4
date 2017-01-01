@@ -78,9 +78,14 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
         //For each root in Body.roots, traverse it until there are no more children. Display organs if available.
         for (BodyPart bodyPart = root; bodyPart != null ; bodyPart = bodyPart.child){
             mainLinear.addView(viewPart(bodyPart));
+
+            /*
+            //REMOVED ORGAN VIEW FROM ACTIVITYHEALTHSECOND.
+             NOT IMPORTANT ENOUGH. MOVED TO ACTIVITYHEALTHTHIRD.
+
             if (bodyPart.organ != null){
                 mainLinear.addView(viewPart(bodyPart.organ));
-            }
+            }*/
         }
     }
 
@@ -122,7 +127,7 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
 
         //Make title TextView
         TextView titleText = new TextView(this);
-        titleText.setBackgroundColor(Util.colorScale(bodyPart.getPartHealthScale(), alpha_title));
+        titleText.setBackgroundColor(Util.colorScale(bodyPart.getPartHealthScaleIncludingOrgan(), alpha_title));
         titleText.setText(bodyPart.GetFullPartName());
         titleText.setTypeface(null, Typeface.BOLD);
         titleText.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
@@ -134,7 +139,7 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
         //Construct statusLinear
         LinearLayout statusLinear = new LinearLayout(this);
         statusLinear.setLayoutParams(width_match_height_wrap);
-        statusLinear.setBackgroundColor(Util.colorScale(bodyPart.getPartHealthScale(), alpha_detail));
+        statusLinear.setBackgroundColor(Util.colorScale(bodyPart.getPartHealthScaleIncludingOrgan(), alpha_detail));
         statusLinear.setOrientation(LinearLayout.HORIZONTAL);
         statusLinear.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
 
@@ -149,8 +154,8 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
 
             //FOR DEBUGGING - Increments damage to a particular body part if its icon is clicked
             int[] tag = {getIntent().getIntExtra("activity_health_second_identifier", 0), bodyPart.getPartIndexInLimb(), damage_type, bodyPart.isOrgan?1:0};
-            statusImage.setTag(tag);
-            statusImage.setOnClickListener(new View.OnClickListener(){
+            statusView.setTag(tag);
+            statusView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view) { //FOR DEBUGGING ONLY - REMOVE LATER
                     int a = ((int[]) view.getTag())[0];
                     int b = ((int[]) view.getTag())[1];
@@ -200,7 +205,7 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
             }
 
             //statusView.setBackgroundColor(Util.invertedColorScale(bodyPart.damage[damage_type],5,alpha_title));
-            statusView.setBackgroundColor(Util.colorScale(bodyPart.getDamageHealthScale(damage_type), alpha_title));
+            statusView.setBackgroundColor(Util.colorScale(bodyPart.getDamageHealthScaleIncludingOrgan(damage_type), alpha_title));
 
             statusLinear.addView(statusImage);
             statusLinear.addView(statusView);

@@ -53,7 +53,16 @@ public class ActivityHealthThird extends AppCompatActivity {
         super.onResume();
         save = SaveGame.update(this);
 
-        updateHealthThird();
+        //Get relevant body part
+        int[] part_details = getIntent().getIntArrayExtra("activity_health_third_identifier");
+        BodyPart bodyPart = save.body.roots.get(part_details[0]).getChild(part_details[1])
+                .getOrganIfTrue(part_details[2] == 1);
+
+        addHealthThird(bodyPart);
+        if(bodyPart.hasOrgan()){
+            addHealthThird(bodyPart.organ);
+        }
+
     }
 
     @Override
@@ -66,7 +75,12 @@ public class ActivityHealthThird extends AppCompatActivity {
         super.onStop();
     }
 
-    public void updateHealthThird(){
+    public void clearMainLinlay(){
+        LinearLayout mainLinear = (LinearLayout) findViewById(R.id.activity_health_third_linlay_main);
+        mainLinear.removeAllViews();
+    }
+
+    public void addHealthThird(BodyPart bodyPart){
         //Displays detailed information about a single BodyPart.
 
         //Tunable Constants
@@ -75,14 +89,13 @@ public class ActivityHealthThird extends AppCompatActivity {
         int icon_dimension_dp = (int) (25 * Util.getDensity(this));
         int titlePadding = (int) (Util.getDensity(this) * 6);
 
-        //First, clear Activity
-        LinearLayout mainLinear = (LinearLayout) findViewById(R.id.activity_health_third_linlay_main);
-        mainLinear.removeAllViews();
+        //Obtain reference to activity's Linlay
+        LinearLayout activityLinear = (LinearLayout) findViewById(R.id.activity_health_third_linlay_main);
 
-        //Get relevant body part
-        int[] part_details = getIntent().getIntArrayExtra("activity_health_third_identifier");
-        BodyPart bodyPart = save.body.roots.get(part_details[0]).getChild(part_details[1])
-                .getOrganIfTrue(part_details[2] == 1);
+        //Create mainLinlay to add stuff to
+        LinearLayout mainLinear = new LinearLayout(this);
+        mainLinear.setOrientation(LinearLayout.VERTICAL);
+        mainLinear.setPadding(0,0,0,titlePadding);
 
         //Work out colour in advance:
         int color_title = Util.colorScale(bodyPart.getPartHealthScale(),alpha_title);
@@ -120,7 +133,7 @@ public class ActivityHealthThird extends AppCompatActivity {
 
             //Display severed only
             iconImage.setImageResource(R.drawable.icon_sharp_severe);
-            detailText.setText(bodyPart.getDamageSevereStatusText(0).toUpperCase());
+            detailText.setText(bodyPart.GETDamageSevereStatusText(0));
             colorView.setBackgroundColor(Util.colorScale(0,alpha_title));
 
             detailLinear.addView(iconImage);
@@ -153,7 +166,7 @@ public class ActivityHealthThird extends AppCompatActivity {
 
                 //Display fractured
                 iconImage.setImageResource(R.drawable.icon_blunt_severe);
-                detailText.setText(bodyPart.getDamageSevereStatusText(1).toUpperCase());
+                detailText.setText(bodyPart.GETDamageSevereStatusText(1));
                 colorView.setBackgroundColor(Util.colorScale(0,alpha_title));
 
                 detailLinear.addView(iconImage);
@@ -254,10 +267,8 @@ public class ActivityHealthThird extends AppCompatActivity {
 
 
 
-
-
-
-
+        //Finally, add the containing Linlay to the Linlay on the page
+        activityLinear.addView(mainLinear);
 
     }
 

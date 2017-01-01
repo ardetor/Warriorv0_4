@@ -116,13 +116,7 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
 
         while (now_working_on != null){
             //Get scaled health of a part, INCLUDING ITS ASSOCIATED ORGAN
-            double partHealth;
-            if (now_working_on.organ == null){
-                partHealth = now_working_on.getPartHealthScale();
-            } else {
-                //Add organ damage on to part damage
-                partHealth = now_working_on.getPartAndOrganHealthScale();
-            }
+            double partHealth = now_working_on.getPartHealthScaleIncludingOrgan();
 
             LinearLayout partLinear = new LinearLayout(this);
             partLinear.setOrientation(LinearLayout.HORIZONTAL);
@@ -133,18 +127,8 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
             partText.setPadding(padding, padding, padding, padding);
 
             TextView statusText = new TextView(this);
-            String status;
-            if (partHealth == 1){
-                status = "Perfect";
-            } else if (partHealth > 0.9){
-                status = "Good";
-            } else if (partHealth > 0.5){
-                status = "Poor";
-            } else if (partHealth > 0){
-                status = "Very poor";
-            } else { //partHealth == 0
-                status = "Critical";
-            }
+
+            String status = now_working_on.GetPartStatusText();
             statusText.setText(status);
             statusText.setPadding(padding, padding, padding, padding);
 
