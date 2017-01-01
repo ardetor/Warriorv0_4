@@ -1,4 +1,4 @@
-package com.accypiter.warriorv0_4;
+package com.ardetor.warriorv0_4;
 
 import android.content.Context;
 import android.util.TypedValue;

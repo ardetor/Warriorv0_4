@@ -1,4 +1,4 @@
-package com.accypiter.warriorv0_4;
+package com.ardetor.warriorv0_4;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -106,6 +106,12 @@ public class ActivitySummary extends AppCompatActivity {
     public void startActivityHealth(View view){
         Intent openHealthIntent = new Intent(this, ActivityHealth.class);
         startActivity(openHealthIntent);
+    }
+
+    public void startActivitySkills(View view){
+        Intent openSkillsIntent = new Intent(this, ActivitySkills.class);
+        startActivity(openSkillsIntent);
+
     }
 
 

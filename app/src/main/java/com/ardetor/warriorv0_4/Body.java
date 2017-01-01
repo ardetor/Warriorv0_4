@@ -1,4 +1,4 @@
-package com.accypiter.warriorv0_4;
+package com.ardetor.warriorv0_4;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -99,7 +99,7 @@ public class Body implements Serializable {
         BodyPart now_working_on = root;
         while (now_working_on != null){
             //Add one to reference health for each body part or organ
-            reference_health += 1;
+            reference_health += 0.25;
 
             //Add aggregate damage^2
             limb_aggregate_damage += Math.pow(now_working_on.partAggregateDamage(), 2);

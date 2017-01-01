@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.accypiter.warriorv0_4.ActivityNewGame"
+    tools:context="com.ardetor.warriorv0_4.ActivityNewGame"
     tools:showIn="@layout/activity_new_game"
     android:id="@+id/activity_new_game_rellay"
     android:layout_width="match_parent"

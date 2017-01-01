@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.accypiter.warriorv0_4.ActivityAbout"
+    tools:context="com.ardetor.warriorv0_4.ActivityAbout"
     android:id="@+id/activity_about_coolay">
 
     <android.support.design.widget.AppBarLayout

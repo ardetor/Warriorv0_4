@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.accypiter.warriorv0_4.ActivitySummary"
+    tools:context="com.ardetor.warriorv0_4.ActivitySummary"
     tools:showIn="@layout/activity_summary">
 
     <LinearLayout
@@ -53,7 +53,8 @@
             android:scaleType="centerInside"
             android:src="@drawable/icon_skills"
             android:contentDescription="@string/activity_summary_button_skills"
-            android:id="@+id/activity_summary_button_skills"/>
+            android:id="@+id/activity_summary_button_skills"
+            android:onClick="startActivitySkills"/>
 
         <ImageButton
             android:layout_width="0dp"

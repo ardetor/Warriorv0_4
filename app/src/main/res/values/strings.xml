@@ -14,7 +14,7 @@
     <string name="activity_preferences_journal_capacity_description">This number of journal entries will be saved. Enter 0 for unlimited saved entries. (Default: 100)</string>
 
     <!--ActivityMain Strings-->
-    <string name="activity_main_subtitle">An idle RPG for Android</string>
+    <string name="activity_main_subtitle">Realism in fantasy</string>
     <string name="activity_main_button_loadgame">Load Game</string>
     <string name="activity_main_button_newgame">New Game</string>
     <string name="activity_main_button_about">About</string>
@@ -34,7 +34,7 @@
     <string name="activity_new_game_confirm_button_disarm">Disarm</string>
 
     <!--ActivityAbout Strings-->
-    <string name="activity_about_description">Warrior is an idle RPG for the Android platform, made in Android Studio. \n\nCoded by ardetor.\n\n\n\n\nThis app uses the TwoDScrollView class, originally made by Matt Clark and modified by Jared Rummler, under the Apache Licence 2.0. This class (and by extension, this app) may not be used except in compliance with the License. You may obtain a copy of the License at:\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.\n\n\n\n\nThis app uses icons from Icons8.</string>
+    <string name="activity_about_description"><b>Warrior is an RPG for the Android platform, made in Android Studio. \n\nCoded by ardetor (accypiter).</b>\n\n\n\n\n<u>Legal information:</u>\n\nThis app uses the TwoDScrollView class, originally made by Matt Clark and modified by Jared Rummler, under the Apache Licence 2.0. This class (and by extension, this app) may not be used except in compliance with the License. You may obtain a copy of the License at:\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.\n\n\nThis app uses icons from Icons8, available at icons8.com/web-app/</string>
 
 
     <!--ActivitySummary Strings-->
@@ -68,4 +68,5 @@
     <string name="title_activity_health">Health</string>
     <string name="title_activity_health_second">Limb</string>
     <string name="title_activity_health_third">Details</string>
+    <string name="title_activity_skills">Skills</string>
 </resources>

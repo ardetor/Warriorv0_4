@@ -1,10 +1,7 @@
-package com.accypiter.warriorv0_4;
-
-import android.text.format.DateUtils;
+package com.ardetor.warriorv0_4;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 /**
  * Instances of JournalEntry are journal entries, an ArrayList of which are stored in SaveGame.current.

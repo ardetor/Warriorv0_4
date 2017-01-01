@@ -1,4 +1,4 @@
-package com.accypiter.warriorv0_4;
+package com.ardetor.warriorv0_4;
 
 import android.support.annotation.Nullable;
 
@@ -251,7 +251,7 @@ public class BodyPart implements Serializable{
                 this.name = "artery";
                 this.part_type = ORGAN_ARTERY;
                 this.thresholdSevere = new double[]{9999,9999};
-                this.severeName = new String[]{"error_artery_should_not_be_severable","error_artery_should_not_be_severable"};
+                this.severeName = new String[]{"error_artery_should_not_be_severable","error_artery_should_not_be_fracturable"};
 
                 //Sets prefix of this organ to the full name of its parent, accounting for exception of heart
                 if (parent.name.equals("torso")){
@@ -398,7 +398,7 @@ public class BodyPart implements Serializable{
     }
 
     public double getUnboundedDamageHealthScale(int damage_type){
-        //returns a fraction from 0 to 1 representing the health of a particular body part IN ONE TYPE OF DAMAGE.
+        //returns a fraction from -infinity to 1 representing the health of a particular body part IN ONE TYPE OF DAMAGE.
         double reference_health = 7.5;
         double damage = this.damage[damage_type];
 

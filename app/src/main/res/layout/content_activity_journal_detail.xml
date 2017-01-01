@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.accypiter.warriorv0_4.ActivityJournalDetail"
+    tools:context="com.ardetor.warriorv0_4.ActivityJournalDetail"
     tools:showIn="@layout/activity_journal_detail">
 
     <LinearLayout

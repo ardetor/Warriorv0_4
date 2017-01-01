@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.accypiter.warriorv0_4">
+    package="com.ardetor.warriorv0_4">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ActivityMain"
+            android:name="com.ardetor.warriorv0_4.ActivityMain"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivitySummary"
+            android:name="com.ardetor.warriorv0_4.ActivitySummary"
             android:label="@string/title_activity_summary"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityAbout"
+            android:name="com.ardetor.warriorv0_4.ActivityAbout"
             android:label="@string/title_activity_about"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -33,40 +33,44 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityNewGame"
+            android:name="com.ardetor.warriorv0_4.ActivityNewGame"
             android:label="@string/title_activity_new_game"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityNewGameConfirm"
+            android:name="com.ardetor.warriorv0_4.ActivityNewGameConfirm"
             android:label="@string/title_activity_new_game_confirm"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityPreferences"
+            android:name="com.ardetor.warriorv0_4.ActivityPreferences"
             android:label="@string/title_activity_preferences"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityFight"
+            android:name="com.ardetor.warriorv0_4.ActivityFight"
             android:label="@string/title_activity_fight"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityJournal"
+            android:name="com.ardetor.warriorv0_4.ActivityJournal"
             android:label="@string/title_activity_journal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityJournalDetail"
+            android:name="com.ardetor.warriorv0_4.ActivityJournalDetail"
             android:label="@string/title_activity_journal_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityHealth"
+            android:name="com.ardetor.warriorv0_4.ActivityHealth"
             android:label="@string/title_activity_health"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityHealthSecond"
+            android:name="com.ardetor.warriorv0_4.ActivityHealthSecond"
             android:label="@string/title_activity_health_second"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityHealthThird"
+            android:name="com.ardetor.warriorv0_4.ActivityHealthThird"
             android:label="@string/title_activity_health_third"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.ardetor.warriorv0_4.ActivitySkills"
+            android:label="@string/title_activity_skills"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

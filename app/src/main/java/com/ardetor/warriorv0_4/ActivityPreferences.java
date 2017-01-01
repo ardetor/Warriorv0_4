@@ -1,22 +1,26 @@
-package com.accypiter.warriorv0_4;
+package com.ardetor.warriorv0_4;
 
+import android.preference.PreferenceFragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ActivityAbout extends AppCompatActivity {
+public class ActivityPreferences extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_preferences);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        getFragmentManager().beginTransaction().replace(R.id.activity_preferences_placeholder, new MyPreferenceFragment()).commit();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,5 +36,14 @@ public class ActivityAbout extends AppCompatActivity {
         return super.onOptionsItemSelected(menuItem);
     }
 
+    public static class MyPreferenceFragment extends PreferenceFragment
+    {
+        @Override
+        public void onCreate(final Bundle savedInstanceState)
+        {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.preferences);
+        }
+    }
 
 }
