@@ -120,7 +120,8 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
             if (now_working_on.organ == null){
                 partHealth = now_working_on.getPartHealthScale();
             } else {
-                partHealth = 0.5 * (now_working_on.getPartHealthScale() + now_working_on.organ.getPartHealthScale());
+                //Add organ damage on to part damage
+                partHealth = now_working_on.getPartAndOrganHealthScale();
             }
 
             LinearLayout partLinear = new LinearLayout(this);
@@ -128,7 +129,7 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
             partLinear.setBackgroundColor(Util.colorScale(partHealth,alpha_detail));
 
             TextView partText = new TextView(this);
-            partText.setText(now_working_on.GetPartName());
+            partText.setText(now_working_on.GetFullPartName());
             partText.setPadding(padding, padding, padding, padding);
 
             TextView statusText = new TextView(this);

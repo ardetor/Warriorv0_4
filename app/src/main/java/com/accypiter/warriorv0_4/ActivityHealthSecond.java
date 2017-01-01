@@ -106,25 +106,25 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
 
 
 
-        //Calculate colour of this view
+        //Constants
         int alpha_title = 0xA0;
         int alpha_detail = 0x30;
         int icon_dimension_dp = 25;
+        int titlePadding = (int) (Util.getDensity(this) * 6);
 
         //Make containing LL
         LinearLayout containerLinear = new LinearLayout(this);
         LinearLayout.LayoutParams width_match_height_wrap = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         containerLinear.setLayoutParams(width_match_height_wrap);
         double density = Util.getDensity(this);
-        containerLinear.setPadding(0,0,0,(int)(10*density));
+        containerLinear.setPadding(0,0,0,titlePadding);
         containerLinear.setOrientation(LinearLayout.VERTICAL);
 
         //Make title TextView
         TextView titleText = new TextView(this);
         titleText.setBackgroundColor(Util.colorScale(bodyPart.getPartHealthScale(), alpha_title));
-        titleText.setText(bodyPart.GetPartName());
+        titleText.setText(bodyPart.GetFullPartName());
         titleText.setTypeface(null, Typeface.BOLD);
-        int titlePadding = (int) (Util.getDensity(this) * 6);
         titleText.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
         titleText.setLayoutParams(width_match_height_wrap);
 
@@ -199,7 +199,8 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
                     break;
             }
 
-            statusView.setBackgroundColor(Util.invertedColorScale(bodyPart.damage[damage_type],5,alpha_title));
+            //statusView.setBackgroundColor(Util.invertedColorScale(bodyPart.damage[damage_type],5,alpha_title));
+            statusView.setBackgroundColor(Util.colorScale(bodyPart.getDamageHealthScale(damage_type), alpha_title));
 
             statusLinear.addView(statusImage);
             statusLinear.addView(statusView);
@@ -214,9 +215,11 @@ public class ActivityHealthSecond extends AppCompatActivity implements View.OnCl
         //tag[0]: root index
         //tag[1]: self-explanatory; part index in limb.
         //tag[2]: whether or not have to get organ.
-        int[] tag = {getIntent().getIntExtra("health_second_tag", 0), bodyPart.getPartIndexInLimb(), bodyPart.isOrgan?1:0};
+        int[] tag = {getIntent().getIntExtra("activity_health_second_identifier", 0), bodyPart.getPartIndexInLimb(), bodyPart.isOrgan?1:0};
         containerLinear.setTag(tag);
         containerLinear.setOnClickListener(this);
+
+
 
         return containerLinear;
     }

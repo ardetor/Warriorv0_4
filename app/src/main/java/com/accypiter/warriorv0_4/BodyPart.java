@@ -1,10 +1,8 @@
 package com.accypiter.warriorv0_4;
 
-import android.icu.util.VersionInfo;
 import android.support.annotation.Nullable;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class BodyPart implements Serializable{
 
@@ -331,13 +329,33 @@ public class BodyPart implements Serializable{
         // 0 means disabled, 1 means perfect condition.
         // Used for calculating part color scales only.
 
-        double reference_health = 10;
-
         if (this.isSeverelyDamaged()) {
             return 0; // If broken/severed straight away go to red
         }
 
-        double aggregate_damage = this.partAggregateDamage();
+        return getPartHealthScale(this.partAggregateDamage());
+    }
+
+    public double getPartAndOrganHealthScale(){
+        //Returns a fraction from 0 to 1 representing the health of a particular body part.
+        // 0 means disabled, 1 means perfect condition.
+        // Used for calculating part color scales only.
+
+
+        if (this.isSeverelyDamaged() || this.organ.isSeverelyDamaged() ) {
+            return 0; // If broken/severed straight away go to red
+        }
+
+        return getPartHealthScale(this.partAggregateDamage() + this.organ.partAggregateDamage());
+    }
+
+    public double getPartHealthScale(double aggregate_damage){
+        //Returns a fraction from 0 to 1 representing the health of a particular body part.
+        // 0 means disabled, 1 means perfect condition.
+        // Used for calculating part color scales only.
+
+        double reference_health = 10;
+
         if (aggregate_damage > reference_health){
             return 0;
         }
@@ -345,11 +363,12 @@ public class BodyPart implements Serializable{
         return 1 - (aggregate_damage / reference_health);
     }
 
+
     public double getDamageHealthScale(int damage_type){
         //returns a fraction from 0 to 1 representing the health of a particular body part IN ONE TYPE OF DAMAGE.
-        double reference_health = 10;
+        double reference_health = 7.5;
         double damage = this.damage[damage_type];
-        if (damage >= 0 && damage <= 1){
+        if (damage/reference_health >= 0 && damage/reference_health <= 1){
             return 1 - (damage / reference_health);
         } else if (damage > reference_health){
             return 0;
@@ -358,30 +377,19 @@ public class BodyPart implements Serializable{
         }
     }
 
-    public double getTotalDamage(){
-        //Iterates over a BodyPart's damage statistic and returns the sum.
-        //Bleeding damage only counts as one-fifth the damage.
-        double damage = 0;
-        for (double individual_damage : this.damage) {
-            damage += individual_damage;
-        }
-        damage -= this.damage[2] * 0.8;
-        return damage;
-    }
-
     public boolean isSeverelyDamaged(){
         return this.severeDamage[0] || this.severeDamage[1];
     }
 
     public BodyPart getChild(int depth){
-        if (depth == 0){
+        if (depth == 0 || this.child == null){
             return this;
         } else {
             return this.child.getChild(depth - 1);
         }
     }
 
-    public String getPartName(){
+    public String getFullPartName(){
         if (this.designation == null || this.designation.equals("")){
             return this.name;
         } else {
@@ -389,8 +397,8 @@ public class BodyPart implements Serializable{
         }
     }
 
-    public String GetPartName(){
-        return Util.capitalize(this.getPartName());
+    public String GetFullPartName(){
+        return Util.capitalize(this.getFullPartName());
     }
 
     public double partAggregateDamage(){
@@ -462,6 +470,116 @@ public class BodyPart implements Serializable{
         } else {
             return this.organ;
         }
+    }
+
+    public String GetDamageStatusText(int damage_type){
+        double damage_scale = this.getDamageHealthScale(damage_type);
+
+        //Sharp damage
+        if (damage_type == 0){
+            if (damage_scale == 1){
+                return "No cuts";
+            } else if (damage_scale > 0.9){
+                return "Some cuts and scratches";
+            } else if (damage_scale > 0.7){
+                return "Mildly lacerated";
+            } else if (damage_scale > 0.4){
+                return "Lacerated";
+            } else if (damage_scale > 0){
+                return "Shredded";
+            } else {
+                return "Mutilated";
+            }
+        }
+
+        //Blunt damage
+        else if (damage_type == 1){
+            if (damage_scale == 1){
+                return "Unbruised";
+            } else if (damage_scale > 0.9){
+                return "Sore";
+            } else if (damage_scale > 0.7){
+                return "Lightly bruised";
+            } else if (damage_scale > 0.4){
+                return "Badly bruised";
+            } else if (damage_scale > 0){
+                return "Internally haemorraging";
+            } else {
+                return "Severe internal haemorrhage";
+            }
+        }
+
+        //Bleed damage
+        else if (damage_type == 2){
+            if (damage_scale == 1){
+                return "Not bleeding";
+            } else if (damage_scale > 0.9){
+                return "Bleeding slightly";
+            } else if (damage_scale > 0.7){
+                return "Bleeding";
+            } else if (damage_scale > 0.4){
+                return "Haemorrhaging";
+            } else if (damage_scale > 0){
+                return "Spurting blood";
+            } else {
+                return "Gushing blood";
+            }
+        }
+
+        //Burn damage
+        else if (damage_type == 3){
+            if (damage_scale == 1){
+                return "Not burned";
+            } else if (damage_scale > 0.9){
+                return "Rare";
+            } else if (damage_scale > 0.7){
+                return "Singed";
+            } else if (damage_scale > 0.4){
+                return "Burned";
+            } else if (damage_scale > 0){
+                return "Roasted";
+            } else {
+                return "Torrefied";
+            }
+        }
+
+        //Dark damage
+        else if (damage_type == 4){
+            if (damage_scale == 1){
+                return "Alive";
+            } else if (damage_scale > 0.9){
+                return "Festering";
+            } else if (damage_scale > 0.7){
+                return "Decaying";
+            } else if (damage_scale > 0.4){
+                return "Rotting";
+            } else if (damage_scale > 0){
+                return "Putrefying";
+            } else {
+                return "Necrotic";
+            }
+        }
+
+        //Some crazy error
+        else{
+            return "ERROR(BodyPart.getDamageStatusText)";
+        }
+    }
+
+    public String getDamageStatusText(int damage_type){
+        return GetDamageStatusText(damage_type).toLowerCase();
+    }
+
+    public String getDamageSevereStatusText (int severe_type){
+        if (this.severeDamage[severe_type]){
+            return this.severeName[severe_type];
+        } else {
+            return "not " + this.severeName[severe_type];
+        }
+    }
+
+    public String GetDamageSevereStatusText (int severe_type){
+        return Util.capitalize(getDamageSevereStatusText (severe_type));
     }
 
 }

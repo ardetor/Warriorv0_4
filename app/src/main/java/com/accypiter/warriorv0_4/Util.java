@@ -119,4 +119,20 @@ public class Util {
         return context.getResources().getDisplayMetrics().density;
     }
 
+    public static int getDamageTypeImage(int damage_type){
+        switch (damage_type){
+            case 0:
+                return R.drawable.icon_sharp;
+            case 1:
+                return R.drawable.icon_blunt;
+            case 2:
+                return R.drawable.icon_blood;
+            case 3:
+                return R.drawable.icon_burn;
+            default:
+                return R.drawable.icon_dark;
+
+        }
+    }
+
 }

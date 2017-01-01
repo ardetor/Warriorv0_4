@@ -92,12 +92,15 @@ public class Body implements Serializable {
         //Given a root, traverse and aggregate the damage, and give fractional effectiveness of that limb.
         //Accounts for severe damage.
         //Perfect health is a 1. If 0, the limb cannot attack.
-        double reference_health = 30;
+        double reference_health = 10;
         double limb_aggregate_damage = 0;
         int number_severe = 0;
 
         BodyPart now_working_on = root;
         while (now_working_on != null){
+            //Add one to reference health for each body part or organ
+            reference_health += 1;
+
             //Add aggregate damage^2
             limb_aggregate_damage += Math.pow(now_working_on.partAggregateDamage(), 2);
 
@@ -108,6 +111,8 @@ public class Body implements Serializable {
 
             //Repeat for organ
             if (now_working_on.organ != null){
+                reference_health += 1;
+
                 limb_aggregate_damage += Math.pow(now_working_on.organ.partAggregateDamage(), 2);
 
                 if (now_working_on.organ.isSeverelyDamaged()){
