@@ -397,7 +397,17 @@ public class BodyPart implements Serializable{
                                                          + Math.pow(this.organ.damage[damage_type],2)));
     }
 
+    public double getUnboundedDamageHealthScale(int damage_type){
+        //returns a fraction from 0 to 1 representing the health of a particular body part IN ONE TYPE OF DAMAGE.
+        double reference_health = 7.5;
+        double damage = this.damage[damage_type];
 
+        if (damage/reference_health >= 0){
+            return 1 - (damage / reference_health);
+        } else {
+            return Double.NaN;
+        }
+    }
 
 
 
@@ -502,19 +512,19 @@ public class BodyPart implements Serializable{
     }
 
     public String GetDamageStatusText(int damage_type){
-        double damage_scale = this.getDamageHealthScale(damage_type);
+        double damage_scale = this.getUnboundedDamageHealthScale(damage_type);
 
         //Sharp damage
         if (damage_type == 0){
             if (damage_scale == 1){
                 return "No cuts";
-            } else if (damage_scale > 0.9){
-                return "Some cuts and scratches";
-            } else if (damage_scale > 0.7){
-                return "Mildly lacerated";
+            } else if (damage_scale > 0.8){
+                return "Cuts and scratches";
             } else if (damage_scale > 0.4){
+                return "Mildly lacerated";
+            } else if (damage_scale > -0.2){
                 return "Lacerated";
-            } else if (damage_scale > 0){
+            } else if (damage_scale > -1){
                 return "Shredded";
             } else {
                 return "Mutilated";
@@ -525,13 +535,13 @@ public class BodyPart implements Serializable{
         else if (damage_type == 1){
             if (damage_scale == 1){
                 return "Unbruised";
-            } else if (damage_scale > 0.9){
+            } else if (damage_scale > 0.8){
                 return "Sore";
-            } else if (damage_scale > 0.7){
-                return "Lightly bruised";
             } else if (damage_scale > 0.4){
+                return "Lightly bruised";
+            } else if (damage_scale > -0.2){
                 return "Badly bruised";
-            } else if (damage_scale > 0){
+            } else if (damage_scale > -1){
                 return "Internally haemorraging";
             } else {
                 return "Severe internal haemorrhage";
@@ -542,13 +552,13 @@ public class BodyPart implements Serializable{
         else if (damage_type == 2){
             if (damage_scale == 1){
                 return "Not bleeding";
-            } else if (damage_scale > 0.9){
+            } else if (damage_scale > 0.8){
                 return "Bleeding slightly";
-            } else if (damage_scale > 0.7){
-                return "Bleeding";
             } else if (damage_scale > 0.4){
+                return "Bleeding";
+            } else if (damage_scale > -0.2){
                 return "Haemorrhaging";
-            } else if (damage_scale > 0){
+            } else if (damage_scale > -1){
                 return "Spurting blood";
             } else {
                 return "Gushing blood";
@@ -559,13 +569,13 @@ public class BodyPart implements Serializable{
         else if (damage_type == 3){
             if (damage_scale == 1){
                 return "Not burned";
-            } else if (damage_scale > 0.9){
-                return "Rare";
-            } else if (damage_scale > 0.7){
-                return "Singed";
+            } else if (damage_scale > 0.8){
+                return "Lightly charred";
             } else if (damage_scale > 0.4){
+                return "Singed";
+            } else if (damage_scale > -0.2){
                 return "Burned";
-            } else if (damage_scale > 0){
+            } else if (damage_scale > -1){
                 return "Roasted";
             } else {
                 return "Torrefied";
@@ -575,14 +585,14 @@ public class BodyPart implements Serializable{
         //Dark damage
         else if (damage_type == 4){
             if (damage_scale == 1){
-                return "Alive";
-            } else if (damage_scale > 0.9){
+                return "Healthy";
+            } else if (damage_scale > 0.8){
                 return "Festering";
-            } else if (damage_scale > 0.7){
-                return "Decaying";
             } else if (damage_scale > 0.4){
+                return "Decaying";
+            } else if (damage_scale > -0.2){
                 return "Rotting";
-            } else if (damage_scale > 0){
+            } else if (damage_scale > -1){
                 return "Putrefying";
             } else {
                 return "Necrotic";

@@ -84,6 +84,9 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
         int alpha_title = 0xA0;
         int alpha_detail = 0x30;
         int padding = (int) (Util.getDensity(this) * 6);
+        int limb_health_color_title = Util.colorScale(body.getLimbHealth(index), alpha_title);
+        int limb_health_color_detail = Util.colorScale(body.getLimbHealth(index), alpha_detail);
+        int icon_size_dp = (int) (25 * Util.getDensity(this));
 
         String limb_name = body.getLimbName(index);
 
@@ -99,7 +102,7 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
 
         //Make title TextView
         TextView titleText = new TextView(this);
-        titleText.setBackgroundColor(Util.colorScale(body.getLimbHealth(index), alpha_title));
+        titleText.setBackgroundColor(limb_health_color_title);
         titleText.setText(Util.capitalize(limb_name));
         titleText.setTypeface(null, Typeface.BOLD);
 
@@ -113,6 +116,7 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
         BodyPart now_working_on = body.roots.get(index);
         LinearLayout.LayoutParams partParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         LinearLayout.LayoutParams statusParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams width_fixed_height_fixed = new LinearLayout.LayoutParams(icon_size_dp,icon_size_dp);
 
         while (now_working_on != null){
             //Get scaled health of a part, INCLUDING ITS ASSOCIATED ORGAN
@@ -120,21 +124,24 @@ public class ActivityHealth extends AppCompatActivity implements View.OnClickLis
 
             LinearLayout partLinear = new LinearLayout(this);
             partLinear.setOrientation(LinearLayout.HORIZONTAL);
-            partLinear.setBackgroundColor(Util.colorScale(partHealth,alpha_detail));
+            partLinear.setBackgroundColor(limb_health_color_detail);
+            partLinear.setPadding(padding, padding, padding, padding);
 
             TextView partText = new TextView(this);
             partText.setText(now_working_on.GetFullPartName());
-            partText.setPadding(padding, padding, padding, padding);
 
             TextView statusText = new TextView(this);
 
             String status = now_working_on.GetPartStatusText();
             statusText.setText(status);
-            statusText.setPadding(padding, padding, padding, padding);
+            statusText.setPadding(0,0,padding,0);
+
+            View statusView = new View(this);
+            statusView.setBackgroundColor(Util.colorScale(partHealth, alpha_title));
 
             partLinear.addView(partText, partParams);
             partLinear.addView(statusText,statusParams);
-
+            partLinear.addView(statusView,width_fixed_height_fixed);
 
             //Add the completed partLinear to containerLinear
             containerLinear.addView(partLinear);
