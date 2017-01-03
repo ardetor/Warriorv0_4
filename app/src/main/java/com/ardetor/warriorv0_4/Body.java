@@ -35,6 +35,15 @@ public class Body implements Serializable {
     double blood_max;
     double blood_current;
 
+    //Blood Regen
+    double blood_regen_base;         //Should not change
+    double blood_regen_variable;         //Multiplier
+    long blood_regen_variable_duration;  //How long before mult resets to 1
+
+    //Health regen
+    double health_regen_base;        //Should not change
+    double health_regen_variable;        //Multiplier
+    long health_regen_variable_duration;      //How long before mult resets to 1
 
     //Constructor
     Body(Species species) {
@@ -47,6 +56,15 @@ public class Body implements Serializable {
         this.blood_max = species.baseBlood();
         this.blood_current = species.baseBlood();
 
+        this.blood_regen_base = species.baseBloodRegen();  //Will regen one fifth of max blood per period (default 1 hour)
+        this.blood_regen_variable = 0;                     //starts at zero, goes up temporarily when medicine is taken.
+        this.blood_regen_variable_duration = 0;            //Duration remaining, in milliseconds, of the multiplier.
+
+        this.health_regen_base =  species.baseHealthRegen();
+        this.health_regen_variable = 0;
+        this.health_regen_variable_duration = 0;
+
+        //CONSTRUCT BODY!
         this.roots = new ArrayList<BodyPart>();
 
         //generate torso root
@@ -92,14 +110,14 @@ public class Body implements Serializable {
         //Given a root, traverse and aggregate the damage, and give fractional effectiveness of that limb.
         //Accounts for severe damage.
         //Perfect health is a 1. If 0, the limb cannot attack.
-        double reference_health = 10;
+        double reference_health = 8.5;
         double limb_aggregate_damage = 0;
         int number_severe = 0;
 
         BodyPart now_working_on = root;
         while (now_working_on != null){
             //Add one to reference health for each body part or organ
-            reference_health += 0.25;
+            reference_health += 0.2;
 
             //Add aggregate damage^2
             limb_aggregate_damage += Math.pow(now_working_on.partAggregateDamage(), 2);
@@ -144,6 +162,13 @@ public class Body implements Serializable {
     }
 
 
+    public void recoverBody(double damage_recovered){
+        int numberLimbs =  this.species.numberHeads() + this.species.numberArms() + this.species.numberLegs();
+
+        for (int i = 0; i < numberLimbs; i++){
+            this.roots.get(i).recoverLimb(damage_recovered);
+        }
+    }
 
 
 
@@ -158,6 +183,8 @@ public class Body implements Serializable {
 
         double baseWeight();
         double baseBlood();
+        double baseBloodRegen();
+        double baseHealthRegen();
 
         double speciesSize();
 
@@ -175,6 +202,9 @@ public class Body implements Serializable {
 
         public double baseWeight() { return 50; }
         public double baseBlood() { return 1.5; }
+        public double baseBloodRegen() { return 0.2 * baseBlood(); }
+        public double baseHealthRegen() { return 2; }
+
 
         public double speciesSize() { return 1; }
 

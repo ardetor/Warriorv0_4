@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ActivitySkills extends AppCompatActivity {
+public class ActivitySkill extends AppCompatActivity {
     public SaveGame save;
 
     @Override
@@ -43,13 +43,6 @@ public class ActivitySkills extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        save = SaveGame.update(this);
-
-
-    }
 
     @Override
     public void onPause() {
@@ -59,6 +52,18 @@ public class ActivitySkills extends AppCompatActivity {
     public void onStop() {
         save = SaveGame.update(this);
         super.onStop();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        save = SaveGame.update(this);
+
+        displaySkills();
+    }
+
+    public void displaySkills(){
+
     }
 
 }

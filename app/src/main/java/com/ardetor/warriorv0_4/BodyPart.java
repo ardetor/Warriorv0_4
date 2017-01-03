@@ -378,7 +378,7 @@ public class BodyPart implements Serializable{
 
     public double getDamageHealthScale(int damage_type, double damage){
         //returns a fraction from 0 to 1 representing the health of a particular body part IN ONE TYPE OF DAMAGE.
-        double reference_health = 7.5;
+        double reference_health = 8;
         if (damage/reference_health >= 0 && damage/reference_health <= 1){
             return 1 - (damage / reference_health);
         } else if (damage > reference_health){
@@ -456,7 +456,7 @@ public class BodyPart implements Serializable{
     public void sever(){
         BodyPart now_working_on = this;
 
-        //sever all child parts and set damage to 999
+        //sever all child parts and set all damage to 999
         while (now_working_on != null){
             //set bodypart to severed
             now_working_on.severeDamage[0] = true;
@@ -477,6 +477,13 @@ public class BodyPart implements Serializable{
         }
 
     }
+
+    public void fracture(){
+        //Fracture and set blunt damage to 999
+        this.severeDamage[1] = true;
+        this.damage[1] = 999;
+    }
+
 
     public int getPartIndexInLimb(){
         //This method traverses through parent of this BodyPart, until the parent is null.
@@ -516,10 +523,10 @@ public class BodyPart implements Serializable{
 
         //Sharp damage
         if (damage_type == 0){
-            if (damage_scale == 1){
+            if (damage_scale > 0.9){
                 return "No cuts";
             } else if (damage_scale > 0.8){
-                return "Cuts and scratches";
+                return "Just a scratch";
             } else if (damage_scale > 0.4){
                 return "Mildly lacerated";
             } else if (damage_scale > -0.2){
@@ -533,7 +540,7 @@ public class BodyPart implements Serializable{
 
         //Blunt damage
         else if (damage_type == 1){
-            if (damage_scale == 1){
+            if (damage_scale > 0.9){
                 return "Unbruised";
             } else if (damage_scale > 0.8){
                 return "Sore";
@@ -550,7 +557,7 @@ public class BodyPart implements Serializable{
 
         //Bleed damage
         else if (damage_type == 2){
-            if (damage_scale == 1){
+            if (damage_scale > 0.9){
                 return "Not bleeding";
             } else if (damage_scale > 0.8){
                 return "Bleeding slightly";
@@ -567,7 +574,7 @@ public class BodyPart implements Serializable{
 
         //Burn damage
         else if (damage_type == 3){
-            if (damage_scale == 1){
+            if (damage_scale > 0.9){
                 return "Not burned";
             } else if (damage_scale > 0.8){
                 return "Lightly charred";
@@ -584,7 +591,7 @@ public class BodyPart implements Serializable{
 
         //Dark damage
         else if (damage_type == 4){
-            if (damage_scale == 1){
+            if (damage_scale > 0.9){
                 return "Healthy";
             } else if (damage_scale > 0.8){
                 return "Festering";
@@ -623,7 +630,7 @@ public class BodyPart implements Serializable{
 
     public String GetPartStatusText(){
         double partHealth = this.getPartHealthScaleIncludingOrgan();
-        if (partHealth == 1){
+        if (partHealth > 0.95){
             return "Perfect health";
         } else if (partHealth > 0.9){
             return "Healthy";
@@ -641,6 +648,47 @@ public class BodyPart implements Serializable{
     public String getPartStatusText(){
         return GetPartStatusText().toLowerCase();
     }
+
+    public void recoverPart(double damage_recovered){
+        if (!this.severeDamage[0]) {
+            this.damage[0] -= damage_recovered;
+            if (!this.severeDamage[1]) {
+                this.damage[1] -= damage_recovered;
+            }
+            this.damage[2] -= damage_recovered;
+            this.damage[3] -= damage_recovered;
+
+            if (this.damage[4] > 0) {
+                this.damage[4] += damage_recovered;
+            }
+        }
+
+        for (int i = 0; i < 5; i++){
+            if (this.damage[i] < 0) {
+                this.damage[i] = 0;
+            }
+        }
+    }
+
+    public void recoverPartAndOrgan(double damage_recovered){
+        this.recoverPart(damage_recovered);
+        if(this.hasOrgan()){
+            this.organ.recoverPart(damage_recovered);
+        }
+    }
+
+    public void recoverLimb(double damage_recovered){
+        BodyPart now_working_on = this;
+
+        while (now_working_on != null){
+            now_working_on.recoverPartAndOrgan(damage_recovered);
+
+            now_working_on = now_working_on.child;
+        }
+
+    }
+
+
 }
 
 

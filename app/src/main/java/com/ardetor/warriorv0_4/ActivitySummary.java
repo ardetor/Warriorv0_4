@@ -109,7 +109,7 @@ public class ActivitySummary extends AppCompatActivity {
     }
 
     public void startActivitySkills(View view){
-        Intent openSkillsIntent = new Intent(this, ActivitySkills.class);
+        Intent openSkillsIntent = new Intent(this, ActivitySkill.class);
         startActivity(openSkillsIntent);
 
     }

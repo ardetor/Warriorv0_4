@@ -69,7 +69,7 @@
             android:label="@string/title_activity_health_third"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.ardetor.warriorv0_4.ActivitySkills"
+            android:name="com.ardetor.warriorv0_4.ActivitySkill"
             android:label="@string/title_activity_skills"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
